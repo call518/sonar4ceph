@@ -1,18 +1,19 @@
 <html>
-<title> System Stats </title>
+<title> CEPH - Logical Info </title>
 <head>
 <style>
 table.type01 {
-    border-collapse: collapse;
-    text-align: left;
-    line-height: 1.5;
-    margin : 20px 20px;
+	border-collapse: collapse;
+	text-align: left;
+	line-height: 1.5;
+	margin : 20px 20px;
+	padding: 15px;
 }
 table.type01 tr {
-    vertical-align: top;
+	vertical-align: top;
 }
 table.type01 td {
-    vertical-align: top;
+	vertical-align: top;
 }
 </style>
 <script type="text/JavaScript">
@@ -146,6 +147,9 @@ function getChildren($arr)
 		echo " <tr>";
 		echo "  <td>";
 		showUsageBarGraph($utilization);
+		$osd_id = explode('.', $name)[1];
+		//echo "   <center><a href='detail-osd.php?osd_id=$osd_id' target='_blank'>Detail</a>";
+		echo "<br><center><input type=\"button\" value=\"Detail OSD-$osd_id\" onclick=\"window.open('detail-osd.php?osd_id=$osd_id', 'Detail of OSD.$osd_id', 'width=1024, height=800')\">";
 	}
 	$children = $arr[children];
 	if (count($children) > 0) {
