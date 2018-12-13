@@ -4,17 +4,15 @@
 <style>
 table.type01 {
     border-collapse: collapse;
-    text-align: left;
+    text-align: center;
     line-height: 1.5;
     margin : 20px 20px;
 }
 table.type01 tr {
-    vertical-align: top;
-    border: 10px solid #ccc;
+    vertical-align: middle;
 }
 table.type01 td {
-    vertical-align: top;
-    border: 10px solid #ccc;
+    vertical-align: middle;
 }
 </style>
 <script type="text/JavaScript">
@@ -70,51 +68,61 @@ getChildren($nodeTree);
 ######################################
 ## Functions
 ######################################
+
 function getChildren($arr) {
+	$color_root = "#7B68EE";
+	$color_datacenter = '#3CB371';
+	$color_rack = '#7B68EE';
+	$color_host = '#BDB76B';
+	$color_osd = '#20B2AA';
+
 	#var_dump(rsort($arr));
 	$name = $arr[name];
 	$status = $arr[status];
 	$type = $arr[type];
 	if ($type == "root") {
 		#echo "==== root start ==============<br>";
-		echo "<center><table class='type01'><tr>";
+		echo "<center>";
+		echo "<table class='type01' border='10px' bordercolor='$color_root'><tr>";
 		echo " <tr>";
-		echo "  <td><b>Root:</b> $name</td>";
+		echo "  <td bgcolor='$color_root'><b>Root:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "datacenter") {
 		#echo "==== datacenter start ==============<br>";
-		echo "<table class='type01'><tr>";
+		echo "<table class='type01' border='10px' bordercolor='$color_datacenter'><tr>";
 		echo " <tr>";
-		echo "  <td><b>Datacenter:</b> $name</td>";
+		echo "  <td bgcolor='$color_datacenter'><b>Datacenter:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "rack") {
 		#echo "==== rack start ==============<br>";
-		echo "<table class='type01' style='float: left'><tr>";
+		echo "<table class='type01' style='float:left' width='300px' border='10px' bordercolor='$color_rack'><tr>";
 		echo " <tr>";
-		echo "  <td><b>Rack:</b> $name</td>";
+		echo "  <td bgcolor='$color_rack'><b>Rack:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "host") {
 		#echo "==== host start ==============<br>";
-		echo "<center><table class='type01'><tr>";
+		echo "<center>";
+		echo "<table class='type01' width='250px' border='10px' bordercolor='$color_host'><tr>";
 		echo " <tr>";
-		echo "  <td><b>Host:</b> $name</td>";
+		echo "  <td bgcolor='$color_host'><b>Host:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "osd") {
 		#echo "==== osd start ==============<br>";
-		echo "<center><table class='type01'><tr>";
-		echo " <tr>";
+		echo "<center>";
+		echo "<table class='type01' width='200px' border='10px' bordercolor='$color_osd'><tr>";
+		echo " <tr bgcolor='$color_osd'>";
 		echo "  <td><b>OSD:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
-		echo "  <td>";
+		echo "  <td>Status";
 	}
 	#echo "<pre><font color=black>name: $name</font></pre>";
 	#echo "<pre><font color=black>status: $status</font></pre>";
