@@ -1,6 +1,22 @@
 <html>
 <title> System Stats </title>
 <head>
+<style>
+table.type01 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    margin : 20px 20px;
+}
+table.type01 tr {
+    vertical-align: top;
+    border: 10px solid #ccc;
+}
+table.type01 td {
+    vertical-align: top;
+    border: 10px solid #ccc;
+}
+</style>
 <script type="text/JavaScript">
 function timedRefresh(timeoutPeriod) {
 	setTimeout("location.reload(true);",timeoutPeriod);
@@ -61,41 +77,41 @@ function getChildren($arr) {
 	$type = $arr[type];
 	if ($type == "root") {
 		#echo "==== root start ==============<br>";
-		echo "<table border='2'><tr>";
+		echo "<center><table class='type01'><tr>";
 		echo " <tr>";
-		echo "  <td><b>$name</b></td>";
+		echo "  <td><b>Root:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "datacenter") {
 		#echo "==== datacenter start ==============<br>";
-		echo "<table border='2'><tr>";
+		echo "<table class='type01'><tr>";
 		echo " <tr>";
-		echo "  <td><b>$name</b></td>";
+		echo "  <td><b>Datacenter:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "rack") {
 		#echo "==== rack start ==============<br>";
-		echo "<table border='2' style='float: left'><tr>";
+		echo "<table class='type01' style='float: left'><tr>";
 		echo " <tr>";
-		echo "  <td><b>$name</b></td>";
+		echo "  <td><b>Rack:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "host") {
 		#echo "==== host start ==============<br>";
-		echo "<table border='2'><tr>";
+		echo "<center><table class='type01'><tr>";
 		echo " <tr>";
-		echo "  <td><b>$name</b></td>";
+		echo "  <td><b>Host:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
 	} else if ($type == "osd") {
 		#echo "==== osd start ==============<br>";
-		echo "<table border='2'><tr>";
+		echo "<center><table class='type01'><tr>";
 		echo " <tr>";
-		echo "  <td><b>$name</b></td>";
+		echo "  <td><b>OSD:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td>";
