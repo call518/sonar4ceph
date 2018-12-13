@@ -1,5 +1,5 @@
 <html>
-<title> System Stats </title>
+<title> Detail - OSD </title>
 <head>
 <style>
 table.type01 {
@@ -24,10 +24,11 @@ function timedRefresh(timeoutPeriod) {
 </head>
 
 <body onload="JavaScript:timedRefresh(5000);">
-<?php
 
 <?php
-$osd_id = $_GET['osd_id'];
 
+echo "Working...................";
 
 ?>
+</body>
+</html>

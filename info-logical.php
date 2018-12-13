@@ -5,9 +5,8 @@
 table.type01 {
 	border-collapse: collapse;
 	text-align: left;
-	line-height: 1.5;
-	margin : 20px 20px;
-	padding: 15px;
+	line-height: 1;
+	margin : 15px 15px;
 }
 table.type01 tr {
 	vertical-align: top;
@@ -23,23 +22,40 @@ function timedRefresh(timeoutPeriod) {
 </script>
 </head>
 
-<body onload="JavaScript:timedRefresh(5000);">
+<body onload="JavaScript:timedRefresh(10000);">
+
 <?php
 /* Here I am setting  up the variables for the commands to pass down through to the shell */
 
 //$date = (shell_exec("date"));
 //echo "<pre><font color=black>$date</font></pre>";
 
-//$file = shell_exec('ceph osd tree --format=json');
-$file = shell_exec('ceph osd df tree --format=json');
-$input_json = json_decode($file);
+$rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");
+$arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
+//var_dump($arrPG_DUMP);
+
+//$rawData = shell_exec('ceph osd tree --format=json');
+$rawData = shell_exec('ceph osd df tree --format=json');
+$input_json = json_decode($rawData);
 //var_dump($input_json);
 $nodes = array();
 
-foreach ( $input_json->nodes as $node )
+foreach ($input_json->nodes as $node)
 {
 	$nodes[$node->id] = $node;
 }
+
+$nodeTree = buildNode(-1);
+
+//var_dump(json_encode($nodeTree));
+
+getChildren($nodeTree);
+
+//=============================================================================================
+
+//////////////////////////////////////
+//           Functions              //
+//////////////////////////////////////
 
 function buildNode($nodeID) {
 	global $nodes;
@@ -67,18 +83,9 @@ function buildNode($nodeID) {
 	return $return;
 }
 
-$nodeTree = buildNode(-1);
-
-//var_dump(json_encode($nodeTree));
-
-getChildren($nodeTree);
-
-//////////////////////////////////////
-//           Functions              //
-//////////////////////////////////////
-
 function getChildren($arr)
 {
+	global $arrPG_DUMP;
 	//$color_root = "#7B68EE";
 	//$color_datacenter = '#3CB371';
 	//$color_rack = '#7B68EE';
@@ -149,7 +156,54 @@ function getChildren($arr)
 		showUsageBarGraph($utilization);
 		$osd_id = explode('.', $name)[1];
 		//echo "   <center><a href='detail-osd.php?osd_id=$osd_id' target='_blank'>Detail</a>";
-		echo "<br><center><input type=\"button\" value=\"Detail OSD-$osd_id\" onclick=\"window.open('detail-osd.php?osd_id=$osd_id', 'Detail of OSD.$osd_id', 'width=1024, height=800')\">";
+		echo "<br><center><input type=\"button\" value=\"Detail OSD-$osd_id\" onclick=\"window.open('detail-osd.php?osd_id=$osd_id', 'Detail of OSD.$osd_id', 'width=1024, height=800')\"><p>";
+		//include "osd-pgs.php";
+		//var_dump($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
+		$chartData = convertPGDumpArray2ChartArray($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
+		$arrLabels = $chartData[0];
+		$arrDatasets = $chartData[1];
+		//print_r($arrLabels);
+		//print_r($arrDatasets);
+?>
+<canvas id="barChart<?php echo $osd_id; ?>"></canvas>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js'></script>
+
+<script>
+var canvas = document.getElementById("barChart<?php echo $osd_id; ?>");
+var ctx = canvas.getContext('2d');
+
+// Global Options:
+// Chart.defaults.global.defaultFontColor = 'black';
+// Chart.defaults.global.defaultFontSize = 16;
+
+var data = {
+    labels: <?php echo json_encode($arrLabels, JSON_NUMERIC_CHECK); ?>,
+    datasets: [
+        {
+            fill: true,
+            data: <?php echo json_encode($arrDatasets, JSON_NUMERIC_CHECK); ?>,
+        }
+    ]
+};
+
+// Notice the rotation from the documentation.
+
+var options = {
+        rotation: -0.7 * Math.PI
+};
+
+
+// Chart declaration:
+var myBarChart = new Chart(ctx, {
+    type: 'pie',
+    data: data,
+    options: options
+});
+
+// Fun Fact: I've lost exactly 3 of my favorite T-shirts and 2 hoodies this way :|
+</script>
+
+<?php
 	}
 	$children = $arr[children];
 	if (count($children) > 0) {
@@ -218,6 +272,21 @@ function showUsageBarGraph($utilization)
 	echo "  <td bgcolor='#32CD32'>";
 	echo " </tr>";
 	echo "</table>";
+}
+
+function convertPGDumpArray2ChartArray($arr)
+{
+	$arrLabels = array();
+	$arrDatasets = array();
+	//$total = $arr['total'];
+	unset($arr['total']);
+	foreach ($arr as $k=>$v) {
+		//$item = array("label"=>"$k", "y"=>$v);
+		//array_push($cahrtArray, $item);
+		array_push($arrLabels, $k);
+		array_push($arrDatasets, $v);
+	}
+	return array($arrLabels, $arrDatasets);
 }
 //////////////////////////////////////
 
