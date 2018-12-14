@@ -24,11 +24,35 @@ function timedRefresh(timeoutPeriod) {
 
 <body onload="JavaScript:timedRefresh(5000);">
 
-<center><input type="button" value="Client I/O per Pools" onclick="window.open('io_per_pool.php', 'Client I/O per Pools', 'width=1024, height=800')">
-
 <?php
 include '_common.php';
 include 'functions.php';
+
+$jsonPoolData = shell_exec('ceph osd lspools --format=json');
+$arrPoolData = json_decode($jsonPoolData);
+//print_r($arrPoolData);
+
+echo "<center>";
+echo "<table class='type01' border='0' cellpadding='10'><tr>";
+echo " <tr>";
+$i=0;
+foreach ($arrPoolData as $object)
+{
+	if ($i % 5 == 0) {
+		echo " </tr>";
+		echo " <tr>";
+	}
+	$i++;
+	echo "  <td>";
+	$arrItem = json_decode(json_encode($object), True);
+	$pool_name = $arrItem['poolname'];
+	$pool_id = $arrItem['poolnum'];
+
+	echo "<input type=\"button\" value=\"Client I/O : $pool_name($pool_id)\" onclick=\"window.open('client-io-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client I/O : $pool_name($pool_id)', 'width=1024, height=800')\">";
+}
+echo "  </td>";
+echo " </tr>";
+echo "</table>";
 
 //$date = (shell_exec("date"));
 //echo "<pre><font color=black>$date</font></pre>";

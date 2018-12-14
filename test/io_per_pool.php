@@ -51,8 +51,32 @@ function getNow() {
   hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
   minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
   second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
-  //return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
-  return hour + ":" + minute + ":" + second;
+  return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+  //return hour + ":" + minute + ":" + second;
+}
+
+function getCountData(Chart, label, data) {
+    Chart<?php echo $pool_id; ?>.data.labels.push(label);
+    Chart<?php echo $pool_id; ?>.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    Chart<?php echo $pool_id; ?>.update();
+}
+
+function addData(Chart, label, data) {
+    Chart<?php echo $pool_id; ?>.data.labels.push(label);
+    Chart<?php echo $pool_id; ?>.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    Chart<?php echo $pool_id; ?>.update();
+}
+
+function removeData(chart) {
+    Chart<?php echo $pool_id; ?>.data.labels.pop();
+    Chart<?php echo $pool_id; ?>.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    Chart<?php echo $pool_id; ?>.update();
 }
 
 // create initial empty chart
@@ -92,7 +116,7 @@ var Chart<?php echo $pool_id; ?> = new Chart(ctx_live<?php echo $pool_id; ?>, {
     scales: {
       xAxes: [{
         ticks: {
-          display: false
+          display: true,
         }
       }],
       yAxes: [{
@@ -123,7 +147,7 @@ var getData<?php echo $pool_id; ?> = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData<?php echo $pool_id; ?>, 2000);
+setInterval(getData<?php echo $pool_id; ?>, 1000);
 </script>
 
 <?php
