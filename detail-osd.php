@@ -26,9 +26,79 @@ function timedRefresh(timeoutPeriod) {
 <body onload="JavaScript:timedRefresh(5000);">
 
 <?php
+include 'functions.php';
 
-echo "Working...................";
+$osd_id = $_GET['osd_id'];
+//echo "Working...................<br>";
+//echo "OSD ID => $osd_id<br>";
 
+$rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");
+$arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
+
+//var_dump($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
+$chartData = convertPGDumpArray2ChartArray($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
+$arrLabels = $chartData[0];
+$arrDatasets = $chartData[1];
+//print_r($arrLabels);
+//print_r($arrDatasets);
 ?>
+
+<canvas id="pieChart<?php echo $osd_id; ?>"></canvas>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js'></script>
+
+<script>
+function random_rgba() {
+    var o = Math.round, r = Math.random, s = 255;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+}
+
+var canvas = document.getElementById("pieChart<?php echo $osd_id; ?>");
+var ctx = canvas.getContext('2d');
+
+var data = {
+    labels: <?php echo json_encode($arrLabels, JSON_NUMERIC_CHECK); ?>,
+    datasets: [
+        {
+            fill: true,
+            data: <?php echo json_encode($arrDatasets, JSON_NUMERIC_CHECK); ?>,
+            backgroundColor: [
+//                "#FF6384",
+//                "#63FF84",
+//                "#8463FF",
+//                "#6384FF",
+//                "#84FF63",
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+                  random_rgba(),
+            ]
+        }
+    ]
+};
+var options = {
+        rotation: -0.7 * Math.PI,
+        animation: false,
+        responsive: true,
+};
+// Chart declaration:
+var myChart = new Chart(ctx, {
+    //type: 'pie',
+    type: 'doughnut',
+    data: data,
+    options: options
+});
+</script>
+
 </body>
 </html>
