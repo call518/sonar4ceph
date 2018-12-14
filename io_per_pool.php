@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" >
-<h
-ead>
+<head>
   <meta charset="UTF-8">
-  <title>Chart.js - Dynamically Update Chart Via Ajax Requests</title>
+  <title>Client I/O per Pools</title>
 </head>
 
 <body>
@@ -32,10 +31,6 @@ foreach ($arrData as $object)
 		$write_bytes_sec = $arr_client_io_rate['write_bytes_sec'];
 		$read_op_per_sec = $arr_client_io_rate['read_op_per_sec'];
 		$write_op_per_sec = $arr_client_io_rate['write_op_per_sec'];
-		echo "$read_bytes_sec<br>";
-		echo "$write_bytes_sec<br>";
-		echo "$read_op_per_sec<br>";
-		echo "$write_op_per_sec<br>";
 	} else {
 		$read_bytes_sec = 0;
 		$write_bytes_sec = 0;
@@ -44,38 +39,38 @@ foreach ($arrData as $object)
 	}
 ?>  
 <div style="width:50%;">
-  <canvas id="canvas-<?php echo $pool_id; ?>"></canvas>
+  <canvas id="canvas<?php echo $pool_id; ?>"></canvas>
 </div>
 
 <script>
 // create initial empty chart
-var now_time = Date.now();
-var ctx_live = document.getElementById("canvas-<?php echo $pool_id; ?>");
-var myChart = new Chart(ctx_live, {
+var now_time<?php echo $pool_id; ?> = Date.now();
+var ctx_live<?php echo $pool_id; ?> = document.getElementById("canvas<?php echo $pool_id; ?>");
+var Chart<?php echo $pool_id; ?> = new Chart(ctx_live<?php echo $pool_id; ?>, {
   type: 'bar',
   data: {
     labels: [],
-    datasets: 
+    datasets:
     [
-      {
+     {
       data: [],
       borderWidth: 1,
-      borderColor:'#58D68D',
-      label: now_time,
-      },
-      {
+      backgroundColor:'#5DADE2',
+      label: 'read_bytes_sec',
+     },
+     {
       data: [],
       borderWidth: 1,
-      borderColor:'#EB984E',
-      label: now_time,
-      }
+      backgroundColor:'#F5B041',
+      label: 'write_bytes_sec',
+     }
     ]
   },
   options: {
     responsive: true,
     title: {
       display: true,
-      text: "Client I/O Bytes",
+      text: "Client I/O per Pool - <?php echo "$pool_name($pool_id)"; ?>",
     },
     legend: {
       display: true
@@ -90,33 +85,31 @@ var myChart = new Chart(ctx_live, {
   }
 });
 
-// this post id drives the example data
-var postId = 1;
-
 // logic to get new data
-var getData = function() {
+var getData<?php echo $pool_id; ?> = function() {
   $.ajax({
     success: function(data) {
       // process your data to pull out what you plan to use to update the chart
       // e.g. new label and a new data point
       
       // add new label and data point to chart's underlying data structures
-      myChart.data.labels.push(now_time);
-      myChart.data.datasets[0].data.push(100);
-      myChart.data.datasets[1].data.push(50);
+      Chart<?php echo $pool_id; ?>.data.labels.push(now_time<?php echo $pool_id; ?>);
+      Chart<?php echo $pool_id; ?>.data.datasets[0].data.push(<?php echo $read_bytes_sec; ?>);
+      Chart<?php echo $pool_id; ?>.data.datasets[1].data.push(<?php echo $write_bytes_sec; ?>);
       
       // re-render the chart
-      myChart.update();
+      Chart<?php echo $pool_id; ?>.update();
     }
   });
 };
 
 // get new data every 3 seconds
-setInterval(getData, 1000);
-
-<?php } ?>
-
+setInterval(getData<?php echo $pool_id; ?>, 10000);
 </script>
+
+<?php
+}
+?>
 
 </body>
 
