@@ -27,6 +27,7 @@ function timedRefresh(timeoutPeriod) {
 
 <?php
 include 'functions.php';
+include 'functions.php';
 
 $osd_id = $_GET['osd_id'];
 //echo "Working...................<br>";
@@ -41,6 +42,8 @@ $arrLabels = $chartData[0];
 $arrDatasets = $chartData[1];
 //print_r($arrLabels);
 //print_r($arrDatasets);
+
+$arrColors = json_decode(file_get_contents($PoolColorFile), true);
 ?>
 
 <canvas id="pieChart<?php echo $osd_id; ?>"></canvas>
@@ -61,28 +64,15 @@ var data = {
         {
             fill: true,
             data: <?php echo json_encode($arrDatasets, JSON_NUMERIC_CHECK); ?>,
-            backgroundColor: [
+//            backgroundColor: [
 //                "#FF6384",
 //                "#63FF84",
 //                "#8463FF",
 //                "#6384FF",
 //                "#84FF63",
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-                  random_rgba(),
-            ]
+//                random_rgba(),
+//            ]
+			backgroundColor: <?php echo json_encode($arrColors, JSON_NUMERIC_CHECK); ?>,
         }
     ]
 };

@@ -25,6 +25,7 @@ function timedRefresh(timeoutPeriod) {
 <body onload="JavaScript:timedRefresh(5000);">
 
 <?php
+include '_common.php';
 include 'functions.php';
 
 //$date = (shell_exec("date"));
@@ -35,19 +36,19 @@ $arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
 //var_dump($arrPG_DUMP);
 
 // Pool Color
-$tmpFile = "/tmp/sonar4ceph-pre-pools-count";
-$pre_poolsCount = preg_replace('/\R/', '', shell_exec("cat $tmpFile"));
-$poolsCount = shell_exec('ceph osd pool stats | grep -c "^pool"');
-echo "$poolsCount <---- $pre_poolsCount";
-if ($poolsCount != $pre_poolsCount) {
+$countPool = shell_exec('ceph osd pool stats | grep -c "^pool"');
+$countPool_pre = file_get_contents($prePoolCountFile);
+if ($countPool != $countPool_pre or count(json_decode(file_get_contents($PoolColorFile), true)) == 0) {
 	$arrColors = array();
-	for ($i=0; $i<$poolsCount; $i++) {
-		array_push($arrColors, getRandomColor());
+	for ($i=0; $i<$countPool; $i++) {
+		$color = getRandomColor();
+		array_push($arrColors, $color);
 	}
+	file_put_contents($PoolColorFile, json_encode($arrColors));
+	file_put_contents($prePoolCountFile, $countPool);
+} else {
+	$arrColors = json_decode(file_get_contents($PoolColorFile), true);
 }
-$pre_poolsCountFile = fopen($tmpFile, "w") or die("Unable to open file!");
-fwrite($pre_poolsCountFile, $poolsCount);
-fclose($pre_poolsCountFile);
 
 
 //$rawData = shell_exec('ceph osd tree --format=json');

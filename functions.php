@@ -41,11 +41,11 @@ function getChildren($arr)
 
 	$border_size = '5px';
 
-	$color_root = "#787878";
-	$color_datacenter = '#696969';
-	$color_rack = '#585858';
-	$color_host = '#484848';
-	$color_osd = '#383838';
+	$color_root = "#EB984E";
+	$color_datacenter = '#239B56';
+	$color_rack = '#7D3C98';
+	$color_host = '#2874A6';
+	$color_osd = '#F1C40F';
 
 	//var_dump(rsort($arr));
 	$name = $arr['name'];
@@ -62,45 +62,49 @@ function getChildren($arr)
 		echo "<center>";
 		echo "<table class='type01' border='$border_size' bordercolor='$color_root'><tr>";
 		echo " <tr>";
-		echo "  <td bgcolor='$color_root'><b><font color='#FFFFFF'>Root:</b> $name</td>";
+		echo "  <td bgcolor='$color_root'><b><font color='#000000'>Root:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
-		echo "  <td>";
-		showUsageBarGraph($utilization);
+		echo "  <td bgcolor='#FAE5D3'>";
+		showUsageBarGraph($utilization, $kb_used, $kb_avail);
+		echo "<br><br>";
 	} else if ($type == "datacenter") {
 		echo "<table class='type01' border='$border_size' bordercolor='$color_datacenter'><tr>";
 		echo " <tr>";
 		echo "  <td bgcolor='$color_datacenter'><b><font color='#FFFFFF'>Datacenter:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
-		echo "  <td>";
-		showUsageBarGraph($utilization);
+		echo "  <td bgcolor='#D5F5E3'>";
+		showUsageBarGraph($utilization, $kb_used, $kb_avail);
+		echo "<br><br>";
 	} else if ($type == "rack") {
-		echo "<table class='type01' style='float:left' width='500px' border='$border_size' bordercolor='$color_rack'><tr>";
+		echo "<table class='type01' style='float:left' width='400px' border='$border_size' bordercolor='$color_rack'><tr>";
 		echo " <tr>";
 		echo "  <td bgcolor='$color_rack'><b><font color='#FFFFFF'>Rack:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
-		echo "  <td>";
-		showUsageBarGraph($utilization);
+		echo "  <td bgcolor='#E8DAEF'>";
+		showUsageBarGraph($utilization, $kb_used, $kb_avail);
+		echo "<br><br>";
 	} else if ($type == "host") {
 		echo "<center>";
-		echo "<table class='type01' width='450px' border='$border_size' bordercolor='$color_host'><tr>";
+		echo "<table class='type01' width='350px' border='$border_size' bordercolor='$color_host'><tr>";
 		echo " <tr>";
 		echo "  <td bgcolor='$color_host'><b><font color='#FFFFFF'>Host:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
-		echo "  <td>";
-		showUsageBarGraph($utilization);
+		echo "  <td bgcolor='#AED6F1'>";
+		showUsageBarGraph($utilization, $kb_used, $kb_avail);
+		echo "<br><br>";
 	} else if ($type == "osd") {
 		echo "<center>";
-		echo "<table class='type01' width='400px' border='$border_size' bordercolor='$color_osd'><tr>";
+		echo "<table class='type01' width='300px' border='$border_size' bordercolor='$color_osd'><tr>";
 		echo " <tr bgcolor='$color_osd'>";
-		echo "  <td><b><font color='#FFFFFF'>OSD:</b> $name</td>";
+		echo "  <td><b><font color='#000000'>OSD:</b> $name</td>";
 		echo " </tr>";
 		echo " <tr>";
-		echo "  <td>";
-		showUsageBarGraph($utilization);
+		echo "  <td bgcolor='#F9E79F'>";
+		showUsageBarGraph($utilization, $kb_used, $kb_avail);
 		$osd_id = explode('.', $name)[1];
 		//echo "   <center><a href='detail-osd.php?osd_id=$osd_id' target='_blank'>Detail</a>";
 		//include "osd-pgs.php";
@@ -169,16 +173,20 @@ function formatKBytes($size, $precision = 2)
     $base = log($size, 1024);
     $suffixes = array('KiB', 'MiB', 'GiB', 'TiB');   
 
-    return round(pow(1024, $base - floor($base)), $precision) .' '. $suffixes[floor($base)];
+    return round(pow(1024, $base - floor($base)), $precision) .''. $suffixes[floor($base)];
 }
 
 
-function showUsageBarGraph($utilization)
+function showUsageBarGraph($utilization, $kb_used, $kb_avail)
 {
-	echo "<table broder='0' width='95%' align='center' cellpadding='0' cellspacing='0' style='border-collapse: collapse;'>";
+	$pcnt_used = number_format($utilization, 2);
+	$pcnt_avail = 100 - $pcnt_used;
+	$byte_used = formatKBytes($kb_used);
+	$byte_avail = formatKBytes($kb_avail);
+	echo "<center><table broder='0' width='95%' align='center' cellpadding='0' cellspacing='0' style='border-collapse: collapse; margin: 5px;'>";
 	echo " <tr height='20' colspan='0'>";
-	echo "  <td width=$utilization% bgcolor='#FFA500'>";
-	echo "  <td bgcolor='#32CD32'>";
+	echo "  <td width=$pcnt_used% bgcolor='#FFA500'><center><span style='font-size: 0.2em'>USE<br>($byte_used)</span>";
+	echo "  <td bgcolor='#32CD32'><center><span style='font-size: 0.2em'>AVAIL<br>($byte_avail)</span>";
 	echo " </tr>";
 	echo "</table>";
 }
@@ -186,7 +194,7 @@ function showUsageBarGraph($utilization)
 function showPoolPGBarGraph($arrLabels, $arrDatasets, $arrColors)
 {
 	global $arrColors;
-	echo "<table broder='0' width='95%' align='center' cellpadding='0' cellspacing='0' style='border-collapse: collapse;'>";
+	echo "<center><table broder='0' width='95%' align='center' cellpadding='0' cellspacing='0' style='border-collapse: collapse; margin: 5px;'>";
 	echo " <tr height='20' colspan='0'>";
 	$total = 0;
 	foreach ($arrDatasets as $k=>$v) {
@@ -194,10 +202,11 @@ function showPoolPGBarGraph($arrLabels, $arrDatasets, $arrColors)
 	}
 	foreach ($arrLabels as $k=>$v) {
 		$label = $v;
+		$pool_id = explode("pool_", $label)[1];
 		$data = $arrDatasets[$k];
 		$pcnt = floor(($data / $total) * 100);
 		$color = $arrColors[$k];
-		echo "  <td width=$pcnt% bgcolor='$color'>";
+		echo "  <td width=$pcnt% bgcolor='$color'><center><span style='font-size: 0.2em'>$pool_id<br>($data)</span>";
 	}
 	echo " </tr>";
 	echo "</table>";
