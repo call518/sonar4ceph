@@ -67,7 +67,7 @@ function getChildren($arr)
 		echo " <tr>";
 		echo "  <td bgcolor='#FAE5D3'>";
 		showUsageBarGraph($utilization, $kb_used, $kb_avail);
-		echo "<br><br>";
+		echo "<br>";
 	} else if ($type == "datacenter") {
 		echo "<table class='type01' border='$border_size' bordercolor='$color_datacenter'><tr>";
 		echo " <tr>";
@@ -76,7 +76,7 @@ function getChildren($arr)
 		echo " <tr>";
 		echo "  <td bgcolor='#D5F5E3'>";
 		showUsageBarGraph($utilization, $kb_used, $kb_avail);
-		echo "<br><br>";
+		echo "<br>";
 	} else if ($type == "rack") {
 		echo "<table class='type01' style='float:left' width='400px' border='$border_size' bordercolor='$color_rack'><tr>";
 		echo " <tr>";
@@ -85,7 +85,7 @@ function getChildren($arr)
 		echo " <tr>";
 		echo "  <td bgcolor='#E8DAEF'>";
 		showUsageBarGraph($utilization, $kb_used, $kb_avail);
-		echo "<br><br>";
+		echo "<br>";
 	} else if ($type == "host") {
 		echo "<center>";
 		echo "<table class='type01' width='350px' border='$border_size' bordercolor='$color_host'><tr>";
@@ -95,17 +95,17 @@ function getChildren($arr)
 		echo " <tr>";
 		echo "  <td bgcolor='#AED6F1'>";
 		showUsageBarGraph($utilization, $kb_used, $kb_avail);
-		echo "<br><br>";
+		echo "<br>";
 	} else if ($type == "osd") {
+		$osd_id = explode('.', $name)[1];
 		echo "<center>";
 		echo "<table class='type01' width='300px' border='$border_size' bordercolor='$color_osd'><tr>";
 		echo " <tr bgcolor='$color_osd'>";
-		echo "  <td><b><font color='#000000'>OSD:</b> $name</td>";
+		echo "  <td><b><font color='#000000'><input type=\"button\" value=\"Detail OSD-$osd_id\" onclick=\"window.open('detail-osd.php?osd_id=$osd_id', 'Detail of OSD.$osd_id', 'width=1024, height=800')\"></td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td bgcolor='#F9E79F'>";
 		showUsageBarGraph($utilization, $kb_used, $kb_avail);
-		$osd_id = explode('.', $name)[1];
 		//echo "   <center><a href='detail-osd.php?osd_id=$osd_id' target='_blank'>Detail</a>";
 		//include "osd-pgs.php";
 		//var_dump($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
@@ -116,7 +116,6 @@ function getChildren($arr)
 		//echo "<br>";
 		//print_r($arrDatasets);
 		showPoolPGBarGraph($arrLabels, $arrDatasets, $arrColors);
-		echo "<br><center><input type=\"button\" value=\"Detail OSD-$osd_id\" onclick=\"window.open('detail-osd.php?osd_id=$osd_id', 'Detail of OSD.$osd_id', 'width=1024, height=800')\"><p>";
 	}
 	$children = $arr[children];
 	if (count($children) > 0) {

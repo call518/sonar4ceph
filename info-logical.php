@@ -24,6 +24,8 @@ function timedRefresh(timeoutPeriod) {
 
 <body onload="JavaScript:timedRefresh(5000);">
 
+<center><input type="button" value="Client I/O per Pools" onclick="window.open('io_per_pool.php', 'Client I/O per Pools', 'width=1024, height=800')">
+
 <?php
 include '_common.php';
 include 'functions.php';
