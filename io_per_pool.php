@@ -38,13 +38,27 @@ foreach ($arrData as $object)
 		$write_op_per_sec = 0;
 	}
 ?>  
-<div style="width:50%;">
+<div style="width:90%;">
   <canvas id="canvas<?php echo $pool_id; ?>"></canvas>
 </div>
 
 <script>
+function getNow() {
+  now = new Date();
+  year = "" + now.getFullYear();
+  month = "" + (now.getMonth() + 1); if (month.length == 1) { month = "0" + month; }
+  day = "" + now.getDate(); if (day.length == 1) { day = "0" + day; }
+  hour = "" + now.getHours(); if (hour.length == 1) { hour = "0" + hour; }
+  minute = "" + now.getMinutes(); if (minute.length == 1) { minute = "0" + minute; }
+  second = "" + now.getSeconds(); if (second.length == 1) { second = "0" + second; }
+  //return year + "-" + month + "-" + day + " " + hour + ":" + minute + ":" + second;
+  return hour + ":" + minute + ":" + second;
+}
+
 // create initial empty chart
-var now_time<?php echo $pool_id; ?> = Date.now();
+//var now<?php echo $pool_id; ?> = Date.now();
+var now<?php echo $pool_id; ?> = getNow();
+
 var ctx_live<?php echo $pool_id; ?> = document.getElementById("canvas<?php echo $pool_id; ?>");
 var Chart<?php echo $pool_id; ?> = new Chart(ctx_live<?php echo $pool_id; ?>, {
   type: 'bar',
@@ -76,6 +90,11 @@ var Chart<?php echo $pool_id; ?> = new Chart(ctx_live<?php echo $pool_id; ?>, {
       display: true
     },
     scales: {
+      xAxes: [{
+        ticks: {
+          display: false
+        }
+      }],
       yAxes: [{
         ticks: {
           beginAtZero: true,
@@ -93,7 +112,7 @@ var getData<?php echo $pool_id; ?> = function() {
       // e.g. new label and a new data point
       
       // add new label and data point to chart's underlying data structures
-      Chart<?php echo $pool_id; ?>.data.labels.push(now_time<?php echo $pool_id; ?>);
+      Chart<?php echo $pool_id; ?>.data.labels.push(now<?php echo $pool_id; ?>);
       Chart<?php echo $pool_id; ?>.data.datasets[0].data.push(<?php echo $read_bytes_sec; ?>);
       Chart<?php echo $pool_id; ?>.data.datasets[1].data.push(<?php echo $write_bytes_sec; ?>);
       
@@ -104,7 +123,7 @@ var getData<?php echo $pool_id; ?> = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData<?php echo $pool_id; ?>, 10000);
+setInterval(getData<?php echo $pool_id; ?>, 2000);
 </script>
 
 <?php
