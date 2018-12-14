@@ -26,16 +26,12 @@ function timedRefresh(timeoutPeriod) {
 <body onload="JavaScript:timedRefresh(5000);">
 
 <?php
-$osd_id = $_GET['osd_id'];
-echo "OSD ID: $osd_id";
-echo "<br>Working..........";
-
 include '_common.php';
 include 'functions.php';
 
 $osd_id = $_GET['osd_id'];
-//echo "Working...................<br>";
-//echo "OSD ID => $osd_id<br>";
+echo "OSD ID: $osd_id";
+echo "<br>Working..........";
 
 $rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");
 $arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
@@ -44,8 +40,6 @@ $arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
 $chartData = convertPGDumpArray2ChartArray($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
 $arrLabels = $chartData[0];
 $arrDatasets = $chartData[1];
-//print_r($arrLabels);
-//print_r($arrDatasets);
 
 $arrColors = json_decode(file_get_contents($PoolColorFile), true);
 ?>
@@ -68,14 +62,6 @@ var data = {
         {
             fill: true,
             data: <?php echo json_encode($arrDatasets, JSON_NUMERIC_CHECK); ?>,
-//            backgroundColor: [
-//                "#FF6384",
-//                "#63FF84",
-//                "#8463FF",
-//                "#6384FF",
-//                "#84FF63",
-//                random_rgba(),
-//            ]
 			backgroundColor: <?php echo json_encode($arrColors, JSON_NUMERIC_CHECK); ?>,
         }
     ]
