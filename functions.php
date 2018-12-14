@@ -106,15 +106,9 @@ function getChildren($arr)
 		echo " <tr>";
 		echo "  <td bgcolor='#F9E79F'>";
 		showUsageBarGraph($utilization, $kb_used, $kb_avail);
-		//echo "   <center><a href='detail-osd.php?osd_id=$osd_id' target='_blank'>Detail</a>";
-		//include "osd-pgs.php";
-		//var_dump($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
 		$chartData = convertPGDumpArray2ChartArray($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
 		$arrLabels = $chartData[0];
 		$arrDatasets = $chartData[1];
-		//print_r($arrLabels);
-		//echo "<br>";
-		//print_r($arrDatasets);
 		showPoolPGBarGraph($arrLabels, $arrDatasets, $arrColors);
 	}
 	$children = $arr[children];
