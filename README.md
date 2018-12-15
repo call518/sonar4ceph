@@ -69,6 +69,16 @@ Copyright (c) 1997-2016 The PHP Group
 Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 ```
 
+#### CEPH-REST-API 서비스
+
+* CEPH 노드든 HTTPd서버 노드든 관계 없음. 쿼리 수행만 정상확인 필수.
+* CEPH-REST-API 서비스 위치와, "_config.php"의 "$ceph_api" 변수값 일치 확인 필수.
+* (Note) 데몬 타입으로 시작 방법을 몰라, 일단 screen을 이용해 진행 중임.....;;;
+
+```bash
+screen -dmSL Ceph-REST-API-Service ceph-rest-api -n client.admin
+```
+
 #### sonar4ceph 배치
 
 ```
