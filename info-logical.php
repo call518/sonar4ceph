@@ -75,8 +75,8 @@ echo "</table>";
 //echo "<pre><font color=black>$date</font></pre>";
 
 $rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");
+// $arrPG_DUMP -> _functions.php의 getChildren() 함수가 참조. 
 $arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
-//var_dump($arrPG_DUMP);
 
 // Pool Color
 //$countPool = shell_exec('ceph osd pool stats | grep -c "^pool"');

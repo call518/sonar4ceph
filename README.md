@@ -54,7 +54,7 @@ yum install -y httpd
 
 #### PHP 설치 (>=5.5.x)
 
-* CentOS7의 기본 PHP는 5.4이므로 서드파티 Repository를 활용하여 5.6.x를 설치 하여 진행하였음.
+* CentOS7의 기본 PHP는 5.4인 관계로, 3사 Repository를 이용헤 5.6.x를 설치 하여 진행하였음.
   * 참고 문서: https://www.tecmint.com/install-php-5-6-on-centos-7/
 
 ```bash
