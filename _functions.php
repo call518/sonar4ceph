@@ -242,5 +242,40 @@ function convertPGDumpArray2ChartArray($arr)
 	}
 	return array($arrLabels, $arrDatasets);
 }
+
+function json2table($data)
+{
+    $table = '
+    <center><table class="type03" width="90%">
+    ';
+    foreach ($data as $key => $value) {
+        $table .= '
+        <tr valign="top">
+        ';
+        if ( ! is_numeric($key)) {
+            $table .= ' 
+            <th scope="row">'.$key.'</th>
+            <td>
+            ';
+        } else {
+            $table .= '
+            <td colspan="2">
+            ';
+        }
+        if (is_object($value) || is_array($value)) {
+            $table .= json2table($value);
+        } else {
+            $table .= $value;
+        }
+        $table .= '
+            </td>
+        </tr>
+        ';
+    }
+    $table .= '
+    </table>
+    ';
+    return $table;
+}
 //=============================================================================================
 ?>

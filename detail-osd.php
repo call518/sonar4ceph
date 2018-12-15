@@ -1,19 +1,38 @@
+<?php
+include '_config.php';
+include '_functions.php';
+
+$osd_id = $_GET['osd_id'];
+?>
+
 <html>
-<title> Detail - OSD </title>
+<title> Detail - "OSD-<?php echo $osd_id; ?>"</title>
 <head>
 <style>
-table.type01 {
-	border-collapse: collapse;
-	text-align: left;
-	line-height: 1.5;
-	margin : 20px 20px;
-	padding: 15px;
+table.type03 {
+    border-collapse: collapse;
+    text-align: left;
+    line-height: 1;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+    margin : 3px 3px;
 }
-table.type01 tr {
-	vertical-align: top;
+table.type03 th {
+    width: 147px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: middle;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+
 }
-table.type01 td {
-	vertical-align: top;
+table.type03 td {
+    //width: 349px;
+    padding: 10px;
+    vertical-align: top;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
 }
 </style>
 <script type="text/JavaScript">
@@ -23,15 +42,18 @@ function timedRefresh(timeoutPeriod) {
 </script>
 </head>
 
-<body onload="JavaScript:timedRefresh(5000);">
+<body onload="JavaScript:timedRefresh(10000);">
 
 <?php
-include '_config.php';
-include '_functions.php';
+echo("<strong><OSD: $osd_id></strong>");
+$jsonData = simple_curl("$ceph_api/osd/dump");
+$arrOsdData = json_decode($jsonData, true)['output']['osds'];
+//print_r($arrOsdData);
+$osd_arrIndex = array_search("$osd_id", array_column($arrOsdData, "osd"));
+//echo $osd_arrIndex;
+//print_r($arrOsdData[$osd_arrIndex]);
+print_r(json2table($arrOsdData[$osd_arrIndex]));
 
-$osd_id = $_GET['osd_id'];
-echo "OSD ID: $osd_id";
-echo "<br>Working..........";
 
 $rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");
 $arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
@@ -48,11 +70,6 @@ $arrColors = json_decode(file_get_contents($PoolColorFile), true);
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js'></script>
 
 <script>
-function random_rgba() {
-    var o = Math.round, r = Math.random, s = 255;
-    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-}
-
 var canvas = document.getElementById("pieChart<?php echo $osd_id; ?>");
 var ctx = canvas.getContext('2d');
 
@@ -79,6 +96,7 @@ var myChart = new Chart(ctx, {
     options: options
 });
 </script>
+
 
 </body>
 </html>
