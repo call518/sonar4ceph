@@ -31,9 +31,9 @@ Sonar 4 CEPH (sonar4ceph)
 
 ## 요구 환경
 
-#### PHP >= 5.5.x
+#### PHP >= 5.5
 
-* "array_column" 함수를 필요로 하여, PHP 최소 버전은 5.5.x 이상 요구됨.
+* "array_column" 함수를 필요로 하여, PHP 최소 버전은 5.5 이상 요구됨.
 
 
 #### CEPH-REST-API (TCP:5000)
@@ -52,9 +52,9 @@ Sonar 4 CEPH (sonar4ceph)
 yum install -y httpd
 ```
 
-#### PHP 설치 (>=5.5.x)
+#### PHP 설치 (>=5.5)
 
-* CentOS7의 기본 PHP는 5.4인 관계로, 3사 Repository를 이용헤 5.6.x를 설치 하여 진행하였음.
+* CentOS7의 기본 PHP는 5.4인 관계로, 3사 Repository를 이용하여 5.6 설치 하여 진행하였음.
   * 참고 문서: https://www.tecmint.com/install-php-5-6-on-centos-7/
 
 ```bash
