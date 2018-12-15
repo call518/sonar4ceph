@@ -31,14 +31,14 @@ Sonar 4 CEPH (sonar4ceph)
 
 ## 요구 환경
 
-#### PHP +> 5.5.x
+#### PHP >= 5.5.x
 
-* array_column 함수를 필요로 하여, PHP 최소 버전은 5.5.x 이상 요구됨.
+* "array_column" 함수를 필요로 하여, PHP 최소 버전은 5.5.x 이상 요구됨.
 
 
 #### CEPH-REST-API (TCP:5000)
 
-* 첫 테스트 시에는 단순 PHP의 shell_exec()를 이용해, "ceph {options} -f json" 방식으로 쿼리를 하였으나, 전송 데이터가 증가하고, 빈도수가 많아짐에 따라, 느려짐과 시스템 부하가 커짐.
+* 첫 테스트 시에는 단순 PHP의 "shell_exec()"를 이용해, "ceph {options} -f json" 방식으로 쿼리를 하였으나, 전송 데이터가 증가하고, 빈도수가 많아짐에 따라, 느려짐과 시스템 부하가 커짐.
 * 부하를 최소화 하기 위해, "ceph-rest-api"를 ceph 관리자(ceph.admin) 권한으로 실행(TCP:5000)하여 필요한 정보를 요청/수신하게 처리.
 
 
