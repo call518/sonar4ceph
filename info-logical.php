@@ -28,6 +28,22 @@ function timedRefresh(timeoutPeriod) {
 include '_config.php';
 include '_functions.php';
 
+echo "<center>";
+echo "<table class='type01' border='0' cellpadding='10'><tr>";
+echo " <tr>";
+echo "  <td>";
+echo "    <input type=\"button\" value=\"Dump-Info - Pools\" onclick=\"window.open('dump-info-pools.php', 'Dump-Info - Pools', 'width=1024, height=800')\">";
+echo "  </td>";
+echo "  <td>";
+echo "    <input type=\"button\" value=\"Dump-Info - OSDs\" onclick=\"window.open('dump-info-osds.php', 'Dump-Info - OSDs', 'width=1024, height=800')\">";
+echo "  </td>";
+echo "  <td>";
+echo "    <input type=\"button\" style=\"width: 100%\" value=\"Dump-Info - PGs\" onclick=\"window.open('dump-info-pgs.php', 'Dump-Info - PGs', 'width=1024, height=800')\">";
+echo "  </td>";
+echo " </tr>";
+echo "</table>";
+
+
 //$jsonPoolData = shell_exec('ceph osd lspools --format=json');
 $jsonPoolData = simple_curl("$ceph_api/osd/lspools");
 $arrPoolData = json_decode($jsonPoolData, true)['output'];

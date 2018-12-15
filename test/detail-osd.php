@@ -6,7 +6,7 @@ $osd_id = $_GET['osd_id'];
 ?>
 
 <html>
-<title>Detail - "OSD-<?php echo $osd_id; ?>"</title>
+<title> Detail - "OSD-<?php echo $osd_id; ?>"</title>
 <head>
 <style>
 table.type03 {
@@ -21,7 +21,7 @@ table.type03 th {
     width: 147px;
     padding: 10px;
     font-weight: bold;
-    vertical-align: top;
+    vertical-align: middle;
     color: #153d73;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
@@ -36,14 +36,13 @@ table.type03 td {
 }
 </style>
 <script type="text/JavaScript">
-//function timedRefresh(timeoutPeriod) {
-//	setTimeout("location.reload(true);",timeoutPeriod);
-//}
+function timedRefresh(timeoutPeriod) {
+	setTimeout("location.reload(true);",timeoutPeriod);
+}
 </script>
 </head>
 
-<//body onload="JavaScript:timedRefresh(10000);">
-<body>
+<body onload="JavaScript:timedRefresh(10000);">
 
 <?php
 echo("<strong><OSD: $osd_id></strong>");
@@ -53,7 +52,7 @@ $arrOsdData = json_decode($jsonData, true)['output']['osds'];
 $osd_arrIndex = array_search("$osd_id", array_column($arrOsdData, "osd"));
 //echo $osd_arrIndex;
 //print_r($arrOsdData[$osd_arrIndex]);
-print_r(array2table($arrOsdData[$osd_arrIndex]));
+print_r(json2table($arrOsdData[$osd_arrIndex]));
 
 
 $rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");

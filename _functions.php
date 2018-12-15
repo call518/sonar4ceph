@@ -243,7 +243,7 @@ function convertPGDumpArray2ChartArray($arr)
 	return array($arrLabels, $arrDatasets);
 }
 
-function json2table($data)
+function array2table($data)
 {
     $table = '
     <center><table class="type03" width="90%">
@@ -263,7 +263,7 @@ function json2table($data)
             ';
         }
         if (is_object($value) || is_array($value)) {
-            $table .= json2table($value);
+            $table .= array2table($value);
         } else {
             $table .= $value;
         }
