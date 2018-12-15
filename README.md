@@ -76,7 +76,16 @@ git clone https://github.com/call518/sonar4ceph.git
 mv sonar4ceph /var/www/html/
 ```
 
-Completed~~~~~~~~~~~~~~~~~
+#### Web 접근
+
+```bash
+<브라우져 주소창>
+
+http://{your-http-server-ip-or-name}/sonar4web
+```
+
+
+Completed~~~~~~~~~~~~~~~~~ :)
 
 
 설정
