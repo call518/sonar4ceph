@@ -25,11 +25,12 @@ function timedRefresh(timeoutPeriod) {
 <body onload="JavaScript:timedRefresh(5000);">
 
 <?php
-include '_common.php';
-include 'functions.php';
+include '_config.php';
+include '_functions.php';
 
-$jsonPoolData = shell_exec('ceph osd lspools --format=json');
-$arrPoolData = json_decode($jsonPoolData);
+//$jsonPoolData = shell_exec('ceph osd lspools --format=json');
+$jsonPoolData = simple_curl("$ceph_api/osd/lspools");
+$arrPoolData = json_decode($jsonPoolData, true)['output'];
 //print_r($arrPoolData);
 
 echo "<center>";
@@ -62,7 +63,9 @@ $arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
 //var_dump($arrPG_DUMP);
 
 // Pool Color
-$countPool = shell_exec('ceph osd pool stats | grep -c "^pool"');
+//$countPool = shell_exec('ceph osd pool stats | grep -c "^pool"');
+$jsonDataCountPool = simple_curl("$ceph_api/osd/pool/stats");
+$countPool = count(json_decode($jsonDataCountPool, true)['output']);
 $countPool_pre = file_get_contents($prePoolCountFile);
 if ($countPool != $countPool_pre or count(json_decode(file_get_contents($PoolColorFile), true)) == 0) {
 	$arrColors = array();
@@ -78,7 +81,8 @@ if ($countPool != $countPool_pre or count(json_decode(file_get_contents($PoolCol
 
 
 //$rawData = shell_exec('ceph osd tree --format=json');
-$rawData = shell_exec('ceph osd df tree --format=json');
+//$rawData = shell_exec('ceph osd df tree --format=json');
+$rawData = json_encode(json_decode(simple_curl("$ceph_api/osd/df?output_method=tree"), true)['output']);
 $input_json = json_decode($rawData);
 //var_dump($input_json);
 $nodes = array();

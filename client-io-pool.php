@@ -51,10 +51,11 @@ var Chart = new Chart(ctx_live, {
       borderWidth: 1,
       backgroundColor:'#5DADE2',
       borderColor:'#5DADE2',
+      pointRadius: 1,
       label: 'read_bytes_sec',
       fill: false,
       showLine: true,
-      lineTension: 0.3,
+      //lineTension: 0.3,
       borderWidth: 2,
      },
      {
@@ -62,10 +63,11 @@ var Chart = new Chart(ctx_live, {
       borderWidth: 1,
       backgroundColor:'#F5B041',
       borderColor:'#F5B041',
+      pointRadius: 1,
       label: 'write_bytes_sec',
       fill: false,
       showLine: true,
-      lineTension: 0.3,
+      //lineTension: 0.3,
       borderWidth: 2,
      }
     ]
@@ -83,8 +85,8 @@ var Chart = new Chart(ctx_live, {
       xAxes: [{
         ticks: {
           display: true,
-          //autoSkip: true,
-          //maxTicksLimit: 20,
+          autoSkip: true,
+          maxTicksLimit: 20,
         }
       }],
       yAxes: [{
@@ -139,7 +141,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData, 3000);
+setInterval(getData, 1000);
 </script>
 
 </body>

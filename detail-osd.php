@@ -26,8 +26,8 @@ function timedRefresh(timeoutPeriod) {
 <body onload="JavaScript:timedRefresh(5000);">
 
 <?php
-include '_common.php';
-include 'functions.php';
+include '_config.php';
+include '_functions.php';
 
 $osd_id = $_GET['osd_id'];
 echo "OSD ID: $osd_id";

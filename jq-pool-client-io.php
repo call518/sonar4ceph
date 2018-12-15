@@ -1,13 +1,18 @@
 <?php
+include '_config.php';
+include "_functions.php";
+
 $pool_name = $_GET['pool_name'];
 $pool_id = $_GET['pool_id'];
 //$pool_name = "vms";
 //$pool_id = 5;
-$jsonData = shell_exec("ceph osd pool stats $pool_name --format=json");
-$object = json_decode($jsonData)[0];
-$arrData = json_decode(json_encode($object), True);
-$arr_client_io_rate_object = json_decode(json_encode($arrData['client_io_rate'], True));
-$arr_client_io_rate = json_decode(json_encode($arr_client_io_rate_object), True);
+//$jsonData = shell_exec("ceph osd pool stats $pool_name --format=json");
+$jsonData = simple_curl("$ceph_api/osd/pool/stats?name=$pool_name");
+//print_r($jsonData);
+$arrData = json_decode($jsonData, true)['output'];
+//print_r($arrData);
+$arr_client_io_rate = $arrData[0]['client_io_rate'];;
+//print_r($arr_client_io_rate);
 if (count($arr_client_io_rate) != 0) {
 	$read_bytes_sec = $arr_client_io_rate['read_bytes_sec'];
 	if ($read_bytes_sec == '') $read_bytes_sec = 0;
