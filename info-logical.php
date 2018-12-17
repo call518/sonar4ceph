@@ -51,7 +51,7 @@ echo "  <td>";
 echo "    <input type=\"button\" value=\"OSD Status\" onclick=\"window.open('inkscope-lite/osds.html', '_blank')\">";
 echo "  </td>";
 echo "  <td>";
-echo "    <input type=\"button\" value=\"OSD Performance\" onclick=\"window.open('inkscope-lite/osdPerf.html', '_blank')\">";
+echo "    <input type=\"button\" value=\"OSD Performance\" onclick=\"window.open('inkscope-lite/osdPerf.html', 'OSD Performance', 'width=500, height=800')\">";
 echo "  </td>";
 echo "  <td>";
 echo "    <input type=\"button\" value=\"Pool Status\" onclick=\"window.open('inkscope-lite/poolManagement.html', '_blank')\">";
