@@ -246,6 +246,7 @@ function convertPGDumpArray2ChartArray($arr)
 function array2table($data)
 {
     $table = '
+    <!--<center><table class="type03" width="90%">-->
     <center><table class="type03" width="90%">
     ';
     foreach ($data as $key => $value) {

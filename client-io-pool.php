@@ -115,13 +115,13 @@ var getData = function() {
       // e.g. new label and a new data point
       
       // add new label and data point to chart's underlying data structures
-      //var count = Chart.data.labels.length; 
-      //if (count > 3) {
-      //  Chart.data.labels.pop();
-      //  Chart.data.datasets.forEach((dataset) => {
-      //    dataset.data.pop();
-      //  });
-      //}
+      var count = Chart.data.labels.length; 
+      if (count > 50) {
+        Chart.data.labels.splice(0, 1);
+        Chart.data.datasets.forEach((dataset) => {
+          dataset.data.splice(0, 1);
+        });
+      }
       var parsed_data = JSON.parse(data);
       console.log(parsed_data.read_bytes_sec);
       console.log(parsed_data.write_bytes_sec);
@@ -141,7 +141,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData, 1000);
+setInterval(getData, 3000);
 </script>
 
 </body>
