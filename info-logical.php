@@ -69,7 +69,7 @@ echo "  <td>";
 echo "    <input type=\"button\" value=\"Erasure Profiles\" onclick=\"window.open('inkscope-lite/erasureProfiles.html', '_blank')\">";
 echo "  </td>";
 echo "  <td>";
-echo "    <input type=\"button\" value=\"CRUSH Map\" onclick=\"window.open('inkscope-lite/showCrushMap.html '_blank'')\">";
+echo "    <input type=\"button\" value=\"CRUSH Map\" onclick=\"window.open('inkscope-lite/showCrushMap.html', '_blank')\">";
 echo "  </td>";
 echo " </tr>";
 echo "</table>";
