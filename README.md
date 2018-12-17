@@ -20,7 +20,6 @@ Sonar 4 CEPH (sonar4ceph)
 
 ![ScreenShot](README/screenshot-sonar4ceph.png)
 
-
 설치
 ================================
 
@@ -101,13 +100,50 @@ Completed~~~~~~~~~~~~~~~~~ :)
 설정
 ================================
 
-* 현재는 '설정'이라고 부를만한 것이 딱히 없음.
-* 굳이 있다면, "_config.php" 파일 정도?
+* HTTPd 서버만 요구되므로 아래 2가지 정도만 적절히 설정 하면 완료.
+  * "_config.php" 파일
+  * inkscope-lite에서 CEPH-REST-API에 대한 접근 지원을 위해, Apache "mod_proxy" 설정.
 
 #### _config.php
 
 * CEPH-REST-API의 엑세스 포인트를 정확히 확인/변경 한다.
 * 당연한 이야기지만, 관측에 필요한 모든 데이터 소스가 Rest-API인데, 연결이 안되면 --> :(
+
+#### Apache "mod_proxy"
+
+```bash
+<VirtualHost *:80>
+    ServerName  localhost
+    ServerAdmin webmaster@localhost
+
+    DocumentRoot /var/www/html
+    <Directory "/var/www/html">
+        Options All
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog "logs/error_log"
+
+    # Possible values include: debug, info, notice, warn, error, crit,
+    # alert, emerg.
+    LogLevel warn
+
+    ProxyRequests Off
+    ProxyPass /ceph-rest-api/ http://127.0.0.1:5000/api/v0.1/
+
+    CustomLog "logs/access.log" combined
+</VirtualHost>
+```
+
+APPENDIX
+================================
+
+## (Note) '바퀴를 새로 만들지 말자!'
+
+"*inkscope-lite*" 라는 멋진 OpenSource가 있다. 구상했던 기능들중 중복 항목은 inkscope-lite의 기능을 활용.
+
+Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (A-Dechorgnat)
 
 
 히스토리
