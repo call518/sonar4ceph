@@ -92,7 +92,14 @@ var Chart = new Chart(ctx_live, {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-        }
+          callback: function(label, index, labels) {
+            return (label/1024/1024).toFixed(2)+'MiB';
+          },
+        },
+        scaleLabel: {
+          display: true,
+          labelString: '1MiB = 1024KiB'
+        },
       }]
     }
   }
