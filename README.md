@@ -143,7 +143,7 @@ APPENDIX
 
 "*inkscope-lite*" 라는 멋진 OpenSource가 있다. 구상했던 기능들중 중복 항목은 inkscope-lite를 include하여 모듈 형태로 활용.
 
-Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (A-Dechorgnat)
+Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (["A-Dechorgnat"](https://github.com/A-Dechorgnat/inkscope-lite/commits?author=A-Dechorgnat))
 
 
 히스토리
