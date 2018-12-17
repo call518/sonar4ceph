@@ -111,6 +111,8 @@ Completed~~~~~~~~~~~~~~~~~ :)
 
 #### Apache "mod_proxy"
 
+/etc/httpd/conf.d/inkscope-lite.conf
+
 ```bash
 <VirtualHost *:80>
     ServerName  localhost
