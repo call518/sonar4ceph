@@ -39,6 +39,7 @@ Sonar 4 CEPH (sonar4ceph)
 
 * 첫 테스트 시에는 단순 PHP의 "shell_exec()"를 이용해, "ceph {options} -f json" 방식으로 쿼리를 하였으나, 전송 데이터가 증가하고, 빈도수가 많아짐에 따라, 느려짐과 시스템 부하가 커짐.
 * 부하를 최소화 하기 위해, "ceph-rest-api"를 ceph 관리자(ceph.admin) 권한으로 실행(TCP:5000)하여 필요한 정보를 요청/수신하게 처리.
+  * (Note) 현제 "check-osd_pg_state.sh"를 제외하고는 모두 ceph-rest-api를 통해 데이터 취득중이며, "check-osd_pg_state.sh" 역시, ceph-rest-api로 대체 예정.
 
 
 ## Tutorial
@@ -72,7 +73,9 @@ Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 
 * CEPH 노드든 HTTPd서버 노드든 관계 없음. 쿼리 수행만 정상확인 필수.
 * CEPH-REST-API 서비스 위치와, "_config.php"의 "$ceph_api" 변수값 일치 확인 필수.
-* (Note) 데몬 타입으로 시작 방법을 몰라, 일단 screen을 이용해 진행 중임.....;;;
+* (Note)
+  * 데몬 타입으로 시작 방법을 몰라, 일단 screen을 이용해 진행 중임.....;;;
+  * http 유져가 /etc/ceph/ceph.client.admin.keyring 파일에 접근 권한이 있어야 함.
 
 ```bash
 screen -dmSL Ceph-REST-API-Service ceph-rest-api -n client.admin
