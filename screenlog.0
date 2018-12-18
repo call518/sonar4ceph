@@ -1282,3 +1282,5 @@ error: [Errno 32] Broken pipe
 ::ffff:127.0.0.1 - - [18/Dec/2018 13:27:47] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
 ::ffff:127.0.0.1 - - [18/Dec/2018 13:27:48] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
 ::ffff:127.0.0.1 - - [18/Dec/2018 13:27:48] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 14:15:46] "GET /api/v0.1/osd/crush/dump.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 14:16:03] "GET /api/v0.1/osd/crush/dump.json HTTP/1.1" 200 -

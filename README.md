@@ -95,7 +95,7 @@ mv sonar4ceph /var/www/html/
 ```bash
 <브라우져 주소창>
 
-http://{your-http-server-ip-or-name}/sonar4web
+http://{your-http-server-ip-or-name}/sonar4ceph
 ```
 
 
@@ -117,6 +117,8 @@ Completed~~~~~~~~~~~~~~~~~ :)
 #### Apache "mod_proxy"
 
 /etc/httpd/conf.d/inkscope-lite.conf
+
+* "http://127.0.0.1:5000/api/v0.1/" 주소를 ceph-rest-api의 LISTEN 주소로 수정.
 
 ```bash
 <VirtualHost *:80>
