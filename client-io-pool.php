@@ -123,7 +123,7 @@ var getData = function() {
       
       // add new label and data point to chart's underlying data structures
       var count = Chart.data.labels.length; 
-      if (count > 200) {
+      if (count > 300) {
         Chart.data.labels.splice(0, 1);
         Chart.data.datasets.forEach((dataset) => {
           dataset.data.splice(0, 1);
@@ -148,7 +148,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData, 3000);
+setInterval(getData, 1000);
 </script>
 
 </body>

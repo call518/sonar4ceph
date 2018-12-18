@@ -1070,3 +1070,215 @@
 ::ffff:127.0.0.1 - - [18/Dec/2018 13:12:08] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
 ::ffff:127.0.0.1 - - [18/Dec/2018 13:12:08] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
 ::ffff:127.0.0.1 - - [18/Dec/2018 13:12:08] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:12:37] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:12:37] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:12:37] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:12:44] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:12:44] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:12:44] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:13:11] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:13:11] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:13:11] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:13:47] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:13:47] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:13:47] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:14:18] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:14:18] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:14:18] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:14:55] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:14:55] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:14:55] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:192.168.0.2 - - [18/Dec/2018 13:15:17] "GET /api/v0.1 HTTP/1.1" 400 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:39] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:39] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:39] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:46] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:46] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:46] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:53] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:53] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:15:53] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:00] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:00] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:00] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:07] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:07] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:07] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:14] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:14] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:14] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:21] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:21] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:21] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:28] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:28] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:28] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:35] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:35] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:35] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:42] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:42] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:42] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:49] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:49] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:49] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:56] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:56] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:16:56] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:03] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:03] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:03] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:10] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:10] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:10] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:17] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:17] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:17] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:24] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:24] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:24] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:31] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:31] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:31] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:38] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:38] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:38] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:45] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:45] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:45] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:54] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:54] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:17:54] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:18:06] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:18:06] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:18:06] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:18:32] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:18:32] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:18:32] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:04] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:04] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:04] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:35] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:35] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:35] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:42] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:42] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:42] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:47] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:48] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:48] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:53] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:54] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:54] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:19:59] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:00] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:00] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:05] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:05] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:05] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:10] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:11] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:11] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:16] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:17] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:17] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:23] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:23] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:23] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:30] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:30] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:20:30] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:21:28] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:21:28] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:21:28] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:21:42] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:21:42] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:21:42] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:22:11] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:22:11] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:22:11] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:22:43] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:22:43] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:22:43] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:23:17] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:23:17] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:23:17] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:23:48] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:23:48] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:23:48] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:24:20] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:24:20] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:24:20] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:24:50] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:24:50] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:24:50] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:25:28] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:25:28] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:25:28] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:25:57] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:25:57] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:25:57] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:26:26] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:26:26] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:26:26] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:26:55] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:26:55] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:26:55] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:22] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:38] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('::ffff:127.0.0.1', 33586, 0, 0)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/SocketServer.py", line 295, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib64/python2.7/SocketServer.py", line 321, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python2.7/SocketServer.py", line 334, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python2.7/SocketServer.py", line 651, in __init__
+    self.finish()
+  File "/usr/lib64/python2.7/SocketServer.py", line 710, in finish
+    self.wfile.close()
+  File "/usr/lib64/python2.7/socket.py", line 279, in close
+    self.flush()
+  File "/usr/lib64/python2.7/socket.py", line 303, in flush
+    self._sock.sendall(view[write_offset:write_offset+buffer_size])
+error: [Errno 32] Broken pipe
+----------------------------------------
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:38] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+----------------------------------------
+Exception happened during processing of request from ('::ffff:127.0.0.1', 33588, 0, 0)
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/SocketServer.py", line 295, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "/usr/lib64/python2.7/SocketServer.py", line 321, in process_request
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python2.7/SocketServer.py", line 334, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python2.7/SocketServer.py", line 651, in __init__
+    self.finish()
+  File "/usr/lib64/python2.7/SocketServer.py", line 710, in finish
+    self.wfile.close()
+  File "/usr/lib64/python2.7/socket.py", line 279, in close
+    self.flush()
+  File "/usr/lib64/python2.7/socket.py", line 303, in flush
+    self._sock.sendall(view[write_offset:write_offset+buffer_size])
+error: [Errno 32] Broken pipe
+----------------------------------------
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:38] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:39] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:39] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:42] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:42] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:42] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:44] "GET /api/v0.1/df.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:44] "GET /api/v0.1/osd/ls.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:44] "GET /api/v0.1/status.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:45] "GET /api/v0.1/df.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:45] "GET /api/v0.1/osd/ls.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:45] "GET /api/v0.1/pg/dump_json?dumpcontents=pgs HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:45] "GET /api/v0.1/status.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:45] "GET /api/v0.1/osd/dump.json HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:47] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:48] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 13:27:48] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
