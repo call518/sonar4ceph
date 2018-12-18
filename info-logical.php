@@ -73,7 +73,6 @@ foreach ($rootIDs as $k => $v) {
 		echo "      <option value=\"$v\">$k</option>";
 	}
 }
-		echo "      <option value=\"-2\" selected>test</option>";
 echo "    </select>";
 echo "  </td>";
 echo " </tr>";
