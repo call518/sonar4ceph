@@ -78,6 +78,8 @@ Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
   * http 유져가 /etc/ceph/ceph.client.admin.keyring 파일에 접근 권한이 있어야 함.
 
 ```bash
+chmod 644 /etc/ceph/ceph.client.admin.keyring
+
 screen -dmSL Ceph-REST-API-Service ceph-rest-api -n client.admin
 ```
 
