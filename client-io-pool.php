@@ -123,7 +123,7 @@ var getData = function() {
       
       // add new label and data point to chart's underlying data structures
       var count = Chart.data.labels.length; 
-      if (count > 50) {
+      if (count > 200) {
         Chart.data.labels.splice(0, 1);
         Chart.data.datasets.forEach((dataset) => {
           dataset.data.splice(0, 1);
