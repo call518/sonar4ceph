@@ -22,6 +22,23 @@ function simple_curl($url)
   return $content;
 }
 
+function getRootNodeIDs()
+{
+	global $ceph_api;
+	$result = array();
+	$jsonPoolData = simple_curl("$ceph_api/osd/df?output_method=tree");
+	$arrPoolData = json_decode($jsonPoolData, true)['output'];
+	$arrAllNodes = array_column($arrPoolData['nodes'], "type");
+	$arrRootNodeKeys = array_keys($arrAllNodes, "root");
+	foreach ($arrRootNodeKeys as $rootNodeKey)
+	{
+		$id = $arrPoolData['nodes'][$rootNodeKey]['id'];
+		$name = $arrPoolData['nodes'][$rootNodeKey]['name'];
+		$result[$name] = $id;
+	}
+    return $result;
+}
+
 function buildNode($nodeID) {
 	global $nodes;
 

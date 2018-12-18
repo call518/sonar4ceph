@@ -32,6 +32,13 @@ table.type01 td {
 function timedRefresh(timeoutPeriod) {
 	setTimeout("location.reload(true);",timeoutPeriod);
 }
+window.addEventListener('load', function(){
+    var select = document.getElementById('root_node');
+
+    select.addEventListener('change', function(){
+        window.location = 'info-logical.php?rootNodeId=' + this.value;
+    }, false);
+}, false);
 </script>
 </head>
 
@@ -41,8 +48,35 @@ function timedRefresh(timeoutPeriod) {
 include '_config.php';
 include '_functions.php';
 
+$pre_rootNodeId = $_GET['rootNodeId'];
+if ($pre_rootNodeId && $pre_rootNodeId != "undefined") {
+	$rootNodeId = $pre_rootNodeId;
+} else {
+	$rootNodeId = -1;
+}
+$rootIDs = getRootNodeIDs();
+$rootNodeName = array_search($rootNodeId, $rootIDs);
+//print_r($rootNodeId);
+//print_r($rootNodeName);
+?>
+
+<?php
 echo "<center>";
 echo "<table class='type00' border='0' cellpadding='5'><tr>";
+echo " <tr>";
+echo "  <td>";
+echo "    Root: <select id=\"root_node\" name=\"root_node\">";
+foreach ($rootIDs as $k => $v) {
+	if ($rootNodeId == $v) {
+		echo "      <option value=\"$v\" selected>$k</option>";
+	} else {
+		echo "      <option value=\"$v\">$k</option>";
+	}
+}
+		echo "      <option value=\"-2\" selected>test</option>";
+echo "    </select>";
+echo "  </td>";
+echo " </tr>";
 echo " <tr>";
 echo "  <td>";
 echo "    <input type=\"button\" value=\"OSD Map\" onclick=\"window.open('inkscope-lite/osdMap.html', '_blank')\">";
@@ -153,11 +187,16 @@ foreach ($input_json->nodes as $node)
 	$nodes[$node->id] = $node;
 }
 
-$nodeTree = buildNode(-1);
+
+// buildNode("Root Node ID")
+//echo $rootNodeId;
+if (!empty($rootNodeId) && !empty($rootNodeName)) {
+	$nodeTree = buildNode($rootNodeId);
 
 //var_dump(json_encode($nodeTree));
 
 getChildren($nodeTree);
+}
 
 ?>
 
