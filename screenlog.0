@@ -86,3 +86,6 @@
 ::ffff:127.0.0.1 - - [18/Dec/2018 10:22:26] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
 ::ffff:127.0.0.1 - - [18/Dec/2018 10:22:27] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
 ::ffff:127.0.0.1 - - [18/Dec/2018 10:22:27] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 10:23:02] "GET /api/v0.1/osd/lspools HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 10:23:03] "GET /api/v0.1/osd/pool/stats HTTP/1.1" 200 -
+::ffff:127.0.0.1 - - [18/Dec/2018 10:23:03] "GET /api/v0.1/osd/df?output_method=tree HTTP/1.1" 200 -

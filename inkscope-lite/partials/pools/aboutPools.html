@@ -1,0 +1,12 @@
+<div id="graphpool" >
+    <h3>Total space usage</h3>
+    <ad-gauge value="percentUsed" colormode="desc" width="400"></ad-gauge>
+    <div class="gaugeLegend">
+        {{totalUsed| bytes}} used <br>on {{totalSpace| bytes}}
+    </div>
+    <br />
+    <h3>Bytes used by pools</h3>
+    <div id="pools_graph">
+        <ad-pie-pools id="pie01" value="pools" width="400" labelfield="name"></ad-pie-pools>
+    </div>
+</div>

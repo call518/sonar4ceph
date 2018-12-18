@@ -1,0 +1,64 @@
+<!doctype html>
+<html ng-app="poolApp">
+<head>
+    <meta charset=utf-8 />
+    <script src="scripts/angular/angular.min.js"></script>
+    <script src="scripts/angular/angular-route.min.js"></script>
+    <script src="scripts/angular/angular-sanitize.min.js"></script>
+    <script src="scripts/angular-misc/ng-table.min.js"></script>
+    <script src="scripts/angular-misc/angular-commons.js"></script>
+    <script src="scripts/angular-misc/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="scripts/angular-misc/dialogs.v2.min.js"></script>
+    <script src="scripts/poolApp.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/angular-misc/D3Directives.js"></script>
+    <script src="scripts/d3/d3.v3.min.js"></script>
+    <script src="scripts/d3/common.js"></script>
+    <script src="scripts/d3/colorbrewer.js"></script>
+    <link rel="stylesheet" href="css/testAdmin.css" />
+    <link rel="stylesheet" href="css/tooltip.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="scripts/angular-misc/ng-table.min.css">
+    <script src="scripts/d3/nv.d3.min.js" charset="utf-8"></script>
+    <title>Ceph pools admin</title>
+    <style>
+        .glyphicon-chevron-down:before  {content: "\25BC";}
+        .glyphicon-chevron-right:before {content: "\25B6";}
+    </style>
+</head>
+<body ng-controller="ListCtrl" onresize="resizeBlocks(['#listpool','#control'])">
+
+
+<header id="header" ng-include src="'partials/header.html'" ng-init="pageTitle='Ceph pools management'"></header>
+
+<div>
+<!--div id="status"  >{{status}}</div-->
+    <div id="datePanel"><br>Date : {{date | date:'HH:mm:ss'}}</div>
+
+    <div id="listpool">
+    <table>
+        <tr>
+            <th><input type="text" ng-model="search.name" class="search-query" placeholder="Search pool name"></th>
+            <th>&nbsp; &nbsp; </th>
+            <th></th>
+        </tr>
+    </table>
+    <br>
+    <table ng-table="tableParams" class="table table-condensed clickable">
+        <tr ng-repeat="pool in orderedData | filter:search:strict" ng-click="showDetail(pool.id)">
+            <td data-title="'Id'" sortable="'id'">{{pool.id}}</td>
+            <td data-title="'Pool'" sortable="'name'">{{pool.name}}</td>
+            <td data-title="'Space used'" sortable="'stats.bytes_used'" style="text-align:right">{{pool.stats.bytes_used|bytes}}</td>
+            <td data-title="'Objects'" sortable="'stats.objects'" style="text-align:right">{{pool.stats.objects}}</td>
+            <td data-title="'View'" sortable="pool" style="text-align:center"><i class="icon-eye-open" alt="view details of {{pool.name}}" title="view details of {{pool.name}}"></i></td>
+        </tr>
+    </table>
+</div>
+</div>
+<div ng-view id="control" ></div>
+
+<script>resizeBlocks(['#listpool','#control']);</script>
+</body>
+
+</html>

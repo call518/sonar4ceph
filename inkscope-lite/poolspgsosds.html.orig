@@ -1,0 +1,106 @@
+﻿<!DOCTYPE html>
+<html ng-app="PoolPgOsdApp">
+<head>
+    <meta charset=utf-8/>
+    <title>Pools / PGs / OSDs</title>
+    <!--META HTTP-EQUIV="Refresh" CONTENT="10"-->
+    <link rel="stylesheet" type="text/css" media="screen" href="css/testAdmin.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/tooltip.css"/>
+    <script src="scripts/angular/angular.min.js"></script>
+    <script src="scripts/angular/angular-sanitize.min.js"></script>
+    <script src="scripts/angular-misc/ng-table.min.js"></script>
+    <script src="scripts/angular-misc/angular-commons.js"></script>
+    <script src="scripts/angular-misc/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="scripts/angular-misc/dialogs.v2.min.js"></script>
+    <script src="scripts/poolPgOsdApp.js"></script>
+    <script src="scripts/d3/d3.v3.min.js"></script>
+    <script src="scripts/d3/sankey.js"></script>
+    <script src="scripts/d3/common.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <style>
+        .node rect {
+            cursor: pointer;
+            fill-opacity: .9;
+            shape-rendering: crispEdges;
+        }
+
+        .node text {
+            pointer-events: none;
+            text-shadow: 0 1px 0 #fff;
+        }
+
+        .link {
+            fill: none;
+            stroke: #000;
+            stroke-opacity: .2;
+        }
+
+        .link:hover {
+            stroke-opacity: 1.0;
+        }
+
+        #chart1, #chart2 {
+            margin: 10px auto;
+        }
+
+        #chart1 {
+            display: none
+        }
+
+        #controlPanel {
+            border: black solid 1px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            margin: 10px;
+            border-radius: 5px;
+            vertical-align: middle;
+            line-height: 40px;
+            padding:5px;
+        }
+
+        #controlPanel input[type=number] {
+            width:40px;
+        }
+
+    </style>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<body ng-controller="poolPgOsdCtrl">
+
+<header ng-include src="'partials/header.html'" ng-init="pageTitle='Pools / PGs / OSDs'"></header>
+
+<form ng-submit="changePeriod()">
+    <div id="controlPanel">
+        Refresh period
+        <input type="number" ng-model="refreshPeriod" name="refreshPeriod" placeholder="infinite">
+        <input type="submit" id="submit" value="update">
+    </div>
+</form>
+    <form action="poolspgsosds.html" style="margin:0">
+        <div id="datePanel">
+        Date : {{date | date:'HH:mm:ss'}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Selection:&nbsp;&nbsp;pool
+        <select id="pool" name="pool" >
+            <option value="" ng-selected="{{ selectedPool=='' }}">all pools</option>
+            <option ng-repeat="pool in pools" value="{{ pool.name }}" ng-selected="{{ pool.name==selectedPool }}">{{ pool.name }}</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;osd
+        <select id="osd" name="osd" >
+            <option value="" ng-selected="{{ selectedOsd=='' }}">all osds</option>
+            <option ng-repeat="osd in osds" value="osd.{{ osd }}" ng-selected="{{ 'osd.'+osd == selectedOsd }}">osd.{{ osd }}</option>
+        </select>
+        only unhealthy pgs <input type="checkbox" id="filterStatus" ng-checked="filterStatus" name="filterStatus">
+        <input type="submit" value="show">
+        </div>
+    </form>
+
+<p id="chart">
+
+</p>
+</body>
+</html>

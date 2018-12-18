@@ -1,0 +1,188 @@
+<!doctype html>
+<html ng-app="showCrushMapApp">
+<head>
+    <meta charset="UTF-8"/>
+    <script src="scripts/angular/angular.min.js"></script>
+    <script src="scripts/angular-misc/component.js"></script>
+    <script src="scripts/angular/angular-sanitize.min.js"></script>
+    <script src="scripts/angular-misc/ng-table.min.js"></script>
+    <script src="scripts/angular-misc/angular-commons.js"></script>
+    <script src="scripts/angular-misc/ui-bootstrap-tpls-0.10.0.min.js"></script>
+    <script src="scripts/angular-misc/dialogs.v2.min.js"></script>
+    <script src="scripts/d3/common.js" charset="utf-8"></script>
+    <script src="scripts/d3/colorbrewer.js" charset="utf-8"></script>
+    <script src="scripts/d3/d3.v3.min.js"></script>
+    <script src="scripts/showCrushMapApp.js"></script>
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/testAdmin.css" />
+    <link rel="stylesheet" href="css/tooltip.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="scripts/angular-misc/ng-table.min.css">
+    <title>Ceph Crush map</title>
+</head>
+<body ng-controller="CrushMapCtrl">
+
+<header ng-include src="'partials/header.html'" ng-init="pageTitle='Ceph crush map'"></header>
+
+<div id="content" style="margin:0 20px">
+    <tabs>
+        <pane title="Topology">
+            <div style="position:absolute ;top: 10; left:10 ">
+                <table>
+                    <tr>
+                        <td valign="center">Root : </td>
+                        <td valign="center"><select id="base" ng-model="base" ng-options="value.id as value.name for value in rootTab| orderBy:'name'" name="base" ng-change="buckets =computeBucketsTree(rawbuckets , base);"></select></td>
+                    </tr>
+                </table>
+            </div>
+            <!--div style="position:absolute ;top: 10; left:10">base: <input type="text" ng-model="base" name="base" ng-change="buckets =computeBucketsTree(rawbuckets , base);" size="4"></div-->
+            <div id="tooltip"></div>
+            <div id="put_the_graph_there" style="width:100%">
+                <my-topology values="buckets"></my-topology>
+            </div>
+        </pane>
+        <pane title="Types">
+            <table class="table table-condensed table-hover" style="width:300px">
+                <thead>
+                <tr>
+                    <th>type_id</th>
+                    <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="type in types | filter:search ">
+                    <td>{{type.type_id}}</td>
+                    <td>{{type.name}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </pane>
+        <pane title="Roots">
+            Buckets with no parent<br>
+            <table class="table table-condensed table-hover" style="width:900px">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>alg</th>
+                    <th>hash</th>
+                    <th>type</th>
+                    <th>weight</th>
+                    <th>children</th>
+                    <th>children name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="bucket in rootTab | filter:search ">
+                    <td>{{bucket.id}}</td>
+                    <td>{{bucket.name}}</td>
+                    <td>{{bucket.alg}}</td>
+                    <td>{{bucket.hash}}</td>
+                    <td>{{bucket.type_name}}</td>
+                    <td>{{bucket.weight}}</td>
+                    <td>{{bucket.items.length}}</td>
+                    <td><span ng-repeat="name in bucket.childrenName">{{ ! $first?", ":"" }}{{ name }}</span></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </pane>
+        <pane title="Buckets">
+            <table class="table table-condensed table-hover" style="width:900px">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>alg</th>
+                    <th>hash</th>
+                    <th>type</th>
+                    <th>weight</th>
+                    <th>children</th>
+                    <th>children name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="bucket in rawbuckets | filter:search ">
+                    <td>{{bucket.id}}</td>
+                    <td>{{bucket.name}}</td>
+                    <td>{{bucket.alg}}</td>
+                    <td>{{bucket.hash}}</td>
+                    <td>{{bucket.type_name}}</td>
+                    <td>{{bucket.weight}}</td>
+                    <td>{{bucket.items.length}}</td>
+                    <td><span ng-repeat="name in bucket.childrenName">{{ ! $first?", ":"" }}{{ name }}</span></td>
+                </tr>
+                </tbody>
+            </table>
+
+        </pane>
+
+        <pane title="Devices">
+            <table class="table table-condensed table-hover" style="width:300px">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="device in devices | filter:search ">
+                    <td>{{device.id}}</td>
+                    <td>{{device.name}}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </pane>
+        <pane title="Rules">
+            <table class="table table-condensed table-hover" style="width:100%">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>type</th>
+                    <th>ruleset</th>
+                    <th>min_size</th>
+                    <th>max_size</th>
+                    <th>steps</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="rule in rules | filter:search ">
+                    <td>{{rule.rule_id}}</td>
+                    <td>{{rule.rule_name}}</td>
+                    <td>{{rule.type}} ({{getType(rule.type)}})</td>
+                    <td>{{rule.ruleset}}</td>
+                    <td>{{rule.min_size}}</td>
+                    <td>{{rule.max_size}}</td>
+                    <td>
+                        <table class="table table-condensed table-nohead" style="width:100%">
+                            <tr ng-repeat="step in rule.steps">
+                                <td>{{ prettifyStep(step) }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </pane>
+        <pane title="Tunables">
+            <table class="table table-condensed " style="width:300px">
+                <tbody>
+                <tr ng-repeat="(key, value) in tunables">
+                    <td> {{key}}</td>
+                    <td> {{ value }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </pane>
+        <pane title="Raw crush map">
+            <pre>{{ raw }}</pre>
+        </pane>
+    </tabs>
+</div>
+</body>
+</html>
