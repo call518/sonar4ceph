@@ -15,9 +15,11 @@ $pool_id = $_GET['pool_id'];
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js'></script>
 
+<center>
 <div style="width:90%;">
   <canvas id="canvas"></canvas>
 </div>
+</center>
 
 <script>
 function getRandomIntInclusive(min, max) {
