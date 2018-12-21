@@ -158,6 +158,10 @@ Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (["A-De
 히스토리
 ================================
 
+##### tag v0.0.2
+
+* 초안 완료. (CURSH맵 시각화)
+
 ##### tag v0.0.1
 
 * shell_exec() 방식의 코드본 아카이빙
