@@ -159,6 +159,14 @@ Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (["A-De
 히스토리
 ================================
 
+
+##### tag v0.0.3
+
+* 메인 콘솔 페이지와 CURSH맵 시각화 페이지 분리.
+* shell_exec() 명령 사용 구문 제거 완료. -> 모든 쿼리는 ceph-rest-api를 통해 자료 취득.
+* client IOPS 그래프 기능 추가.
+
+
 ##### tag v0.0.2
 
 * 초안 완료. (CURSH맵 시각화)
