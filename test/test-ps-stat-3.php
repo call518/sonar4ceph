@@ -13,7 +13,7 @@ foreach ($arrPG_IDs as $k => $v) {
 	$arrTmp = array($v => $up_osds);
 	$arr_PG_and_Up_OSDs[$v] = $up_osds;
 }
-ksort($arr_PG_and_Up_OSDs);
+//ksort($arr_PG_and_Up_OSDs);
 
 $arrResult = array("osd_pg_state" => array());
 
@@ -33,6 +33,8 @@ foreach ($arr_PG_and_Up_OSDs as $pg_id => $osds) {
 		$arrResult['osd_pg_state'][$osd_key][$pool_key] += 1;
 	}
 }
+//print_r($arrResult['osd_pg_state']);
+//exit;
 
 foreach ($arrResult['osd_pg_state'] as $osd_key => $item) {
 	$total_pg_count_of_osd = 0;
@@ -52,6 +54,12 @@ foreach ($arrResult['osd_pg_state'] as $item) {
 		$arrResult['total_pgs_pool'][$pool_key] += $pg_count;
 	}
 }
+
+ksort($arrResult['osd_pg_state'], SORT_NATURAL);
+foreach ($arrResult['osd_pg_state'] as $k => $v) {
+	ksort($arrResult['osd_pg_state'][$k], SORT_NATURAL);
+}
+ksort($arrResult['total_pgs_pool'], SORT_NATURAL);
 
 print_r(json_encode($arrResult));
 

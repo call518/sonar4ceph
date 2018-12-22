@@ -378,6 +378,12 @@ function check_osd_pg_status() {
 		}
 	}
 
+	ksort($arrResult['osd_pg_state'], SORT_NATURAL);
+	foreach ($arrResult['osd_pg_state'] as $k => $v) {
+		ksort($arrResult['osd_pg_state'][$k], SORT_NATURAL);
+	}
+	ksort($arrResult['total_pgs_pool'], SORT_NATURAL);
+
 	return json_encode($arrResult);
 }
 //=============================================================================================
