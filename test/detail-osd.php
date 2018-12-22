@@ -52,7 +52,7 @@ $arrOsdData = json_decode($jsonData, true)['output']['osds'];
 $osd_arrIndex = array_search("$osd_id", array_column($arrOsdData, "osd"));
 //echo $osd_arrIndex;
 //print_r($arrOsdData[$osd_arrIndex]);
-print_r(json2table($arrOsdData[$osd_arrIndex]));
+//print_r(json2table($arrOsdData[$osd_arrIndex]));
 
 
 $rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");

@@ -97,7 +97,18 @@ function getChildren($arr)
 		echo "<center>";
 		echo "<table class='type01' border='$border_size' bordercolor='$color_root'><tr>";
 		echo " <tr>";
-		echo "  <td bgcolor='$color_root'><b><font color='#000000'>Root:</b> $name</td>";
+		echo "  <td bgcolor='$color_root'><b><font color='#000000'>Root:</b>";
+		global $rootIDs;
+		echo "    <select id=\"root_node\" name=\"root_node\">";
+		foreach ($rootIDs as $k => $v) {
+			if ($rootNodeId == $v) {
+				echo "      <option value=\"$v\" selected>$k</option>";
+			} else {
+				echo "      <option value=\"$v\">$k</option>";
+			}
+		}
+		echo "    </select>";
+		echo "  </td>";
 		echo " </tr>";
 		echo " <tr>";
 		echo "  <td bgcolor='#FAE5D3'>";
@@ -294,6 +305,80 @@ function array2table($data)
     </table>
     ';
     return $table;
+}
+
+function getPGDump()
+{
+	global $ceph_api;
+	$jsonData = simple_curl("$ceph_api/pg/dump_json?dumpcontents=pgs");
+	return json_decode($jsonData, true);
+}
+
+function uniq_OSD_list() {
+	$arr = getPGDump();
+	$arrStat = $arr['output']['osd_stats'];
+	return array_column($arrStat, "osd");
+}
+
+function uniq_Pool_list() {
+	$arr = getPGDump();
+	$arrStat = $arr['output']['pool_stats'];
+	return array_column($arrStat, "poolid");
+}
+
+function check_osd_pg_status() {
+	$arrData = getPGDump();
+	$pg_stats = $arrData['output']['pg_stats'];
+	$arrPG_IDs = array_column($pg_stats, "pgid");
+	$arrPG_Up = array_column($pg_stats, "up");
+
+	$arr_PG_and_Up_OSDs = array();
+	foreach ($arrPG_IDs as $k => $v) {
+		$up_osds = $arrPG_Up[$k];
+		$arrTmp = array($v => $up_osds);
+		$arr_PG_and_Up_OSDs[$v] = $up_osds;
+	}
+	ksort($arr_PG_and_Up_OSDs);
+
+	$arrResult = array("osd_pg_state" => array());
+
+	foreach ($arr_PG_and_Up_OSDs as $pg_id => $osds) {
+		foreach ($osds as $osd_num) {
+			$osd_key = "osd_".$osd_num;
+			if (array_key_exists($osd_key, $arrResult['osd_pg_state']) != true) {
+				$arrResult['osd_pg_state'][$osd_key] = array();
+			}
+		}
+		$pool_key = "pool_".explode('.', $pg_id)[0];
+		foreach ($osds as $osd_num) {
+			$osd_key = "osd_".$osd_num;
+			if (array_key_exists($pool_key, $arrResult['osd_pg_state'][$osd_key]) != true) {
+				$arrResult['osd_pg_state'][$osd_key][$pool_key] = 0;
+			}
+			$arrResult['osd_pg_state'][$osd_key][$pool_key] += 1;
+		}
+	}
+
+	foreach ($arrResult['osd_pg_state'] as $osd_key => $item) {
+		$total_pg_count_of_osd = 0;
+		foreach ($item as $pg_count) {
+			$total_pg_count_of_osd += $pg_count;
+		}
+		$arrResult['osd_pg_state'][$osd_key]['total'] = $total_pg_count_of_osd;
+	}
+
+	$arrResult['total_pgs_pool'] = array();
+	foreach ($arrResult['osd_pg_state'] as $item) {
+		unset($item['total']);
+		foreach ($item as $pool_key => $pg_count) {
+			if (array_key_exists($pool_key, $arrResult['total_pgs_pool']) != true) {
+				$arrResult['total_pgs_pool'][$pool_key] = 0;
+			}
+			$arrResult['total_pgs_pool'][$pool_key] += $pg_count;
+		}
+	}
+
+	return json_encode($arrResult);
 }
 //=============================================================================================
 ?>

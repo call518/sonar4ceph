@@ -46,21 +46,16 @@ table.type03 td {
 <body>
 
 <?php
-echo("<strong><OSD: $osd_id></strong>");
-$jsonData = simple_curl("$ceph_api/osd/dump");
-$arrOsdData = json_decode($jsonData, true)['output']['osds'];
-//print_r($arrOsdData);
-$osd_arrIndex = array_search("$osd_id", array_column($arrOsdData, "osd"));
-//echo $osd_arrIndex;
-//print_r($arrOsdData[$osd_arrIndex]);
-print_r(array2table($arrOsdData[$osd_arrIndex]));
+//echo("<strong><OSD: $osd_id></strong>");
 
-
-$rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");
+//$rawDataPG_DUMP = shell_exec("./check-osd_pg_state.sh");
+$rawDataPG_DUMP = check_osd_pg_status();
 $arrPG_DUMP = json_decode($rawDataPG_DUMP, true);
+//print_r($arrPG_DUMP);
 
 //var_dump($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
 $chartData = convertPGDumpArray2ChartArray($arrPG_DUMP["osd_pg_state"]["osd_$osd_id"]);
+//print_r($chartData);
 $arrLabels = $chartData[0];
 $arrDatasets = $chartData[1];
 
@@ -98,6 +93,16 @@ var myChart = new Chart(ctx, {
 });
 </script>
 
+<?php
+$jsonData = simple_curl("$ceph_api/osd/dump");
+$arrOsdData = json_decode($jsonData, true)['output']['osds'];
+//print_r($arrOsdData);
+$osd_arrIndex = array_search("$osd_id", array_column($arrOsdData, "osd"));
+//echo $osd_arrIndex;
+//print_r($arrOsdData[$osd_arrIndex]);
+print_r(array2table($arrOsdData[$osd_arrIndex]));
+
+?>
 
 </body>
 </html>
