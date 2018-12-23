@@ -43,6 +43,52 @@ include '_functions.php';
 ?>
 
 <?php
+$jsonData = simple_curl("$ceph_api/health?detail=detail");
+$arrHealth = json_decode($jsonData, true);
+$arrHealthOutput = $arrHealth['output'];
+
+$strHealthOK = "HEALTH_OK";
+$currHealthStatus = $arrHealthOutput['status'];
+$currHealthOverallStatus = "(N/A)";
+
+if (array_key_exists('overall_status', $arrHealthOutput) == true) {
+	$currHealthOverallStatus = $arrHealthOutput['overall_status'];
+}
+
+//$currHealthStatusColor = "#000000";
+//$currHealthOverallStatusColor = "#000000";
+
+if ($currHealthStatus == $strHealthOK) {
+	$currHealthStatusColor = "#00E315";
+} else {
+	$currHealthStatusColor = "#FF0000";
+	$currHealthStatusStr = "";
+}
+
+if ($currHealthOverallStatus == $strHealthOK || $currHealthOverallStatus == "(N/A)") {
+	$currHealthOverallStatusColor = "#00E315";
+} else {
+	$currHealthOverallStatusColor = "#FF0000";
+}
+
+
+echo "<center>";
+echo "<table class='type01' border='0' cellpadding='5' width=50%><tr>";
+echo " <tr>";
+echo "  <td bgcolor='$currHealthStatusColor' colspan=\"100%\">";
+echo "    <center><b>Health:</b> $currHealthStatus<p>";
+echo "    <center><input type=\"button\" value=\"Detail Health\" style=\"width:200px\" onclick=\"window.open('show-health.php', 'Health', 'width=1024, height=800')\">";
+echo "  </td>";
+echo "  <td>";
+echo "  </td>";
+echo "  <td bgcolor='$currHealthOverallStatusColor' colspan=\"100%\">";
+echo "    <center><b>Health Overall:</b> $currHealthOverallStatus<p>";
+echo "    <center><input type=\"button\" value=\"Detail Health\" style=\"width:200px\" onclick=\"window.open('show-health.php', 'Health', 'width=1024, height=800')\">";
+echo "  </td>";
+echo " </tr>";
+echo "</table>";
+echo "<p>";
+
 echo "<center>";
 echo "<table class='type00' border='0' cellpadding='5' width=90%><tr>";
 echo " <tr>";
