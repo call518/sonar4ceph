@@ -55,8 +55,15 @@ if (array_key_exists('overall_status', $arrHealthOutput) == true) {
 	$currHealthOverallStatus = $arrHealthOutput['overall_status'];
 }
 
-//$currHealthStatusColor = "#000000";
-//$currHealthOverallStatusColor = "#000000";
+$arrStatOSD = getStatOSD();
+//print_r($arrStatOSD);
+$OSD_full = $arrStatOSD['full'];
+$OSD_nearfull = $arrStatOSD['nearfull'];
+$OSD_num_osds = $arrStatOSD['num_osds'];
+$OSD_num_up_osds = $arrStatOSD['num_up_osds'];
+$OSD_epoch = $arrStatOSD['epoch'];
+$OSD_num_in_osds = $arrStatOSD['num_in_osds'];
+$OSD_num_remapped_pgs = $arrStatOSD['num_remapped_pgs'];
 
 if ($currHealthStatus == $strHealthOK) {
 	$currHealthStatusColor = "#00E315";
@@ -71,6 +78,33 @@ if ($currHealthOverallStatus == $strHealthOK || $currHealthOverallStatus == "(N/
 	$currHealthOverallStatusColor = "#FF0000";
 }
 
+if ($OSD_num_in_osds == $OSD_num_osds) {
+	$currStatOSD_in_Color = "#00E315";
+} else {
+	$currStatOSD_in_Color = "#FF0000";
+}
+
+if ($OSD_num_up_osds == $OSD_num_osds) {
+	$currStatOSD_up_Color = "#00E315";
+} else {
+    $currStatOSD_up_Color = "#FF0000";
+}
+
+if ($OSD_full == null) {
+	$currStatOSD_full_Color = "#00E315";
+	$OSD_full_str = "(N/A)";
+} else {
+	$currStatOSD_full_Color = "#FF0000";
+	$OSD_full_str = $OSD_full;
+}
+
+if ($OSD_nearfull == null) {
+	$currStatOSD_nearfull_Color = "#00E315";
+	$OSD_nearfull_str = "(N/A)";
+} else {
+	$currStatOSD_nearfull_Color = "#FF0000";
+	$OSD_nearfull_str = $OSD_nearfull;
+}
 
 echo "<center>";
 echo "<table class='type01' border='0' cellpadding='5' width=50%><tr>";
@@ -85,6 +119,24 @@ echo "  <td bgcolor='$currHealthOverallStatusColor' colspan=\"100%\">";
 echo "    <center><b>Health Overall:</b> $currHealthOverallStatus<p>";
 echo "    <center><input type=\"button\" value=\"Detail Health\" style=\"width:200px\" onclick=\"window.open('show-health.php', 'Health', 'width=1024, height=800')\">";
 echo "  </td>";
+echo "  </td>";
+echo "  <td>";
+echo "  <td bgcolor='$currStatOSD_in_Color' colspan=\"100%\">";
+echo "    <center><b>OSD IN</b><p><b>$OSD_num_in_osds</b> / <b>$OSD_num_osds</b><p>";
+echo "  </td>";
+echo "  <td>";
+echo "  </td>";
+echo "  <td bgcolor='$currStatOSD_up_Color' colspan=\"100%\">";
+echo "    <center><b>OSD UP</b><p><b>$OSD_num_up_osds</b> / <b>$OSD_num_osds</b><p>";
+echo "  </td>";
+echo "  <td>";
+echo "  </td>";
+echo "  <td bgcolor='$currStatOSD_full_Color' colspan=\"100%\">";
+echo "    <center><b>OSD Full</b><p><b>$OSD_full_str</b><p>";
+echo "  </td>";
+echo "  <td>";
+echo "  <td bgcolor='$currStatOSD_nearfull_Color' colspan=\"100%\">";
+echo "    <center><b>OSD Near-Full</b><p><b>$OSD_nearfull_str</b><p>";
 echo " </tr>";
 echo "</table>";
 echo "<p>";

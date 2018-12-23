@@ -396,5 +396,14 @@ function check_osd_pg_status() {
 
 	return json_encode($arrResult);
 }
+
+function getStatOSD()
+{
+	global $ceph_api;
+	$jsonData = simple_curl("$ceph_api/osd/stat");
+	$arrData = json_decode($jsonData, true);
+	$arrOSDStat = $arrData['output'];
+	return $arrOSDStat;
+}
 //=============================================================================================
 ?>
