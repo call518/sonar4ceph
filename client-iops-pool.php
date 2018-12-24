@@ -8,6 +8,10 @@
 <body>
 
 <?php
+include '_config.php';
+?>
+
+<?php
 $pool_name = $_GET['pool_name'];
 $pool_id = $_GET['pool_id'];
 ?>
@@ -132,6 +136,7 @@ var getData = function() {
         });
       }
       var parsed_data = JSON.parse(data);
+      console.log(count);
       console.log(parsed_data.read_op_per_sec);
       console.log(parsed_data.write_op_per_sec);
       //Chart.data.labels.push(Date.now());
@@ -150,7 +155,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData, 1000);
+setInterval(getData, <?php echo $refresh_interval_Pools_IO; ?>);
 </script>
 
 </body>

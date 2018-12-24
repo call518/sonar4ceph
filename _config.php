@@ -6,4 +6,7 @@ $prePoolCountFile = "/tmp/sonar4ceph-pre-pool-count";
 
 $PoolColorFile = "/tmp/sonar4ceph-pre-pool-colors";
 
+$refresh_interval_Cluster_IO = 5000;
+$refresh_interval_Pools_IO = 1000;
+
 ?>

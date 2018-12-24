@@ -38,6 +38,7 @@ Sonar 4 CEPH (sonar4ceph)
 #### CEPH-REST-API (TCP:5000)
 
 * 첫 테스트 시에는 단순 PHP의 "shell_exec()"를 이용해, "ceph {options} -f json" 방식으로 쿼리를 하였으나, 전송 데이터가 증가하고, 빈도수가 많아짐에 따라, 느려짐과 시스템 부하가 커짐.
+  * (Note) 일부 ceph-rest-api로 취득 불가한 정보는 불가피하게 "shell_exec()"를 이용해 수집한다.
 * 부하를 최소화 하기 위해, "ceph-rest-api"를 ceph 관리자(ceph.admin) 권한으로 실행(TCP:5000)하여 필요한 정보를 요청/수신하게 처리.
 * (Note)
   * <del>현제 "check-osd_pg_state.sh"를 제외하고는 모두 ceph-rest-api를 통해 데이터 취득중이며, "check-osd_pg_state.sh" 역시, ceph-rest-api로 대체 예정.</del> -> "완료"
@@ -163,7 +164,7 @@ Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (["A-De
 ##### tag v0.0.3
 
 * 메인 콘솔 페이지와 CURSH맵 시각화 페이지 분리.
-* shell_exec() 명령 사용 구문 제거 완료. -> 모든 쿼리는 ceph-rest-api를 통해 자료 취득.
+* "shell_exec()"를 통해 실행했던 "check-osd_pg_state.sh"를 ceph-rest-api를 통해 자료 수집 변환 완료.
 * client IOPS 그래프 기능 추가.
 
 

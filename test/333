@@ -1,0 +1,206 @@
+{
+  "fsid": "88faa469-b817-42b6-8265-4bf63705c151",
+  "health": {
+    "checks": {},
+    "status": "HEALTH_OK"
+  },
+  "election_epoch": 460,
+  "quorum": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "quorum_names": [
+    "ceph-1",
+    "ceph-2",
+    "ceph-3",
+    "ceph-4",
+    "ceph-5"
+  ],
+  "monmap": {
+    "epoch": 2,
+    "fsid": "88faa469-b817-42b6-8265-4bf63705c151",
+    "modified": "2018-12-12 13:06:47.199866",
+    "created": "2018-12-12 13:06:16.274020",
+    "features": {
+      "persistent": [
+        "kraken",
+        "luminous"
+      ],
+      "optional": []
+    },
+    "mons": [
+      {
+        "rank": 0,
+        "name": "ceph-1",
+        "addr": "192.168.0.201:6789/0",
+        "public_addr": "192.168.0.201:6789/0"
+      },
+      {
+        "rank": 1,
+        "name": "ceph-2",
+        "addr": "192.168.0.202:6789/0",
+        "public_addr": "192.168.0.202:6789/0"
+      },
+      {
+        "rank": 2,
+        "name": "ceph-3",
+        "addr": "192.168.0.203:6789/0",
+        "public_addr": "192.168.0.203:6789/0"
+      },
+      {
+        "rank": 3,
+        "name": "ceph-4",
+        "addr": "192.168.0.204:6789/0",
+        "public_addr": "192.168.0.204:6789/0"
+      },
+      {
+        "rank": 4,
+        "name": "ceph-5",
+        "addr": "192.168.0.205:6789/0",
+        "public_addr": "192.168.0.205:6789/0"
+      }
+    ]
+  },
+  "osdmap": {
+    "osdmap": {
+      "epoch": 394,
+      "num_osds": 18,
+      "num_up_osds": 17,
+      "num_in_osds": 17,
+      "full": false,
+      "nearfull": false,
+      "num_remapped_pgs": 0
+    }
+  },
+  "pgmap": {
+    "pgs_by_state": [
+      {
+        "state_name": "active+clean",
+        "count": 1024
+      }
+    ],
+    "num_pgs": 1024,
+    "num_pools": 4,
+    "num_objects": 2537,
+    "data_bytes": 10628366379,
+    "bytes_used": 51115786240,
+    "bytes_avail": 1774174011392,
+    "bytes_total": 1825289797632,
+    "write_bytes_sec": 7329836,
+    "read_op_per_sec": 0,
+    "write_op_per_sec": 3
+  },
+  "fsmap": {
+    "epoch": 1,
+    "by_rank": []
+  },
+  "mgrmap": {
+    "epoch": 65,
+    "active_gid": 1024120,
+    "active_name": "ceph-1",
+    "active_addr": "192.168.0.201:6812/1074",
+    "available": true,
+    "standbys": [
+      {
+        "gid": 1024107,
+        "name": "ceph-5",
+        "available_modules": [
+          "balancer",
+          "dashboard",
+          "influx",
+          "localpool",
+          "prometheus",
+          "restful",
+          "selftest",
+          "status",
+          "zabbix"
+        ]
+      },
+      {
+        "gid": 1024112,
+        "name": "ceph-3",
+        "available_modules": [
+          "balancer",
+          "dashboard",
+          "influx",
+          "localpool",
+          "prometheus",
+          "restful",
+          "selftest",
+          "status",
+          "zabbix"
+        ]
+      },
+      {
+        "gid": 1024130,
+        "name": "ceph-6",
+        "available_modules": [
+          "balancer",
+          "dashboard",
+          "influx",
+          "localpool",
+          "prometheus",
+          "restful",
+          "selftest",
+          "status",
+          "zabbix"
+        ]
+      },
+      {
+        "gid": 1024140,
+        "name": "ceph-4",
+        "available_modules": [
+          "balancer",
+          "dashboard",
+          "influx",
+          "localpool",
+          "prometheus",
+          "restful",
+          "selftest",
+          "status",
+          "zabbix"
+        ]
+      },
+      {
+        "gid": 1024159,
+        "name": "ceph-2",
+        "available_modules": [
+          "balancer",
+          "dashboard",
+          "influx",
+          "localpool",
+          "prometheus",
+          "restful",
+          "selftest",
+          "status",
+          "zabbix"
+        ]
+      }
+    ],
+    "modules": [
+      "balancer",
+      "restful",
+      "status"
+    ],
+    "available_modules": [
+      "balancer",
+      "dashboard",
+      "influx",
+      "localpool",
+      "prometheus",
+      "restful",
+      "selftest",
+      "status",
+      "zabbix"
+    ],
+    "services": {}
+  },
+  "servicemap": {
+    "epoch": 1,
+    "modified": "0.000000",
+    "services": {}
+  }
+}

@@ -1,0 +1,288 @@
+Array
+(
+    [fsid] => 88faa469-b817-42b6-8265-4bf63705c151
+    [health] => Array
+        (
+            [checks] => Array
+                (
+                )
+
+            [status] => HEALTH_OK
+        )
+
+    [election_epoch] => 460
+    [quorum] => Array
+        (
+            [0] => 0
+            [1] => 1
+            [2] => 2
+            [3] => 3
+            [4] => 4
+        )
+
+    [quorum_names] => Array
+        (
+            [0] => ceph-1
+            [1] => ceph-2
+            [2] => ceph-3
+            [3] => ceph-4
+            [4] => ceph-5
+        )
+
+    [monmap] => Array
+        (
+            [epoch] => 2
+            [fsid] => 88faa469-b817-42b6-8265-4bf63705c151
+            [modified] => 2018-12-12 13:06:47.199866
+            [created] => 2018-12-12 13:06:16.274020
+            [features] => Array
+                (
+                    [persistent] => Array
+                        (
+                            [0] => kraken
+                            [1] => luminous
+                        )
+
+                    [optional] => Array
+                        (
+                        )
+
+                )
+
+            [mons] => Array
+                (
+                    [0] => Array
+                        (
+                            [rank] => 0
+                            [name] => ceph-1
+                            [addr] => 192.168.0.201:6789/0
+                            [public_addr] => 192.168.0.201:6789/0
+                        )
+
+                    [1] => Array
+                        (
+                            [rank] => 1
+                            [name] => ceph-2
+                            [addr] => 192.168.0.202:6789/0
+                            [public_addr] => 192.168.0.202:6789/0
+                        )
+
+                    [2] => Array
+                        (
+                            [rank] => 2
+                            [name] => ceph-3
+                            [addr] => 192.168.0.203:6789/0
+                            [public_addr] => 192.168.0.203:6789/0
+                        )
+
+                    [3] => Array
+                        (
+                            [rank] => 3
+                            [name] => ceph-4
+                            [addr] => 192.168.0.204:6789/0
+                            [public_addr] => 192.168.0.204:6789/0
+                        )
+
+                    [4] => Array
+                        (
+                            [rank] => 4
+                            [name] => ceph-5
+                            [addr] => 192.168.0.205:6789/0
+                            [public_addr] => 192.168.0.205:6789/0
+                        )
+
+                )
+
+        )
+
+    [osdmap] => Array
+        (
+            [osdmap] => Array
+                (
+                    [epoch] => 394
+                    [num_osds] => 18
+                    [num_up_osds] => 17
+                    [num_in_osds] => 17
+                    [full] => 
+                    [nearfull] => 
+                    [num_remapped_pgs] => 0
+                )
+
+        )
+
+    [pgmap] => Array
+        (
+            [pgs_by_state] => Array
+                (
+                    [0] => Array
+                        (
+                            [state_name] => active+clean
+                            [count] => 1024
+                        )
+
+                )
+
+            [num_pgs] => 1024
+            [num_pools] => 4
+            [num_objects] => 2486
+            [data_bytes] => 10414456875
+            [bytes_used] => 50541166592
+            [bytes_avail] => 1774748631040
+            [bytes_total] => 1825289797632
+            [write_bytes_sec] => 5233390
+            [read_op_per_sec] => 0
+            [write_op_per_sec] => 2
+        )
+
+    [fsmap] => Array
+        (
+            [epoch] => 1
+            [by_rank] => Array
+                (
+                )
+
+        )
+
+    [mgrmap] => Array
+        (
+            [epoch] => 65
+            [active_gid] => 1024120
+            [active_name] => ceph-1
+            [active_addr] => 192.168.0.201:6812/1074
+            [available] => 1
+            [standbys] => Array
+                (
+                    [0] => Array
+                        (
+                            [gid] => 1024107
+                            [name] => ceph-5
+                            [available_modules] => Array
+                                (
+                                    [0] => balancer
+                                    [1] => dashboard
+                                    [2] => influx
+                                    [3] => localpool
+                                    [4] => prometheus
+                                    [5] => restful
+                                    [6] => selftest
+                                    [7] => status
+                                    [8] => zabbix
+                                )
+
+                        )
+
+                    [1] => Array
+                        (
+                            [gid] => 1024112
+                            [name] => ceph-3
+                            [available_modules] => Array
+                                (
+                                    [0] => balancer
+                                    [1] => dashboard
+                                    [2] => influx
+                                    [3] => localpool
+                                    [4] => prometheus
+                                    [5] => restful
+                                    [6] => selftest
+                                    [7] => status
+                                    [8] => zabbix
+                                )
+
+                        )
+
+                    [2] => Array
+                        (
+                            [gid] => 1024130
+                            [name] => ceph-6
+                            [available_modules] => Array
+                                (
+                                    [0] => balancer
+                                    [1] => dashboard
+                                    [2] => influx
+                                    [3] => localpool
+                                    [4] => prometheus
+                                    [5] => restful
+                                    [6] => selftest
+                                    [7] => status
+                                    [8] => zabbix
+                                )
+
+                        )
+
+                    [3] => Array
+                        (
+                            [gid] => 1024140
+                            [name] => ceph-4
+                            [available_modules] => Array
+                                (
+                                    [0] => balancer
+                                    [1] => dashboard
+                                    [2] => influx
+                                    [3] => localpool
+                                    [4] => prometheus
+                                    [5] => restful
+                                    [6] => selftest
+                                    [7] => status
+                                    [8] => zabbix
+                                )
+
+                        )
+
+                    [4] => Array
+                        (
+                            [gid] => 1024159
+                            [name] => ceph-2
+                            [available_modules] => Array
+                                (
+                                    [0] => balancer
+                                    [1] => dashboard
+                                    [2] => influx
+                                    [3] => localpool
+                                    [4] => prometheus
+                                    [5] => restful
+                                    [6] => selftest
+                                    [7] => status
+                                    [8] => zabbix
+                                )
+
+                        )
+
+                )
+
+            [modules] => Array
+                (
+                    [0] => balancer
+                    [1] => restful
+                    [2] => status
+                )
+
+            [available_modules] => Array
+                (
+                    [0] => balancer
+                    [1] => dashboard
+                    [2] => influx
+                    [3] => localpool
+                    [4] => prometheus
+                    [5] => restful
+                    [6] => selftest
+                    [7] => status
+                    [8] => zabbix
+                )
+
+            [services] => Array
+                (
+                )
+
+        )
+
+    [servicemap] => Array
+        (
+            [epoch] => 1
+            [modified] => 0.000000
+            [services] => Array
+                (
+                )
+
+        )
+
+)

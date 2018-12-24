@@ -194,6 +194,19 @@ echo "  </td>";
 echo " </tr>";
 echo "</table>";
 
+echo "<center>";
+echo "<table class='type00' border='0' cellpadding='5' width=90%><tr>";
+echo " <tr>";
+echo "  <td>";
+echo "   <input type=\"button\" style=\"width:90%\" value=\"Cluster B/W (Byte)\" onclick=\"window.open('cluster-bw.php', 'Cluster B/W (Byte)', 'width=1024, height=800')\">";
+echo "  </td>";
+echo "  <td>";
+echo "   <input type=\"button\" style=\"width:90%\" value=\"Cluster IOPS (Count)\" onclick=\"window.open('cluster-iops.php', 'Cluster IOPS (Count)', 'width=1024, height=800')\">";
+echo "  </td>";
+echo " </tr>";
+echo "</table>";
+
+
 //$jsonPoolData = shell_exec('ceph osd lspools --format=json');
 $jsonPoolData = simple_curl("$ceph_api/osd/lspools");
 $arrPoolData = json_decode($jsonPoolData, true)['output'];
@@ -215,9 +228,9 @@ foreach ($arrPoolData as $object)
 	$pool_name = $arrItem['poolname'];
 	$pool_id = $arrItem['poolnum'];
 
-	echo "<input type=\"button\" style=\"width:90%\" value=\"Client B/W (Byte) : $pool_name($pool_id)\" onclick=\"window.open('client-bw-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client B/W (Byte) : $pool_name($pool_id)', 'width=1024, height=800')\">";
+	echo "   <input type=\"button\" style=\"width:90%\" value=\"Client B/W (Byte) : $pool_name($pool_id)\" onclick=\"window.open('client-bw-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client B/W (Byte) : $pool_name($pool_id)', 'width=1024, height=800')\">";
 	echo "<br>";
-	echo "<input type=\"button\" style=\"width:90%\" value=\"Client IOPS (Count) : $pool_name($pool_id)\" onclick=\"window.open('client-iops-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client IOPS (Count) : $pool_name($pool_id)', 'width=1024, height=800')\">";
+	echo "   <input type=\"button\" style=\"width:90%\" value=\"Client IOPS (Count) : $pool_name($pool_id)\" onclick=\"window.open('client-iops-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client IOPS (Count) : $pool_name($pool_id)', 'width=1024, height=800')\">";
 }
 echo "  </td>";
 echo " </tr>";

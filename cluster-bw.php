@@ -2,18 +2,13 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Client B/W (Byte)</title>
+  <title>Cluster B/W (Byte)</title>
 </head>
 
 <body>
 
 <?php
 include '_config.php';
-?>
-
-<?php
-$pool_name = $_GET['pool_name'];
-$pool_id = $_GET['pool_id'];
 ?>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -58,7 +53,7 @@ var Chart = new Chart(ctx_live, {
       backgroundColor:'#5DADE2',
       borderColor:'#5DADE2',
       pointRadius: 1,
-      label: 'read_bytes_sec',
+      label: 'read_op_per_sec',
       fill: false,
       showLine: true,
       //lineTension: 0.3,
@@ -70,7 +65,7 @@ var Chart = new Chart(ctx_live, {
       backgroundColor:'#F5B041',
       borderColor:'#F5B041',
       pointRadius: 1,
-      label: 'write_bytes_sec',
+      label: 'write_op_per_sec',
       fill: false,
       showLine: true,
       //lineTension: 0.3,
@@ -82,7 +77,7 @@ var Chart = new Chart(ctx_live, {
     responsive: true,
     title: {
       display: true,
-      text: "Client B/W (Byte) - <?php echo "$pool_name($pool_id)"; ?>",
+      text: "Cluster B/W (Byte)",
     },
     legend: {
       display: true
@@ -116,11 +111,11 @@ var getData = function() {
   $.ajax({
     type: 'GET',
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
-    url: 'jq-pool-client-io.php',
-    data: {
-      "pool_name": "<?php echo $pool_name; ?>",
-      "pool_id": "<?php echo $pool_id; ?>"
-    },
+    url: 'jq-cluster-io.php',
+    //data: {
+    //  "pool_name": "<?php echo $pool_name; ?>",
+    //  "pool_id": "<?php echo $pool_id; ?>"
+    //},
     success: function(data) {
       console.log(data);
       //alert(data);
@@ -137,16 +132,16 @@ var getData = function() {
       }
       var parsed_data = JSON.parse(data);
       console.log(count);
-      console.log(parsed_data.read_bytes_sec);
-      console.log(parsed_data.write_bytes_sec);
+      console.log(parsed_data.read_op_per_sec);
+      console.log(parsed_data.write_op_per_sec);
       //Chart.data.labels.push(Date.now());
       Chart.data.labels.push(getNow());
       //Chart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
       //Chart.data.datasets[1].data.push(getRandomIntInclusive(1, 25));
-      //Chart.data.datasets[0].data.push(<?php echo $read_bytes_sec; ?>);
-      //Chart.data.datasets[1].data.push(<?php echo $write_bytes_sec; ?>);
-      Chart.data.datasets[0].data.push(parsed_data.read_bytes_sec);
-      Chart.data.datasets[1].data.push(parsed_data.write_bytes_sec);
+      //Chart.data.datasets[0].data.push(<?php echo $read_op_per_sec; ?>);
+      //Chart.data.datasets[1].data.push(<?php echo $write_op_per_sec; ?>);
+      Chart.data.datasets[0].data.push(parsed_data.read_op_per_sec);
+      Chart.data.datasets[1].data.push(parsed_data.write_op_per_sec);
       
       // re-render the chart
       Chart.update();
@@ -155,7 +150,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData, <?php echo $refresh_interval_Pools_IO; ?>);
+setInterval(getData, <?php echo $refresh_interval_Cluster_IO; ?>);
 </script>
 
 </body>
