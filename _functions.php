@@ -405,5 +405,34 @@ function getStatOSD()
 	$arrOSDStat = $arrData['output'];
 	return $arrOSDStat;
 }
+
+function pool_name2id($pool_name) {
+	global $ceph_api;
+	$jsonData = simple_curl("$ceph_api/osd/lspools");
+	$arrData = json_decode($jsonData, true)['output'];
+
+	$arrIndex = array_search($pool_name, array_column($arrData, "poolname"));
+
+	return $arrData[$arrIndex]['poolnum'];
+}
+
+function pool_id2name($pool_id) {
+	global $ceph_api;
+	$jsonData = simple_curl("$ceph_api/osd/lspools");
+	$arrData = json_decode($jsonData, true)['output'];
+
+	$arrIndex = array_search($pool_id, array_column($arrData, "poolnum"));
+
+	return $arrData[$arrIndex]['poolname'];
+}
+
+function randomRBGA4ChartJS($transparency)
+{
+	$r = mt_rand(0, 255);
+	$g = mt_rand(0, 255);
+	$b = mt_rand(0, 255);
+    return "rgba($r, $g, $b, $transparency)";
+}
+ 
 //=============================================================================================
 ?>
