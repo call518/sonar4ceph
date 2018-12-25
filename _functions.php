@@ -115,7 +115,7 @@ function getChildren($arr)
 		showUsageBarGraph($utilization, $kb_used, $kb_avail);
 		echo "<br>";
 	} else if ($type == "datacenter") {
-		echo "<table class='type01' border='$border_size' bordercolor='$color_datacenter'><tr>";
+		echo "<table class='type01' border='$border_size' bordercolor='$color_datacenter' style='float: left'><tr>";
 		echo " <tr>";
 		echo "  <td bgcolor='$color_datacenter'><b><font color='#FFFFFF'>Datacenter:</b> $name</td>";
 		echo " </tr>";
