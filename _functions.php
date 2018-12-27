@@ -434,5 +434,13 @@ function randomRBGA4ChartJS($transparency)
     return "rgba($r, $g, $b, $transparency)";
 }
  
+function getPoolList() {
+	global $ceph_api;
+	$jsonData = simple_curl("$ceph_api/osd/lspools");
+	$arrData = json_decode($jsonData, true)['output'];
+
+	return $arrData;
+}
+
 //=============================================================================================
 ?>

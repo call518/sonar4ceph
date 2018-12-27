@@ -20,16 +20,16 @@ $arrPGStats = json_decode($jsonData, true)['output']['pg_stats'];
 //$total_pool_count = count(json_decode($jsonData, true)['output']['pool_stats']) + 1;
 //$step_pool_X_Axis = round((1/$total_pool_count), 2);
 
-$jsonPoolListData = simple_curl("$ceph_api/osd/lspools");
-$arrPoolList = json_decode($jsonPoolListData, true)['output'];
+//$jsonPoolListData = simple_curl("$ceph_api/osd/lspools");
+//$arrPoolList = json_decode($jsonPoolListData, true)['output'];
 //print_r($arrPoolList);
 
-$arrPoolStep = array();
-foreach ($arrPoolList as $key => $item) {
-	$pool_count = count($arrPoolList) + 1;
-	$pool_name = $item['poolname'];
-	$arrPoolStep[$pool_name] = $key * round((1 / $pool_count), 2);
-}
+//$arrPoolStep = array();
+//foreach ($arrPoolList as $key => $item) {
+//	$pool_count = count($arrPoolList) + 1;
+//	$pool_name = $item['poolname'];
+//	$arrPoolStep[$pool_name] = $key * round((1 / $pool_count), 2);
+//}
 //print_r($arrPoolStep);
 //exit;
 
@@ -57,6 +57,7 @@ foreach ($arrPGStats as $item_pg) {
 			$pg_pool_color = ${'pool_color_of_' . $pg_pool_id};
 		}
 		if (empty(${'arrData_pool_' . $pg_pool_id})) { 
+			//${'arrData_pool_' . $pg_pool_id} = array("label" => "$pg_pool_name($pg_pool_id)", "backgroundColor" => $pg_pool_color, "data" => array());
 			${'arrData_pool_' . $pg_pool_id} = array("label" => "$pg_pool_name($pg_pool_id)", "backgroundColor" => $pg_pool_color, "data" => array());
 			array_push($arrPool_IDs, $pg_pool_id);
 		}
@@ -80,7 +81,8 @@ foreach ($arrPGStats as $item_pg) {
 		$chart_r = 10;
 	}
 	foreach ($pg_acting_array as $osd) {
-		$arrTMP = array('x' => $osd + $arrPoolStep[$pg_pool_name], 'y' => $pg_hash_num, 'r' => $chart_r);
+		//$arrTMP = array('x' => $osd + $arrPoolStep[$pg_pool_name], 'y' => $pg_hash_num, 'r' => $chart_r);
+		$arrTMP = array('x' => $pg_pool_id.".".$pg_hash_num, 'y' => $osd, 'r' => $chart_r);
 		array_push(${'arrData_pool_' . $pg_pool_id}['data'], $arrTMP);
 	}
 }
@@ -111,21 +113,22 @@ new Chart(document.getElementById("canvas"), {
       title: {
         display: true,
         text: 'Distribution Chart of PGs'
-      }, scales: {
+      },
+      scales: {
         yAxes: [{ 
           scaleLabel: {
             display: true,
-            labelString: "PG Hash-Number"
+            labelString: "OSD ID"
           },
           ticks: {
             autoSkip: false,
-            stepSize: 50,
+            stepSize: 1,
           }
         }],
         xAxes: [{ 
           scaleLabel: {
             display: true,
-            labelString: "OSD ID"
+            labelString: "PG ID"
           },
           ticks: {
             autoSkip: false,
@@ -137,7 +140,7 @@ new Chart(document.getElementById("canvas"), {
         callbacks: {
           label: function(t, d) {
             //return d.datasets[t.datasetIndex].label + ': (OSD:' + get_osd_int(t.xLabel) + ', PGID:' + get_pool_id(d.datasets[t.datasetIndex].label) + '.' + num10_t0_num16(t.yLabel) + ')';
-            return 'PGID: ' + get_pool_id(d.datasets[t.datasetIndex].label) + '.' + num10_t0_num16(t.yLabel) + ' (Pool:' + get_pool_name(d.datasets[t.datasetIndex].label) + ', OSD:' + get_osd_int(t.xLabel) + ')';
+            return 'PGID: ' + get_pool_id(d.datasets[t.datasetIndex].label) + '.' + num10_t0_num16(t.xLabel) + ' (Pool:' + get_pool_name(d.datasets[t.datasetIndex].label) + ', OSD:' + get_osd_int(t.yLabel) + ')';
           }
         }
       },
@@ -158,7 +161,7 @@ function get_osd_int(num) {
 }
 
 function num10_t0_num16(num10) {
-  return num10.toString(16);
+  return Number(String(num10).split('.')[1]).toString(16);
 }
 
 </script>

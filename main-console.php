@@ -165,7 +165,7 @@ echo "  <td>";
 echo "    <input type=\"button\" value=\"Pools/OSDs/PGs\" style=\"width:90%\" onclick=\"window.open('inkscope-lite/poolspgsosds.html', '_blank')\">";
 echo "  </td>";
 echo "  <td>";
-echo "    <input type=\"button\" value=\"Distribution Chart of PGs\" style=\"width:90%\" onclick=\"window.open('showDistributionPGs.php', '_blank')\">";
+echo "    <input type=\"button\" value=\"PG Distribution\" style=\"width:90%\" onclick=\"window.open('showDistributionPGs.php', '_blank')\">";
 echo "  </td>";
 echo "  <td>";
 echo "    <input type=\"button\" value=\"Stuck PGs\" style=\"width:90%\" onclick=\"window.open('inkscope-lite/pgStucks.html', '_blank')\">";
