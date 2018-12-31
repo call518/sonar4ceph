@@ -35,11 +35,11 @@ $arrSamplePGstates = array(
 
 $arrChartDatasets = array();
 
-$transparency = 0.3;
+$transparency = 0.5;
 
 ${"color_active+clean"} = "0, 222, 0";
-${"color_active+undersized"} = "209, 94, 255";
-${"color_active+undersized+degraded"} = "255, 183, 64";
+${"color_active+undersized"} = "137, 112, 0";
+${"color_active+undersized+degraded"} = "235, 152, 78";
 ${"color_peering"} = "43, 88, 255";
 ${"color_activating"} = "255, 0, 243";
 ${"color_stale+active+clean"} = "11, 133, 164";
