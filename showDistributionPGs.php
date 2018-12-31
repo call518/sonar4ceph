@@ -112,6 +112,7 @@ var Chart = new Chart(ctx_live, {
       },
       scales: {
         yAxes: [{ 
+          //offset: true,
           scaleLabel: {
             display: true,
             labelString: "OSD ID"
@@ -126,6 +127,7 @@ var Chart = new Chart(ctx_live, {
           }
         }],
         xAxes: [{ 
+          //offset: true,
           scaleLabel: {
             display: true,
             labelString: "PG Hash-Number"
