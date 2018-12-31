@@ -25,14 +25,9 @@
 include '_config.php';
 include '_functions.php';
 
-$chart_title = "";
-
 $req_pool_id = $_POST['req_pool_id'];
-if ($req_pool_id == "all") {
+if (!$req_pool_id) {
 	$req_pool_id = "all";
-	$chart_title = "ALL(ALL)";
-} else {
-	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
 }
 
 $req_osd_type = $_POST['req_osd_type'];
@@ -40,13 +35,11 @@ if (!$req_osd_type) {
 	$req_osd_type = "acting";
 }
 
-if ($req_osd_type == "acting") {
-	$chart_title .= "(acting)";
+if ($req_pool_id == "acting") {
+	$chart_title = "ALL";
 } else { 
-	$chart_title .= "(acting_primary)";
+	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
 }
-
-print_r($chart_title);
 
 $arrTotalPoolList = getPoolList();
 
@@ -118,7 +111,6 @@ var Chart = new Chart(ctx_live, {
           },
           ticks: {
             autoSkip: false,
-            //min: -1,
             stepSize: 1,
             callback: function(value) {
               return "OSD-" + value;
@@ -132,7 +124,6 @@ var Chart = new Chart(ctx_live, {
           },
           ticks: {
             autoSkip: false,
-            //min: -10,
             stepSize: 50,
             callback: function(value) {
               return value + " (" + value.toString(16) + ")";
