@@ -77,7 +77,7 @@ foreach ($arrPGStats as $item_pg) {
 		//foreach ($pg_acting_array as $osd) {
 		foreach ($osds as $osd) {
 			//$arrTMP = array('x' => $pg_pool_id.".".$pg_hash_num10, 'y' => $osd, 'r' => '10');
-			$arrTMP = array('x' => $pg_hash_num10, 'y' => $osd, 'r' => '15');
+			$arrTMP = array('x' => $pg_hash_num10, 'y' => $osd, 'r' => '15', 'pool_id' => $pg_pool_id);
 			if (in_array($pg_state, $arrSamplePGstates)) {
 				array_push($arrChartDatasets[${"arrKey_".$pg_state}]['data'], $arrTMP);
 			} else {

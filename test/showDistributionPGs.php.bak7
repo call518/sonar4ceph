@@ -148,10 +148,8 @@ var Chart = new Chart(ctx_live, {
         callbacks: {
           label: function(t, d) {
             //console.log(t);
-            //console.log(d);
-            var pg_pool_id = d.datasets[t.datasetIndex].data[t.index].pool_id
             //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID: ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD:' + get_osd_int(t.yLabel);
+            return 'PGID: ' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD:' + get_osd_int(t.yLabel);
           }
         }
       },
@@ -184,9 +182,10 @@ var getData = function() {
       //  //console.log(k, parsed_data[k]);
       //  Chart.data.datasets.push(parsed_data[k]);
       //}
+      //console.log(parsed_data.write_bytes_sec);
+      //Chart.data.datasets[0].data.push(parsed_data.read_bytes_sec);
+      //Chart.data.datasets[1].data.push(parsed_data.write_bytes_sec);
       
-      //console.log(Chart.data.datasets);
-
       // re-render the chart
       Chart.update();
     }
