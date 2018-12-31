@@ -18,7 +18,7 @@ window.addEventListener('load', function(){
 </head>
 
 <!--body-->
-<body onload="JavaScript:timedRefresh(60000);">
+<body>
 
 <?php
 include '_config.php';
@@ -45,6 +45,9 @@ $arrTotalPoolList = getPoolList();
 ?>
 <form id="form1" name="form1" method="post" action="showDistributionPGs.php">
 <?php
+date_default_timezone_set($default_time_zone);
+echo "<b>(".date("Y-m-d H:i:s").")</b>";
+echo "&nbsp;&nbsp;&nbsp;";
 echo "Pool: <select id=\"req_pool_id\" name=\"req_pool_id\">";
 echo "<option value=\"all\">ALL</option>";
 foreach ($arrTotalPoolList as $arrPoolInfo) {
