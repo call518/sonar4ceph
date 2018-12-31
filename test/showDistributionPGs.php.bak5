@@ -153,7 +153,6 @@ var getData = function() {
       "req_osd_type": "<?php echo $req_osd_type; ?>"
     },
     success: function(data) {
-      //Chart.data.datasets = [];
       //console.log(data);
       //alert(data);
       // process your data to pull out what you plan to use to update the chart
@@ -161,12 +160,11 @@ var getData = function() {
       
       // add new label and data point to chart's underlying data structures
       var parsed_data = JSON.parse(data);
-      console.log(parsed_data);
-      //for(var k in parsed_data) {
-      //  console.log(k, parsed_data[k]);
-      //  Chart.data.datasets.push(parsed_data[k]);
-      //}
-      Chart.data.datasets = parsed_data;
+      //console.log(parsed_data);
+      for(var k in parsed_data) {
+        //console.log(k, parsed_data[k]);
+        Chart.data.datasets.push(parsed_data[k]);
+      }
       //console.log(parsed_data.write_bytes_sec);
       //Chart.data.datasets[0].data.push(parsed_data.read_bytes_sec);
       //Chart.data.datasets[1].data.push(parsed_data.write_bytes_sec);
@@ -178,7 +176,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData, 5000);
+setInterval(getData, 1000);
 
 function get_pool_id(num10) {
   return Number(String(num10).split('.')[0]);
