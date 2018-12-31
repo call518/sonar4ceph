@@ -17,10 +17,8 @@ window.addEventListener('load', function(){
 -->
 </head>
 
-<body>
-<!--
+<!--body-->
 <body onload="JavaScript:timedRefresh(60000);">
--->
 
 <?php
 include '_config.php';
