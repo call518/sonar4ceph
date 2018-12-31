@@ -28,7 +28,7 @@ include '_functions.php';
 $chart_title = "";
 
 $req_pool_id = $_POST['req_pool_id'];
-if ($req_pool_id == "all") {
+if ($req_pool_id == "all" || !$req_pool_id) {
 	$req_pool_id = "all";
 	$chart_title = "ALL(ALL)";
 } else {
