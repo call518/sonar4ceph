@@ -62,7 +62,7 @@ foreach ($arrTotalPoolList as $arrPoolInfo) {
 		<option value="<?php echo $arrPoolInfo['poolnum'] ?>" selected><?php echo $arrPoolInfo['poolname'] ?></option>
 <?php
 	} else {
-		print_r($arrPoolInfo);
+		//print_r($arrPoolInfo);
 ?>
 		<option value="<?php echo $arrPoolInfo['poolnum'] ?>"><?php echo $arrPoolInfo['poolname'] ?></option>
 <?php
@@ -121,7 +121,8 @@ var Chart = new Chart(ctx_live, {
           },
           ticks: {
             autoSkip: false,
-            //min: -1,
+            min: 0,
+            max: get_max_OSD_num(),
             stepSize: 1,
             callback: function(value) {
               return "OSD-" + value;
@@ -136,7 +137,7 @@ var Chart = new Chart(ctx_live, {
           },
           ticks: {
             autoSkip: false,
-            //min: -10,
+            min: 0,
             stepSize: 50,
             callback: function(value) {
               return value + " (" + value.toString(16) + ")";
@@ -209,6 +210,10 @@ function num10_to_num16(num10) {
   //var result = Number(String(num10).split('.')[1]).toString(16);
   var result = num10.toString(16);
   return result;
+}
+
+function get_max_OSD_num() {
+	return <?php echo max(uniq_OSD_list()); ?>
 }
 
 function getNow() {
