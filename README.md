@@ -18,7 +18,10 @@ Sonar 4 CEPH (sonar4ceph)
 
 ## 스크린샷 (PoC)
 
-![ScreenShot](README/screenshot-sonar4ceph.png)
+![ScreenShot](README/show-physical.png?raw=true)
+![ScreenShot](README/poolspgsosds.png?raw=true)
+![ScreenShot](README/showDistributionPGs.png?raw=true)
+![ScreenShot](README/poolspgsosds.png?raw=true)
 
 설치
 ================================

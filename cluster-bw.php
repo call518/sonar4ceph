@@ -53,7 +53,7 @@ var Chart = new Chart(ctx_live, {
       backgroundColor:'#5DADE2',
       borderColor:'#5DADE2',
       pointRadius: 1,
-      label: 'read_op_per_sec',
+      label: 'read_bytes_sec',
       fill: false,
       showLine: true,
       //lineTension: 0.3,
@@ -65,7 +65,7 @@ var Chart = new Chart(ctx_live, {
       backgroundColor:'#F5B041',
       borderColor:'#F5B041',
       pointRadius: 1,
-      label: 'write_op_per_sec',
+      label: 'write_bytes_sec',
       fill: false,
       showLine: true,
       //lineTension: 0.3,
@@ -132,16 +132,16 @@ var getData = function() {
       }
       var parsed_data = JSON.parse(data);
       console.log(count);
-      console.log(parsed_data.read_op_per_sec);
-      console.log(parsed_data.write_op_per_sec);
+      console.log(parsed_data.read_bytes_sec);
+      console.log(parsed_data.write_bytes_sec);
       //Chart.data.labels.push(Date.now());
       Chart.data.labels.push(getNow());
       //Chart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
       //Chart.data.datasets[1].data.push(getRandomIntInclusive(1, 25));
-      //Chart.data.datasets[0].data.push(<?php echo $read_op_per_sec; ?>);
-      //Chart.data.datasets[1].data.push(<?php echo $write_op_per_sec; ?>);
-      Chart.data.datasets[0].data.push(parsed_data.read_op_per_sec);
-      Chart.data.datasets[1].data.push(parsed_data.write_op_per_sec);
+      //Chart.data.datasets[0].data.push(<?php echo $read_bytes_sec; ?>);
+      //Chart.data.datasets[1].data.push(<?php echo $write_bytes_sec; ?>);
+      Chart.data.datasets[0].data.push(parsed_data.read_bytes_sec);
+      Chart.data.datasets[1].data.push(parsed_data.write_bytes_sec);
       
       // re-render the chart
       Chart.update();
