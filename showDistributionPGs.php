@@ -149,9 +149,10 @@ var Chart = new Chart(ctx_live, {
           label: function(t, d) {
             //console.log(t);
             //console.log(d);
+            var pg_state = d.datasets[t.datasetIndex].label
             var pg_pool_id = d.datasets[t.datasetIndex].data[t.index].pool_id
             //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID: ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD:' + get_osd_int(t.yLabel);
+            return 'PGID: ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD:' + get_osd_int(t.yLabel) + ', STATE: ' + pg_state;
           }
         }
       },

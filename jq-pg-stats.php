@@ -27,6 +27,10 @@ $arrSamplePGstates = array(
 "active+clean",
 "active+undersized",
 "active+undersized+degraded",
+"active+recovering",
+"active+recovering+degraded",
+"active+recovery_wait+degraded",
+"remapped+peering",
 "peering",
 "activating",
 "stale+active+clean",
@@ -40,6 +44,10 @@ $transparency = 0.5;
 ${"color_active+clean"} = "0, 222, 0";
 ${"color_active+undersized"} = "137, 112, 0";
 ${"color_active+undersized+degraded"} = "235, 152, 78";
+${"color_active+recovering"} = "56, 102, 54";
+${"color_active+recovering+degraded"} = "16, 65, 172";
+${"color_active+recovery_wait+degraded"} = "128, 10, 131";
+${"color_remapped+peering"} = "121, 6, 57";
 ${"color_peering"} = "43, 88, 255";
 ${"color_activating"} = "255, 0, 243";
 ${"color_stale+active+clean"} = "11, 133, 164";
