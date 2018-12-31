@@ -172,7 +172,7 @@ new Chart(document.getElementById("canvas"), {
           label: function(t, d) {
             //console.log(t);
             //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID: ' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')'+ ')'  + ', OSD:' + get_osd_int(t.yLabel);
+            return 'PGID: ' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD:' + get_osd_int(t.yLabel);
           }
         }
       },
