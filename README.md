@@ -19,7 +19,7 @@ Sonar 4 CEPH (sonar4ceph)
 ## 스크린샷 (PoC)
 
 ![ScreenShot](README/show-physical.png?raw=true)
-![ScreenShot](README/poolspgsosds.png?raw=true)
+![ScreenShot](README/cluster-bw.png?raw=true)
 ![ScreenShot](README/showDistributionPGs.png?raw=true)
 ![ScreenShot](README/poolspgsosds.png?raw=true)
 
