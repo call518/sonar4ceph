@@ -46,8 +46,6 @@ if ($req_osd_type == "acting") {
 	$chart_title .= "(acting_primary)";
 }
 
-print_r($chart_title);
-
 $arrTotalPoolList = getPoolList();
 
 ?>
