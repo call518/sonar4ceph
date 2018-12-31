@@ -178,7 +178,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-setInterval(getData, 5000);
+setInterval(getData, <?php echo $refresh_interval_PG_Stats; ?>);
 
 function get_pool_id(num10) {
   return Number(String(num10).split('.')[0]);
