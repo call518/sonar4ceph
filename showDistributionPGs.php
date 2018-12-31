@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Distribution Chart of PGs</title>
 
+<!--
 <script type="text/JavaScript">
 window.addEventListener('load', function(){
     var select = document.getElementById('req_pool_id');
@@ -13,6 +14,7 @@ window.addEventListener('load', function(){
     }, false);
 }, false);
 </script>
+-->
 </head>
 
 <body>
@@ -24,12 +26,17 @@ window.addEventListener('load', function(){
 include '_config.php';
 include '_functions.php';
 
-$req_pool_id = $_GET['req_pool_id'];
+$req_pool_id = $_POST['req_pool_id'];
 if (!$req_pool_id) {
 	$req_pool_id = "all";
 }
 
-if ($req_pool_id == "all") {
+$req_osd_type = $_POST['req_osd_type'];
+if (!$req_osd_type) {
+	$req_osd_type = "acting";
+}
+
+if ($req_pool_id == "acting") {
 	$chart_title = "ALL";
 } else { 
 	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
@@ -37,6 +44,9 @@ if ($req_pool_id == "all") {
 
 $arrTotalPoolList = getPoolList();
 
+?>
+<form id="form1" name="form1" method="post" action="showDistributionPGs.php">
+<?php
 echo "Pool: <select id=\"req_pool_id\" name=\"req_pool_id\">";
 echo "<option value=\"all\">ALL</option>";
 foreach ($arrTotalPoolList as $arrPoolInfo) {
@@ -51,8 +61,18 @@ foreach ($arrTotalPoolList as $arrPoolInfo) {
 <?php
 	}
 }
-echo "</select>";
+?>
+</select>
+&nbsp;&nbsp;&nbsp;
+OSD: <select id="req_osd_type\" name="req_osd_type">
+<option value="acting" <?php if ($req_osd_type == "acting") { echo "selected"; } ?>>Acting(ALL)</option>
+<option value="acting_primary" <?php if ($req_osd_type == "acting_primary") { echo "selected"; } ?>>Acting Primary</option>
+</select>
+&nbsp;&nbsp;&nbsp;
+<input type="submit" name="Submit" value="Submit"/>
+</form>
 
+<?php
 $jsonData = simple_curl("$ceph_api/pg/dump_json?dumpcontents=pgs");
 $arrPGStats = json_decode($jsonData, true)['output']['pg_stats'];
 
@@ -101,7 +121,14 @@ foreach ($arrPGStats as $item_pg) {
 	$pg_up_primary = $item_pg['up_primary'];
 
 	if ($req_pool_id == $pg_pool_id || $req_pool_id == "all") {
-		foreach ($pg_acting_array as $osd) {
+		if ($req_osd_type == "acting_primary") {
+			$osds = array($pg_acting_primary);
+		} else {
+			$osds = $pg_acting_array;
+		}
+		//print_r($osds);
+		//foreach ($pg_acting_array as $osd) {
+		foreach ($osds as $osd) {
 			//$arrTMP = array('x' => $pg_pool_id.".".$pg_hash_num10, 'y' => $osd, 'r' => '10');
 			$arrTMP = array('x' => $pg_hash_num10, 'y' => $osd, 'r' => '15');
 			if (in_array($pg_state, $arrSamplePGstates)) {
