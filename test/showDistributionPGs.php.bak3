@@ -25,20 +25,11 @@ include '_config.php';
 include '_functions.php';
 
 $req_pool_id = $_GET['req_pool_id'];
-if (!$req_pool_id) {
-	$req_pool_id = "all";
-}
-
-if ($req_pool_id == "all") {
-	$chart_title = "ALL";
-} else { 
-	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
-}
 
 $arrTotalPoolList = getPoolList();
 
-echo "Pool: <select id=\"req_pool_id\" name=\"req_pool_id\">";
-echo "<option value=\"all\">ALL</option>";
+echo "Pool_ID: <select id=\"req_pool_id\" name=\"req_pool_id\">";
+echo "<option value=\"none\">(None)</option>";
 foreach ($arrTotalPoolList as $arrPoolInfo) {
 	if ($arrPoolInfo['poolnum'] == $req_pool_id) {
 ?>
@@ -133,7 +124,7 @@ new Chart(document.getElementById("canvas"), {
       title: {
         display: true,
         padding: 30,
-        text: '<?php echo $chart_title; ?> - PGs Distribution & State'
+        text: '<?php echo pool_id2name($req_pool_id)."(".$req_pool_id.")" ?> - PGs Distribution & State'
       },
       legend: {
         display: true,
@@ -171,8 +162,7 @@ new Chart(document.getElementById("canvas"), {
         callbacks: {
           label: function(t, d) {
             //console.log(t);
-            //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID: ' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')'+ ')'  + ', OSD:' + get_osd_int(t.yLabel);
+            return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
           }
         }
       },
@@ -187,7 +177,7 @@ function get_osd_int(num) {
   return Math.floor(num)
 }
 
-function num10_to_num16(num10) {
+function num10_t0_num16(num10) {
   //var result = Number(String(num10).split('.')[1]).toString(16);
   var result = num10.toString(16);
   return result;
