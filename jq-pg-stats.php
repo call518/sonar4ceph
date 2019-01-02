@@ -30,6 +30,7 @@ $arrSamplePGstates = array(
 "active+recovering",
 "active+recovering+degraded",
 "active+recovery_wait+degraded",
+"active+clean+scrubbing+deep",
 "remapped+peering",
 "peering",
 "activating",
@@ -47,14 +48,18 @@ ${"color_active+undersized+degraded"} = "235, 152, 78";
 ${"color_active+recovering"} = "56, 102, 54";
 ${"color_active+recovering+degraded"} = "16, 65, 172";
 ${"color_active+recovery_wait+degraded"} = "128, 10, 131";
+${"color_active+clean+scrubbing+deep"} = "255, 105, 100";
 ${"color_remapped+peering"} = "121, 6, 57";
 ${"color_peering"} = "43, 88, 255";
 ${"color_activating"} = "255, 0, 243";
 ${"color_stale+active+clean"} = "11, 133, 164";
 ${"color_unknown"} = "50, 50, 50";
 
+$border_color_primary = "rgba(169, 40, 97, 0.5)";
 foreach ($arrSamplePGstates as $SampleState) {
-	array_push($arrChartDatasets, array("label" => $SampleState, "hoverRadius" => 0, "backgroundColor" => "rgba(${'color_'.$SampleState}, $transparency)", "data" => array()));
+	//array_push($arrChartDatasets, array("label" => $SampleState, "hoverRadius" => 0, "backgroundColor" => "rgba(${'color_'.$SampleState}, $transparency)", "data" => array()));
+	//array_push($arrChartDatasets, array("label" => $SampleState, "hoverRadius" => 10, "hoverBorderWidth" => 3, "borderColor" => $border_color_primary, "borderWidth" => 1, "backgroundColor" => "rgba(${'color_'.$SampleState}, $transparency)", "data" => array()));
+	array_push($arrChartDatasets, array("label" => $SampleState, "hoverBorderWidth" => 3, "borderColor" => $border_color_primary, "borderWidth" => 1, "backgroundColor" => "rgba(${'color_'.$SampleState}, $transparency)", "data" => array()));
 }
 
 foreach ($arrChartDatasets as $k => $v) {
@@ -85,7 +90,7 @@ foreach ($arrPGStats as $item_pg) {
 		//foreach ($pg_acting_array as $osd) {
 		foreach ($osds as $osd) {
 			//$arrTMP = array('x' => $pg_pool_id.".".$pg_hash_num10, 'y' => $osd, 'r' => '10');
-			$arrTMP = array('x' => $pg_hash_num10, 'y' => $osd, 'r' => '15', 'pool_id' => $pg_pool_id);
+			$arrTMP = array("x" => $pg_hash_num10, "y" => $osd, "r" => 15, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary);
 			if (in_array($pg_state, $arrSamplePGstates)) {
 				array_push($arrChartDatasets[${"arrKey_".$pg_state}]['data'], $arrTMP);
 			} else {
