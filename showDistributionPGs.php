@@ -92,7 +92,7 @@ OSD: <select id="req_osd_type\" name="req_osd_type">
 <script type="text/javascript">
 
 Chart.plugins.register({
-   afterDatasetDraw: c => {
+   afterDatasetsDraw: c => {
       let datasets = c.data.datasets;
       datasets.forEach((dataset, i_dataset) => {
           let data = dataset.data;
@@ -219,8 +219,18 @@ var getData = function() {
       // add new label and data point to chart's underlying data structures
       //Chart.data.datasets = [];
       var parsed_data = JSON.parse(data);
+      //console.log(Chart.data.datasets);
       //console.log(parsed_data);
-      Chart.data.datasets = parsed_data;
+      if (Chart.data.datasets.length == 0) {
+        Chart.data.datasets = parsed_data;
+      } else {
+        parsed_data.forEach((dataset, i) => {
+          //console.log(Chart.data.datasets[i].data);
+          Chart.data.datasets[i].data = [];
+          //console.log(i, dataset);
+          Chart.data.datasets[i].data = dataset.data;
+        }); 
+      }
       //for(var k in parsed_data) {
       //  //console.log(k, parsed_data[k]);
       //  Chart.data.datasets.push(parsed_data[k]);
