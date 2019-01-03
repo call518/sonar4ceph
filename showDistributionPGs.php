@@ -177,7 +177,7 @@ var Chart = new Chart(ctx_live, {
           ticks: {
             autoSkip: false,
             min: 0,
-            stepSize: 50,
+            //stepSize: 50,
             callback: function(value) {
               return value + " (" + value.toString(16) + ")";
             }
@@ -191,8 +191,15 @@ var Chart = new Chart(ctx_live, {
             //console.log(d);
             var pg_state = d.datasets[t.datasetIndex].label
             var pg_pool_id = d.datasets[t.datasetIndex].data[t.index].pool_id
+            var pg_primary_od = d.datasets[t.datasetIndex].data[t.index].primary_osd
+            var pg_is_primary = "(N/A)";
+            if (t.yLabel == pg_primary_od) {
+              str_pg_primary_replica = "P";
+            } else {
+              str_pg_primary_replica = "R";
+            }
             //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID: ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD:' + get_osd_int(t.yLabel) + ', STATE: ' + pg_state;
+            return 'PGID(' + str_pg_primary_replica + '): ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD:' + get_osd_int(t.yLabel) + ', STATE: ' + pg_state;
           }
         }
       },
@@ -219,7 +226,23 @@ var getData = function() {
       
       // add new label and data point to chart's underlying data structures
       //Chart.data.datasets = [];
+      var max_pg_number = 0;
       var parsed_data = JSON.parse(data);
+      //console.log(parsed_data);
+      parsed_data.forEach(datasets => {
+        //console.log(datasets);
+        var dataset = datasets.data;
+        //console.log(dataset);
+        dataset.forEach(data => {
+          //console.log(data);
+          //console.log(data.x);
+          if (data.x > max_pg_number) {
+            max_pg_number = data.x
+          }
+        });
+      });
+      //console.log(max_pg_number);
+      Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 50;
       //console.log(Chart.data.datasets);
       //console.log(parsed_data);
       if (Chart.data.datasets.length == 0) {
@@ -244,6 +267,9 @@ var getData = function() {
     }
   });
 };
+
+
+$(document).ready(getData);
 
 // get new data every 3 seconds
 setInterval(getData, <?php echo $refresh_interval_PG_Stats; ?>);
