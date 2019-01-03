@@ -211,7 +211,6 @@ var getData = function() {
     },
     success: function(data) {
       Chart.options.title.text = '[' + getNow() + ']  ' + '<?php echo $chart_title; ?> - PGs Distribution & State';
-      //Chart.options.scales.xAxes[0].ticks.max = 1000;
       //console.log(data);
       //alert(data);
       // process your data to pull out what you plan to use to update the chart
