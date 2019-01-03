@@ -180,6 +180,11 @@ echo "  <td>";
 echo "    <input type=\"button\" value=\"CRUSH Map\" style=\"width:90%\" onclick=\"window.open('inkscope-lite/showCrushMap.html', '_blank')\">";
 echo "  </td>";
 echo " </tr>";
+echo " <tr>";
+echo "  <td>";
+echo "    <input type=\"button\" value=\"PG Count (of Each OSD)\" style=\"width:90%\" onclick=\"window.open('showPGCountByEachOSD.php', '_blank')\">";
+echo "  </td>";
+echo " </tr>";
 echo "</table>";
 
 echo "<center>";
