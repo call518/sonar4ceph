@@ -2,7 +2,7 @@
 include '_config.php';
 include '_functions.php';
 
-$req_pg_type = $_GET['req_pg_type'];
+$req_pg_type = $_POST['req_pg_type'];
 if (!$req_pg_type) {
 	$req_pg_type = "acting";
 }

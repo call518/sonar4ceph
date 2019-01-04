@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>PG Count (of Each Pool)</title>
+<!--
 <script type="text/JavaScript">
 function timedRefresh(timeoutPeriod) {
 	setTimeout("location.reload(true);",timeoutPeriod);
@@ -15,6 +16,7 @@ window.addEventListener('load', function(){
     }, false);
 }, false);
 </script>
+-->
 </head>
 
 <!--body onload="JavaScript:timedRefresh(1000);"-->
@@ -24,17 +26,21 @@ window.addEventListener('load', function(){
 include '_config.php';
 include '_functions.php';
 
-$req_pg_type = $_GET['req_pg_type'];
+$req_pg_type = $_POST['req_pg_type'];
 if (!$req_pg_type) {
 	$req_pg_type = "acting";
 }
 ?>
 
+<form id="form1" name="form1" method="post" action="showPGCountByEachPool.php">
 PG Type:
 <select id="req_pg_type" name="req_pg_type">
 <option value="acting" <?php if ($req_pg_type == "acting") { echo "selected"; } ?>>Acting(ALL)</option>
 <option value="acting_primary" <?php if ($req_pg_type == "acting_primary") { echo "selected"; } ?>>Acting Primary</option>
 </select>
+&nbsp;&nbsp;&nbsp;
+<input type="submit" name="Submit" value="Submit"/>
+</form>
 
 <canvas id="canvas"></canvas>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -94,7 +100,7 @@ var Chart = new Chart(ctx_live, {
 // logic to get new data
 var getData = function() {
   $.ajax({
-    type: 'GET',
+    type: 'POST',
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
     url: 'jq-pool-pg-count.php',
     data: {

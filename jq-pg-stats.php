@@ -7,9 +7,9 @@ if (!$req_pool_id) {
 	$req_pool_id = "all";
 }
 
-$req_osd_type = $_POST['req_osd_type'];
-if (!$req_osd_type) {
-	$req_osd_type = "acting";
+$req_pg_type = $_POST['req_pg_type'];
+if (!$req_pg_type) {
+	$req_pg_type = "acting";
 }
 
 if ($req_pool_id == "acting") {
@@ -81,7 +81,7 @@ foreach ($arrPGStats as $item_pg) {
 	$pg_up_primary = $item_pg['up_primary'];
 
 	if ($req_pool_id == $pg_pool_id || $req_pool_id == "all") {
-		if ($req_osd_type == "acting_primary") {
+		if ($req_pg_type == "acting_primary") {
 			$osds = array($pg_acting_primary);
 		} else {
 			$osds = $pg_acting_array;
