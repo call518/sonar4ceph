@@ -71,8 +71,7 @@ foreach ($arrTotalPoolList as $arrPoolInfo) {
 ?>
 </select>
 &nbsp;&nbsp;&nbsp;
-OSD:
-<select id="req_pg_type" name="req_pg_type">
+OSD: <select id="req_pg_type\" name="req_pg_type">
 <option value="acting" <?php if ($req_pg_type == "acting") { echo "selected"; } ?>>Acting(ALL)</option>
 <option value="acting_primary" <?php if ($req_pg_type == "acting_primary") { echo "selected"; } ?>>Acting Primary</option>
 </select>

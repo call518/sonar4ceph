@@ -2,9 +2,9 @@
 include '_config.php';
 include '_functions.php';
 
-$req_osd_type = $_GET['req_osd_type'];
-if (!$req_osd_type) {
-	$req_osd_type = "acting";
+$req_pg_type = $_GET['req_pg_type'];
+if (!$req_pg_type) {
+	$req_pg_type = "acting";
 }
 
 $jsonData = simple_curl("$ceph_api/pg/dump_json?dumpcontents=pgs");
@@ -31,7 +31,8 @@ $arrPoolList = getPoolList();
 foreach ($arrPoolList as $pool) {
 	$poolnum = $pool['poolnum'];
 	$poolname = $pool['poolname'];
-	$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => getRandomColor());
+	//$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => getRandomColor());
+	$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => randomRBGA4ChartJS(0.7));
 	foreach ($arr_osd_list as $osd_num) {
 		$arrTmp['data'][$osd_num] = 0;
 	}
@@ -44,10 +45,14 @@ foreach ($arrPGStats as $pgStats) {
     $pool_id = explode(".", $pgid)[0];
     $pg_num = explode(".", $pgid)[1];
     $arr_acting_osds = $pgStats['acting'];
-	foreach ($arr_acting_osds as $ps_acting_osd) {
-		$arrChartData['datasets'][$pool_id]['data'][$ps_acting_osd]++;
+    $acting_primary_osds = $pgStats['acting_primary'];
+	if ($req_pg_type == "acting") {
+		foreach ($arr_acting_osds as $ps_acting_osd) {
+			$arrChartData['datasets'][$pool_id]['data'][$ps_acting_osd]++;
+		}
+	} else {
+		$arrChartData['datasets'][$pool_id]['data'][$acting_primary_osds]++;
 	}
-	//array_push($arrChartDatasets, array("label" => $SampleState, "hoverRadius" => 0, "backgroundColor" => "rgba(${'color_'.$SampleState}, $transparency)", "data" => array()));
 }
 
 $tmpArray = $arrChartData['datasets'];

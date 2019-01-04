@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>PG Count (of Each OSDs)</title>
-
 <script type="text/JavaScript">
+function timedRefresh(timeoutPeriod) {
+	setTimeout("location.reload(true);",timeoutPeriod);
+}
+window.addEventListener('load', function(){
+    var select = document.getElementById('req_pg_type');
+
+    select.addEventListener('change', function(){
+        window.location = 'showPGCountByEachOSD.php?req_pg_type=' + this.value;
+    }, false);
+}, false);
 </script>
 </head>
 
@@ -14,7 +23,18 @@
 <?php
 include '_config.php';
 include '_functions.php';
+
+$req_pg_type = $_GET['req_pg_type'];
+if (!$req_pg_type) {
+	$req_pg_type = "acting";
+}
 ?>
+
+OSD:
+<select id="req_pg_type" name="req_pg_type">
+<option value="acting" <?php if ($req_pg_type == "acting") { echo "selected"; } ?>>Acting(ALL)</option>
+<option value="acting_primary" <?php if ($req_pg_type == "acting_primary") { echo "selected"; } ?>>Acting Primary</option>
+</select>
 
 <canvas id="canvas"></canvas>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -35,7 +55,8 @@ var Chart = new Chart(ctx_live, {
       title: {
         display: true,
         padding: 30,
-        text: '[' + getNow() + '] - PG Count (of Each OSD)',
+        //text: '[' + getNow() + '] - PG Count (of Each OSD)',
+        text: '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each OSD)',
         fontSize: 20,
       },
       legend: {
@@ -47,7 +68,7 @@ var Chart = new Chart(ctx_live, {
           stacked: true,
           scaleLabel: {
             display: true,
-            labelString: "OSD ID"
+            labelString: "PG Count"
           },
           ticks: {
             autoSkip: false,
@@ -59,7 +80,7 @@ var Chart = new Chart(ctx_live, {
           stacked: true,
           scaleLabel: {
             display: true,
-            labelString: "PG Count"
+            labelString: "OSD ID"
           },
           ticks: {
             autoSkip: false,
@@ -77,10 +98,10 @@ var getData = function() {
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
     url: 'jq-osd-pg-count.php',
     data: {
-      "req_osd_type": "<?php echo $req_osd_type; ?>"
+      "req_pg_type": "<?php echo $req_pg_type; ?>"
     },
     success: function(data) {
-      Chart.options.title.text = '[' + getNow() + '] - PG Count (of Each OSD)';
+      Chart.options.title.text = '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each OSD)';
       //Chart.options.scales.xAxes[0].ticks.max = 1000;
       //console.log(data);
       var parsed_data = JSON.parse(data);
