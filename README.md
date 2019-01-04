@@ -22,6 +22,8 @@ Sonar 4 CEPH (sonar4ceph)
 ![ScreenShot](README/cluster-bw.png?raw=true)
 ![ScreenShot](README/showDistributionPGs.png?raw=true)
 ![ScreenShot](README/poolspgsosds.png?raw=true)
+![ScreenShot](README/showPGCountByEachOSD.php?raw=true)
+![ScreenShot](README/showPGCountByEachPool.png?raw=true)
 
 설치
 ================================
@@ -45,6 +47,7 @@ Sonar 4 CEPH (sonar4ceph)
 * 부하를 최소화 하기 위해, "ceph-rest-api"를 ceph 관리자(ceph.admin) 권한으로 실행(TCP:5000)하여 필요한 정보를 요청/수신하게 처리.
 * (Note)
   * <del>현제 "check-osd_pg_state.sh"를 제외하고는 모두 ceph-rest-api를 통해 데이터 취득중이며, "check-osd_pg_state.sh" 역시, ceph-rest-api로 대체 예정.</del> -> "완료"
+  * jq-cluster-io.php는 shell_exec() 필요로함. 역시, ceph-rest-api로 대체 예정.
 
 
 ## Tutorial
@@ -163,6 +166,9 @@ Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (["A-De
 히스토리
 ================================
 
+##### tag v0.1.0
+
+* 구상했던 기능들 초안 완료 버전 태깅.
 
 ##### tag v0.0.3
 
