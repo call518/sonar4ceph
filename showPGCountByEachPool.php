@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>PG Count (of Each OSD)</title>
+  <title>PG Count (of Each Pool)</title>
 <script type="text/JavaScript">
 function timedRefresh(timeoutPeriod) {
 	setTimeout("location.reload(true);",timeoutPeriod);
@@ -11,7 +11,7 @@ window.addEventListener('load', function(){
     var select = document.getElementById('req_pg_type');
 
     select.addEventListener('change', function(){
-        window.location = 'showPGCountByEachOSD.php?req_pg_type=' + this.value;
+        window.location = 'showPGCountByEachPool.php?req_pg_type=' + this.value;
     }, false);
 }, false);
 </script>
@@ -55,8 +55,8 @@ var Chart = new Chart(ctx_live, {
       title: {
         display: true,
         padding: 30,
-        //text: '[' + getNow() + '] - PG Count (of Each OSD)',
-        text: '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each OSD)',
+        //text: '[' + getNow() + '] - PG Count (of Each Pool)',
+        text: '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each Pool)',
         fontSize: 20,
       },
       legend: {
@@ -80,7 +80,7 @@ var Chart = new Chart(ctx_live, {
           stacked: true,
           scaleLabel: {
             display: true,
-            labelString: "OSD ID"
+            labelString: "Pool Name(ID)"
           },
           ticks: {
             autoSkip: false,
@@ -96,12 +96,12 @@ var getData = function() {
   $.ajax({
     type: 'GET',
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
-    url: 'jq-osd-pg-count.php',
+    url: 'jq-pool-pg-count.php',
     data: {
       "req_pg_type": "<?php echo $req_pg_type; ?>"
     },
     success: function(data) {
-      Chart.options.title.text = '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each OSD)';
+      Chart.options.title.text = '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each Pool)';
       //Chart.options.scales.xAxes[0].ticks.max = 1000;
       //console.log(data);
       var parsed_data = JSON.parse(data);
@@ -117,7 +117,7 @@ var getData = function() {
 $(document).ready(getData);
 
 // get new data every 3 seconds
-setInterval(getData, <?php echo $refresh_interval_PG_Count_by_Each_OSD; ?>);
+setInterval(getData, <?php echo $refresh_interval_PG_Count_by_Each_Pool; ?>);
 
 //function get_osd_int(num) {
 //  return Math.floor(num)

@@ -184,6 +184,9 @@ echo " <tr>";
 echo "  <td>";
 echo "    <input type=\"button\" value=\"PG Count (of Each OSD)\" style=\"width:90%\" onclick=\"window.open('showPGCountByEachOSD.php', '_blank')\">";
 echo "  </td>";
+echo "  <td>";
+echo "    <input type=\"button\" value=\"PG Count (of Each Pool)\" style=\"width:90%\" onclick=\"window.open('showPGCountByEachPool.php', '_blank')\">";
+echo "  </td>";
 echo " </tr>";
 echo "</table>";
 

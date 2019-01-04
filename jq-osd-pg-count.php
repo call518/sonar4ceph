@@ -12,11 +12,12 @@ $arrPGStats = json_decode($jsonData, true)['output']['pg_stats'];
 
 $arrChartData = array();
 
-//$transparency = 0.5;
-//$border_color_primary = "rgba(169, 40, 97, 0.5)";
+$transparency = 0.7;
 
 $arr_osd_list = uniq_OSD_list();
 sort($arr_osd_list);
+
+$arrPoolList = getPoolList();
 
 $arrLabels = array();
 foreach ($arr_osd_list as $osd_num) {
@@ -27,12 +28,11 @@ foreach ($arr_osd_list as $osd_num) {
 $arrChartData['labels'] = $arrLabels;
 $arrChartData['datasets'] = array();
 
-$arrPoolList = getPoolList();
 foreach ($arrPoolList as $pool) {
 	$poolnum = $pool['poolnum'];
 	$poolname = $pool['poolname'];
 	//$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => getRandomColor());
-	$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => randomRBGA4ChartJS(0.7));
+	$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => randomRBGA4ChartJS($transparency));
 	foreach ($arr_osd_list as $osd_num) {
 		$arrTmp['data'][$osd_num] = 0;
 	}

@@ -12,5 +12,6 @@ $refresh_interval_Cluster_IO = 5000;
 $refresh_interval_Pools_IO = 1000;
 $refresh_interval_PG_Stats = 2000;
 $refresh_interval_PG_Count_by_Each_OSD = 600000;
+$refresh_interval_PG_Count_by_Each_Pool = 600000;
 
 ?>
