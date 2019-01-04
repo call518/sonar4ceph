@@ -23,7 +23,6 @@ Sonar 4 CEPH (sonar4ceph)
 ![ScreenShot](README/showDistributionPGs.png?raw=true)
 ![ScreenShot](README/poolspgsosds.png?raw=true)
 ![ScreenShot](README/showPGCountByEachOSD.php?raw=true)
-![ScreenShot](README/showPGCountByEachPool.png?raw=true)
 
 설치
 ================================
