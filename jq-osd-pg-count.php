@@ -7,6 +7,11 @@ if (!$req_pg_type) {
 	$req_pg_type = "acting";
 }
 
+$req_pool_id = $_POST['req_pool_id'];
+if (!$req_pool_id) {
+	$req_pool_id = "all";
+}
+
 $jsonData = simple_curl("$ceph_api/pg/dump_json?dumpcontents=pgs");
 $arrPGStats = json_decode($jsonData, true)['output']['pg_stats'];
 
@@ -21,7 +26,6 @@ $arrPoolList = getPoolList();
 
 $arrLabels = array();
 foreach ($arr_osd_list as $osd_num) {
-	//${"osd_".$osd_num} = 0;
 	array_push($arrLabels, "OSD-".$osd_num);
 }
 
@@ -31,12 +35,22 @@ $arrChartData['datasets'] = array();
 foreach ($arrPoolList as $pool) {
 	$poolnum = $pool['poolnum'];
 	$poolname = $pool['poolname'];
-	//$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => getRandomColor());
-	$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => randomRBGA4ChartJS($transparency));
-	foreach ($arr_osd_list as $osd_num) {
-		$arrTmp['data'][$osd_num] = 0;
+	$arrTmp = array();
+	if ($req_pool_id == "all") {
+		$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => randomRBGA4ChartJS($transparency));
+		foreach ($arr_osd_list as $osd_num) {
+			$arrTmp['data'][$osd_num] = 0;
+		}
+		$arrChartData['datasets'][$poolnum] = $arrTmp;
+	} else {
+		if ($req_pool_id == $poolnum) {
+			$arrTmp = array("label" => $poolname."($poolnum)", "data" => array(), "backgroundColor" => randomRBGA4ChartJS($transparency));
+			foreach ($arr_osd_list as $osd_num) {
+				$arrTmp['data'][$osd_num] = 0;
+			}
+			$arrChartData['datasets'][$poolnum] = $arrTmp;
+		}
 	}
-	$arrChartData['datasets'][$poolnum] = $arrTmp;
 }
 
 foreach ($arrPGStats as $pgStats) {
@@ -46,12 +60,26 @@ foreach ($arrPGStats as $pgStats) {
     $pg_num = explode(".", $pgid)[1];
     $arr_acting_osds = $pgStats['acting'];
     $acting_primary_osds = $pgStats['acting_primary'];
-	if ($req_pg_type == "acting") {
-		foreach ($arr_acting_osds as $ps_acting_osd) {
-			$arrChartData['datasets'][$pool_id]['data'][$ps_acting_osd]++;
+
+	if ($req_pool_id == "all") {
+		if ($req_pg_type == "acting") {
+			foreach ($arr_acting_osds as $ps_acting_osd) {
+				$arrChartData['datasets'][$pool_id]['data'][$ps_acting_osd]++;
+			}
+		} else {
+			$arrChartData['datasets'][$pool_id]['data'][$acting_primary_osds]++;
 		}
 	} else {
-		$arrChartData['datasets'][$pool_id]['data'][$acting_primary_osds]++;
+		if ($req_pool_id == $pool_id) {
+			if ($req_pg_type == "acting") {
+				foreach ($arr_acting_osds as $ps_acting_osd) {
+					//print_r($arrChartData['datasets'][$pool_id]);
+					$arrChartData['datasets'][$pool_id]['data'][$ps_acting_osd]++;
+				}
+			} else {
+				$arrChartData['datasets'][$pool_id]['data'][$acting_primary_osds]++;
+			}
+		}
 	}
 }
 

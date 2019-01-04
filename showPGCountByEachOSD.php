@@ -30,6 +30,13 @@ $req_pg_type = $_POST['req_pg_type'];
 if (!$req_pg_type) {
 	$req_pg_type = "acting";
 }
+
+$req_pool_id = $_POST['req_pool_id'];
+if (!$req_pool_id) {
+	$req_pool_id = "all";
+}
+
+$arrTotalPoolList = getPoolList();
 ?>
 
 <form id="form1" name="form1" method="post" action="showPGCountByEachOSD.php">
@@ -39,6 +46,26 @@ PG Type:
 <option value="acting_primary" <?php if ($req_pg_type == "acting_primary") { echo "selected"; } ?>>Acting Primary</option>
 </select>
 &nbsp;&nbsp;&nbsp;
+<?php
+//date_default_timezone_set($default_time_zone);
+//echo "<b>".date("Y-m-d H:i:s")."</b>";
+//echo "&nbsp;&nbsp;&nbsp;";
+echo "Pool: <select id=\"req_pool_id\" name=\"req_pool_id\">";
+echo "<option value=\"all\">ALL PGs</option>";
+foreach ($arrTotalPoolList as $arrPoolInfo) {
+	if ($arrPoolInfo['poolnum'] == $req_pool_id) {
+?>
+		<option value="<?php echo $arrPoolInfo['poolnum'] ?>" selected><?php echo $arrPoolInfo['poolname'] ?></option>
+<?php
+	} else {
+		//print_r($arrPoolInfo);
+?>
+		<option value="<?php echo $arrPoolInfo['poolnum'] ?>"><?php echo $arrPoolInfo['poolname'] ?></option>
+<?php
+	}
+}
+?>
+</select>
 <input type="submit" name="Submit" value="Submit"/>
 </form>
 
@@ -62,7 +89,7 @@ var Chart = new Chart(ctx_live, {
         display: true,
         padding: 30,
         //text: '[' + getNow() + '] - PG Count (of Each OSD)',
-        text: '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each OSD)',
+        text: '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL PGs)"; } else { echo "(Primary)"; } ?><?php if ($req_pool_id == "all") { echo "(ALL Pools)"; } else { echo "(".pool_id2name($req_pool_id).")"; } ?> PG Count (of Each OSD)',
         fontSize: 20,
       },
       legend: {
@@ -104,10 +131,11 @@ var getData = function() {
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
     url: 'jq-osd-pg-count.php',
     data: {
-      "req_pg_type": "<?php echo $req_pg_type; ?>"
+      "req_pg_type": "<?php echo $req_pg_type; ?>",
+      "req_pool_id": "<?php echo $req_pool_id; ?>"
     },
     success: function(data) {
-      Chart.options.title.text = '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL)"; } else { echo "(Primary)"; } ?> PG Count (of Each OSD)';
+      Chart.options.title.text = '[' + getNow() + '] - <?php if ($req_pg_type == "acting") { echo "(ALL PGs)"; } else { echo "(Primary)"; } ?><?php if ($req_pool_id == "all") { echo "(ALL Pools)"; } else { echo "(".pool_id2name($req_pool_id).")"; } ?> PG Count (of Each OSD)';
       //Chart.options.scales.xAxes[0].ticks.max = 1000;
       //console.log(data);
       var parsed_data = JSON.parse(data);
