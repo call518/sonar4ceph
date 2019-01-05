@@ -107,7 +107,7 @@ var Chart = new Chart(ctx_live, {
           ticks: {
             autoSkip: false,
             min: 0,
-            stepSize: 20,
+            stepSize: 50,
           }
         }],
         xAxes: [{ 
