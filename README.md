@@ -35,6 +35,22 @@ Sonar 4 CEPH (sonar4ceph)
 
 ## 요구 환경
 
+#### Tested Ceph 
+
+```
+ceph version 12.2.10 (177915764b752804194937482a39e95e0ca3de94) luminous (stable)
+```
+
+#### Tested OS
+
+```
+LSB Version:	:core-4.1-amd64:core-4.1-noarch:cxx-4.1-amd64:cxx-4.1-noarch:desktop-4.1-amd64:desktop-4.1-noarch:languages-4.1-amd64:languages-4.1-noarch:printing-4.1-amd64:printing-4.1-noarch
+Distributor ID:	CentOS
+Description:	CentOS Linux release 7.4.1708 (Core) 
+Release:	7.4.1708
+Codename:	Core
+```
+
 #### PHP >= 5.5
 
 * "array_column" 함수를 필요로 하여, PHP 최소 버전은 5.5 이상 요구됨.
