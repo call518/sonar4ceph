@@ -12,32 +12,7 @@
 <?php
 include '_config.php';
 include '_functions.php';
-
-$chart_title = "";
-
-$req_pg_type = $_POST['req_pg_type'];
-if (!$req_pg_type) {
-	$req_pg_type = "acting";
-}
-
-if ($req_pg_type == "acting") {
-	$chart_title .= "(acting)";
-} else { 
-	$chart_title .= "(acting_primary)";
-}
-
-$arrTotalPoolList = getPoolList();
-
 ?>
-<form id="form1" name="form1" method="post" action="showSizeOfPGs.php">
-PG Type:
-<select id="req_pg_type" name="req_pg_type">
-<option value="acting" <?php if ($req_pg_type == "acting") { echo "selected"; } ?>>Acting(ALL)</option>
-<option value="acting_primary" <?php if ($req_pg_type == "acting_primary") { echo "selected"; } ?>>Acting Primary</option>
-</select>
-&nbsp;&nbsp;&nbsp;
-<input type="submit" name="Submit" value="Submit"/>
-</form>
 
 <canvas id="canvas"></canvas>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -50,44 +25,6 @@ PG Type:
 -->
 
 <script type="text/javascript">
-//Chart.plugins.register({
-//   afterDatasetsDraw: c => {
-//      let datasets = c.data.datasets;
-//      console.log(datasets);
-//      datasets.forEach((dataset, i_dataset) => {
-//          let data = dataset.data;
-//          data.forEach((data, i_data) => {
-//              let pool_id = data.pool_id;
-//              let current_osd = data.current_osd;
-//              let primary_osd = data.primary_osd;
-//
-//              let ctx = c.chart.ctx;
-//              let meta = c.getDatasetMeta(i_dataset).data[i_data];
-//              let x = meta._model.x;
-//              let y = meta._model.y;
-//              let r = meta._model.radius;
-//
-//              ctx.save();
-//              if (current_osd == primary_osd) {
-//                  //console.log(meta);
-//                  //console.log(data);
-//
-//                  // draw a cross
-//                  // or you can draw anything using general canvas methods
-//                  ctx.beginPath();
-//                  ctx.moveTo(x - r / 4, y);
-//                  ctx.lineTo(x + r / 4, y);
-//                  ctx.moveTo(x, y + r / 4);
-//                  ctx.lineTo(x, y - r / 4);
-//                  ctx.strokeStyle = '#001FFF';
-//                  ctx.lineWidth = 1;
-//                  ctx.stroke();
-//              };
-//              ctx.restore();
-//          });
-//      });
-//   }
-//});
 
 var ctx_live = document.getElementById("canvas");
 var Chart = new Chart(ctx_live, {
@@ -104,7 +41,7 @@ var Chart = new Chart(ctx_live, {
       title: {
         display: true,
         padding: 30,
-        text: '<?php echo $chart_title; ?> - PGs Size',
+        text: 'PGs Size (Primary PG)',
         fontSize: 20,
       },
       legend: {
@@ -177,11 +114,11 @@ var getData = function() {
     type: 'POST',
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
     url: 'jq-pg-size.php',
-    data: {
-      "req_pg_type": "<?php echo $req_pg_type; ?>"
-    },
+    //data: {
+    //  "req_pg_type": "<?php echo $req_pg_type; ?>"
+    //},
     success: function(data) {
-      Chart.options.title.text = '[' + getNow() + ']  ' + '<?php echo $chart_title; ?> - PGs Distribution & State';
+      Chart.options.title.text = '[' + getNow() + ']  ' + 'PGs Size (Primary PG)';
       //Chart.options.scales.xAxes[0].ticks.max = 1000;
       //console.log(data);
       //alert(data);
@@ -208,14 +145,13 @@ var getData = function() {
       //console.log(max_pg_number);
       //Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 50;
       //console.log(Chart.data.datasets);
-      //console.log(parsed_data);
       if (Chart.data.datasets.length == 0) {
         Chart.data.datasets = parsed_data;
       } else {
         parsed_data.forEach((dataset, i) => {
           //console.log(Chart.data.datasets[i].data);
           Chart.data.datasets[i].data = [];
-          //console.log(i, dataset);
+          console.log(i, dataset);
           Chart.data.datasets[i].data = dataset.data;
         }); 
       }

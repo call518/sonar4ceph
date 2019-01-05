@@ -2,14 +2,6 @@
 include '_config.php';
 include '_functions.php';
 
-$req_pg_type = $_POST['req_pg_type'];
-if (!$req_pg_type) {
-	$req_pg_type = "acting";
-}
-
-//$req_pg_type = "acting";
-//$req_pg_type = "acting_primary";
-
 $arrTotalPoolList = getPoolList();
 
 $jsonData = simple_curl("$ceph_api/pg/dump_json?dumpcontents=pgs");
@@ -59,17 +51,9 @@ foreach ($arrPGStats as $item_pg) {
 
 
 	if ($num_bytes > 0) {
-		if ($req_pg_type == "acting_primary") {
-			$osds = array($pg_acting_primary);
-		} else {
-			$osds = $pg_acting_array;
-		}
-
-		foreach ($osds as $osd) {
-			$pg_radius = get_bubble_radius(100, $max_num_bytes, 10, $num_bytes);
-			$arrTMP = array("x" => $pg_hash_num10, "y" => $num_bytes, "r" => $pg_radius, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary, "current_osd" => $osd);
-			array_push($arrChartDatasets[$pg_pool_id]['data'], $arrTMP);
-		}
+		$pg_radius = get_bubble_radius(100, $max_num_bytes, 10, $num_bytes);
+		$arrTMP = array("x" => $pg_hash_num10, "y" => $num_bytes, "r" => $pg_radius, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary);
+		array_push($arrChartDatasets[$pg_pool_id]['data'], $arrTMP);
 	}
 
 //echo "$pg_pool_id - $pg_hash_num10 - $pg_acting_primary - $num_bytes \n";
