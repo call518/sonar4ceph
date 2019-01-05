@@ -100,8 +100,7 @@ var Chart = new Chart(ctx_live, {
             } else {
               str_pg_primary_replica = "R";
             }
-            //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID(' + str_pg_primary_replica + '): ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', Size: ' + t.yLabel + "B(" + toMB(t.yLabel) + "MB)" + ', OSD: ' + pg_current_osd;
+            return 'PGID(' + str_pg_primary_replica + '): ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', Size: ' + toMB(t.yLabel) + "MB(" + t.yLabel + "B)" + ', OSD: ' + pg_current_osd;
           }
         }
       },
