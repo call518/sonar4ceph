@@ -37,7 +37,8 @@ if ($req_pool_id == "all" || !$req_pool_id) {
 
 $req_pg_type = $_POST['req_pg_type'];
 if (!$req_pg_type) {
-	$req_pg_type = "acting";
+	//$req_pg_type = "acting";
+	$req_pg_type = "acting_primary";
 }
 
 if ($req_pg_type == "acting") {
