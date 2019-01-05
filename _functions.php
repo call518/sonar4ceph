@@ -442,5 +442,15 @@ function getPoolList() {
 	return $arrData;
 }
 
+function get_bubble_radius($max_radius, $max_num_bytes, $total_steps, $num_bytes) {
+	$step_bytes = $max_num_bytes / $total_steps;
+	$step_radius = $max_radius / $total_steps;
+	$step=1;
+	while (($step*$step_bytes) < $num_bytes) {
+		$step++;
+	}
+	#echo "step_bytes: $step_bytes, step: $step, step_radius: $step_radius\n";
+	return $step * $step_radius;
+}
 //=============================================================================================
 ?>

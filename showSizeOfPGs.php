@@ -92,51 +92,13 @@ OSD:
 
 <script type="text/javascript">
 
-Chart.plugins.register({
-   afterDatasetsDraw: c => {
-      let datasets = c.data.datasets;
-      datasets.forEach((dataset, i_dataset) => {
-          let data = dataset.data;
-          data.forEach((data, i_data) => {
-              let pool_id = data.pool_id;
-              let osd = data.y;
-              let primary_osd = data.primary_osd;
-
-              let ctx = c.chart.ctx;
-              let meta = c.getDatasetMeta(i_dataset).data[i_data];
-              let x = meta._model.x;
-              let y = meta._model.y;
-              let r = meta._model.radius;
-
-              ctx.save();
-              if (osd == primary_osd) {
-                  //console.log(meta);
-                  //console.log(data);
-
-                  // draw a cross
-                  // or you can draw anything using general canvas methods
-                  ctx.beginPath();
-                  ctx.moveTo(x - r / 4, y);
-                  ctx.lineTo(x + r / 4, y);
-                  ctx.moveTo(x, y + r / 4);
-                  ctx.lineTo(x, y - r / 4);
-                  ctx.strokeStyle = '#001FFF';
-                  ctx.lineWidth = 1;
-                  ctx.stroke();
-              };
-              ctx.restore();
-          });
-      });
-   }
-});
-
 var ctx_live = document.getElementById("canvas");
 var Chart = new Chart(ctx_live, {
     plugins: [{
     }],
     type: 'bubble',
     data: {
-      labels: "HASH of PGs",
+      //labels: "HASH of PGs",
       //datasets: <?php echo json_encode($arrChartDatasets); ?>
       datasets: [],
     },
@@ -145,7 +107,7 @@ var Chart = new Chart(ctx_live, {
       title: {
         display: true,
         padding: 30,
-        text: '<?php echo $chart_title; ?> - PGs Distribution & State',
+        text: '<?php echo $chart_title; ?> - PGs Size',
         fontSize: 20,
       },
       legend: {
@@ -157,16 +119,19 @@ var Chart = new Chart(ctx_live, {
           //offset: true,
           scaleLabel: {
             display: true,
-            labelString: "OSD ID"
+            labelString: "Size"
           },
           ticks: {
             autoSkip: false,
             min: 0,
-            max: get_max_OSD_num(),
-            stepSize: 1,
-            callback: function(value) {
-              return "OSD-" + value;
-            }
+            //max: get_max_OSD_num(),
+            stepSize: 10,
+            //callback: function(value) {
+            //  return "OSD-" + value;
+            //}
+            //callback: function(label, index, labels) {
+            //  return (label/1024/1024).toFixed(2)+'MiB';
+            //},
           }
         }],
         xAxes: [{ 
@@ -178,10 +143,10 @@ var Chart = new Chart(ctx_live, {
           ticks: {
             autoSkip: false,
             min: 0,
-            //stepSize: 50,
-            callback: function(value) {
-              return value + " (" + value.toString(16) + ")";
-            }
+            stepSize: 50,
+            //callback: function(value) {
+            //  return value + " (" + value.toString(16) + ")";
+            //}
           }
         }]
       },
@@ -190,17 +155,19 @@ var Chart = new Chart(ctx_live, {
           label: function(t, d) {
             //console.log(t);
             //console.log(d);
-            var pg_state = d.datasets[t.datasetIndex].label
+            //console.log(d.datasets[t.datasetIndex].data.data[t.index]);
+            //var pg_num = d.datasets[t.datasetIndex].data[t.index].x
             var pg_pool_id = d.datasets[t.datasetIndex].data[t.index].pool_id
             var pg_primary_osd = d.datasets[t.datasetIndex].data[t.index].primary_osd
+            var pg_current_osd = d.datasets[t.datasetIndex].data[t.index].current_osd
             var pg_is_primary = "(N/A)";
-            if (t.yLabel == pg_primary_osd) {
+            if (pg_current_osd == pg_primary_osd) {
               str_pg_primary_replica = "P";
             } else {
               str_pg_primary_replica = "R";
             }
             //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID(' + str_pg_primary_replica + '): ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', OSD: ' + get_osd_int(t.yLabel) + ', STATE: ' + pg_state;
+            return 'PGID(' + str_pg_primary_replica + '): ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', Size: ' + Byte2MB(t.yLabel) + 'MiB, OSD: ' + pg_current_osd;
           }
         }
       },
@@ -212,7 +179,7 @@ var getData = function() {
   $.ajax({
     type: 'POST',
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
-    url: 'jq-pg-stats.php',
+    url: 'jq-pg-size.php',
     data: {
       "req_pool_id": "<?php echo $req_pool_id; ?>",
       "req_pg_type": "<?php echo $req_pg_type; ?>"
@@ -228,22 +195,22 @@ var getData = function() {
       // add new label and data point to chart's underlying data structures
       //Chart.data.datasets = [];
       var parsed_data = JSON.parse(data);
-      var max_pg_number = 0;
-      //console.log(parsed_data);
-      parsed_data.forEach(datasets => {
-        //console.log(datasets);
-        var dataset = datasets.data;
-        //console.log(dataset);
-        dataset.forEach(data => {
-          //console.log(data);
-          //console.log(data.x);
-          if (data.x > max_pg_number) {
-            max_pg_number = data.x
-          }
-        });
-      });
+//      //var max_pg_number = 0;
+//      console.log(parsed_data);
+//      parsed_data.forEach(datasets => {
+//        //console.log(datasets);
+//        var dataset = datasets.data;
+//        //console.log(dataset);
+//        dataset.forEach(data => {
+//          //console.log(data);
+//          //console.log(data.x);
+//          if (data.x > max_pg_number) {
+//            max_pg_number = data.x
+//          }
+//        });
+//      });
       //console.log(max_pg_number);
-      Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 50;
+      //Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 50;
       //console.log(Chart.data.datasets);
       //console.log(parsed_data);
       if (Chart.data.datasets.length == 0) {
@@ -280,7 +247,11 @@ function get_pool_id(num10) {
 }
 
 function get_osd_int(num) {
-  return Math.floor(num)
+  return Math.floor(num);
+}
+
+function Byte2MB(num) {
+  return (num/1024/1024).toFixed(4);
 }
 
 function num10_to_num16(num10) {
