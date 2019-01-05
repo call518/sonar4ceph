@@ -50,6 +50,44 @@ PG Type:
 -->
 
 <script type="text/javascript">
+//Chart.plugins.register({
+//   afterDatasetsDraw: c => {
+//      let datasets = c.data.datasets;
+//      console.log(datasets);
+//      datasets.forEach((dataset, i_dataset) => {
+//          let data = dataset.data;
+//          data.forEach((data, i_data) => {
+//              let pool_id = data.pool_id;
+//              let current_osd = data.current_osd;
+//              let primary_osd = data.primary_osd;
+//
+//              let ctx = c.chart.ctx;
+//              let meta = c.getDatasetMeta(i_dataset).data[i_data];
+//              let x = meta._model.x;
+//              let y = meta._model.y;
+//              let r = meta._model.radius;
+//
+//              ctx.save();
+//              if (current_osd == primary_osd) {
+//                  //console.log(meta);
+//                  //console.log(data);
+//
+//                  // draw a cross
+//                  // or you can draw anything using general canvas methods
+//                  ctx.beginPath();
+//                  ctx.moveTo(x - r / 4, y);
+//                  ctx.lineTo(x + r / 4, y);
+//                  ctx.moveTo(x, y + r / 4);
+//                  ctx.lineTo(x, y - r / 4);
+//                  ctx.strokeStyle = '#001FFF';
+//                  ctx.lineWidth = 1;
+//                  ctx.stroke();
+//              };
+//              ctx.restore();
+//          });
+//      });
+//   }
+//});
 
 var ctx_live = document.getElementById("canvas");
 var Chart = new Chart(ctx_live, {
@@ -154,7 +192,7 @@ var getData = function() {
       //Chart.data.datasets = [];
       var parsed_data = JSON.parse(data);
 //      //var max_pg_number = 0;
-      console.log(parsed_data);
+      //console.log(parsed_data);
 //      parsed_data.forEach(datasets => {
 //        //console.log(datasets);
 //        var dataset = datasets.data;
@@ -198,7 +236,7 @@ var getData = function() {
 $(document).ready(getData);
 
 // get new data every 3 seconds
-setInterval(getData, <?php echo $refresh_interval_PG_Stats; ?>);
+setInterval(getData, <?php echo $refresh_interval_PG_Size; ?>);
 
 function get_pool_id(num10) {
   return Number(String(num10).split('.')[0]);
