@@ -35,12 +35,15 @@ $arrSamplePGstates = array(
 "peering",
 "activating",
 "stale+active+clean",
+"activating+undersized",
+"undersized+peered",
+"undersized+degraded+peered",
 "unknown",
 );
 
 $arrChartDatasets = array();
 
-$transparency = 0.5;
+$transparency = 0.6;
 
 ${"color_active+clean"} = "0, 222, 0";
 ${"color_active+undersized"} = "137, 112, 0";
@@ -53,7 +56,10 @@ ${"color_remapped+peering"} = "121, 6, 57";
 ${"color_peering"} = "43, 88, 255";
 ${"color_activating"} = "255, 0, 243";
 ${"color_stale+active+clean"} = "11, 133, 164";
-${"color_unknown"} = "50, 50, 50";
+${"color_activating+undersized"} = "241, 196, 15";
+${"color_undersized+peered"} = "115, 198, 182";
+${"color_undersized+degraded+peered"} = "11, 83, 69";
+${"color_unknown"} = "23, 32, 42";
 
 $border_color_primary = "rgba(169, 40, 97, 0.5)";
 foreach ($arrSamplePGstates as $SampleState) {
