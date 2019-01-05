@@ -2,21 +2,13 @@
 include '_config.php';
 include '_functions.php';
 
-$req_pool_id = $_POST['req_pool_id'];
-if (!$req_pool_id) {
-	$req_pool_id = "all";
-}
-
 $req_pg_type = $_POST['req_pg_type'];
 if (!$req_pg_type) {
 	$req_pg_type = "acting";
 }
 
-if ($req_pool_id == "acting") {
-	$chart_title = "ALL";
-} else { 
-	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
-}
+//$req_pg_type = "acting";
+//$req_pg_type = "acting_primary";
 
 $arrTotalPoolList = getPoolList();
 
@@ -36,7 +28,7 @@ foreach ($arrPGStats as $item_pg) {
 
 $arrChartDatasets = array();
 
-$transparency = 0.6;
+$transparency = 0.5;
 
 $border_color_primary = "rgba(169, 40, 97, 0.5)";
 
@@ -66,42 +58,22 @@ foreach ($arrPGStats as $item_pg) {
 	$num_bytes = $item_pg['stat_sum']['num_bytes'];
 
 
-	if ($req_pool_id == $pg_pool_id || $req_pool_id == "all") {
-		if ($num_bytes > 0) {
-			if ($req_pg_type == "acting_primary") {
-				$osds = array($pg_acting_primary);
-			} else {
-				$osds = $pg_acting_array;
-			}
+	if ($num_bytes > 0) {
+		if ($req_pg_type == "acting_primary") {
+			$osds = array($pg_acting_primary);
+		} else {
+			$osds = $pg_acting_array;
+		}
 
-			foreach ($osds as $osd) {
-				$pg_radius = get_bubble_radius(20, $max_num_bytes, 10, $num_bytes);
-				$arrTMP = array("x" => $pg_hash_num10, "y" => $num_bytes, "r" => $pg_radius, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary, "current_osd" => $osd);
-				array_push($arrChartDatasets[$pg_pool_id]['data'], $arrTMP);
-			}
+		foreach ($osds as $osd) {
+			$pg_radius = get_bubble_radius(100, $max_num_bytes, 10, $num_bytes);
+			$arrTMP = array("x" => $pg_hash_num10, "y" => $num_bytes, "r" => $pg_radius, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary, "current_osd" => $osd);
+			array_push($arrChartDatasets[$pg_pool_id]['data'], $arrTMP);
 		}
 	}
 
 //echo "$pg_pool_id - $pg_hash_num10 - $pg_acting_primary - $num_bytes \n";
 
-//	if ($req_pool_id == $pg_pool_id || $req_pool_id == "all") {
-//		if ($req_pg_type == "acting_primary") {
-//			$osds = array($pg_acting_primary);
-//		} else {
-//			$osds = $pg_acting_array;
-//		}
-//		//print_r($osds);
-//		//foreach ($pg_acting_array as $osd) {
-//		foreach ($osds as $osd) {
-//			//$arrTMP = array('x' => $pg_pool_id.".".$pg_hash_num10, 'y' => $osd, 'r' => '10');
-//			$arrTMP = array("x" => $pg_hash_num10, "y" => $num_bytes, "r" => 15, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary);
-//			if (in_array($pg_state, $arrSamplePGstates)) {
-//				array_push($arrChartDatasets[${"arrKey_".$pg_state}]['data'], $arrTMP);
-//			} else {
-//				array_push($arrChartDatasets[$arrKey_unknown]['data'], $arrTMP);
-//			}
-//		}
-//	}
 }
 
 $tmpArray = $arrChartDatasets;

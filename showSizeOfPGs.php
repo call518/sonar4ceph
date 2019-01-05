@@ -4,18 +4,6 @@
   <meta charset="UTF-8">
   <title>Distribution Chart of PGs</title>
 
-<script type="text/JavaScript">
-//function timedRefresh(timeoutPeriod) {
-//	setTimeout("location.reload(true);",timeoutPeriod);
-//}
-//window.addEventListener('load', function(){
-//    var select = document.getElementById('req_pool_id');
-//
-//    select.addEventListener('change', function(){
-//        window.location = 'showDistributionPGs.php?req_pool_id=' + this.value;
-//    }, false);
-//}, false);
-</script>
 </head>
 
 <!--body onload="JavaScript:timedRefresh(1000);"-->
@@ -26,14 +14,6 @@ include '_config.php';
 include '_functions.php';
 
 $chart_title = "";
-
-$req_pool_id = $_POST['req_pool_id'];
-if ($req_pool_id == "all" || !$req_pool_id) {
-	$req_pool_id = "all";
-	$chart_title = "ALL(ALL)";
-} else {
-	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
-}
 
 $req_pg_type = $_POST['req_pg_type'];
 if (!$req_pg_type) {
@@ -49,29 +29,8 @@ if ($req_pg_type == "acting") {
 $arrTotalPoolList = getPoolList();
 
 ?>
-<form id="form1" name="form1" method="post" action="showDistributionPGs.php">
-<?php
-//date_default_timezone_set($default_time_zone);
-//echo "<b>".date("Y-m-d H:i:s")."</b>";
-//echo "&nbsp;&nbsp;&nbsp;";
-echo "Pool: <select id=\"req_pool_id\" name=\"req_pool_id\">";
-echo "<option value=\"all\">ALL</option>";
-foreach ($arrTotalPoolList as $arrPoolInfo) {
-	if ($arrPoolInfo['poolnum'] == $req_pool_id) {
-?>
-		<option value="<?php echo $arrPoolInfo['poolnum'] ?>" selected><?php echo $arrPoolInfo['poolname'] ?></option>
-<?php
-	} else {
-		//print_r($arrPoolInfo);
-?>
-		<option value="<?php echo $arrPoolInfo['poolnum'] ?>"><?php echo $arrPoolInfo['poolname'] ?></option>
-<?php
-	}
-}
-?>
-</select>
-&nbsp;&nbsp;&nbsp;
-OSD:
+<form id="form1" name="form1" method="post" action="showSizeOfPGs.php">
+PG Type:
 <select id="req_pg_type" name="req_pg_type">
 <option value="acting" <?php if ($req_pg_type == "acting") { echo "selected"; } ?>>Acting(ALL)</option>
 <option value="acting_primary" <?php if ($req_pg_type == "acting_primary") { echo "selected"; } ?>>Acting Primary</option>
@@ -125,13 +84,13 @@ var Chart = new Chart(ctx_live, {
             autoSkip: false,
             min: 0,
             //max: get_max_OSD_num(),
-            stepSize: 10,
+            stepSize: 10*1024*1024,
             //callback: function(value) {
             //  return "OSD-" + value;
             //}
-            //callback: function(label, index, labels) {
-            //  return (label/1024/1024).toFixed(2)+'MiB';
-            //},
+            callback: function(label, index, labels) {
+              return (label/1024/1024).toFixed(2)+'MB';
+            },
           }
         }],
         xAxes: [{ 
@@ -144,9 +103,9 @@ var Chart = new Chart(ctx_live, {
             autoSkip: false,
             min: 0,
             stepSize: 50,
-            //callback: function(value) {
-            //  return value + " (" + value.toString(16) + ")";
-            //}
+            callback: function(value) {
+              return value + " (" + value.toString(16) + ")";
+            }
           }
         }]
       },
@@ -167,7 +126,7 @@ var Chart = new Chart(ctx_live, {
               str_pg_primary_replica = "R";
             }
             //return 'PGID: ' + <?php echo $pg_pool_id; ?> + '.' + num10_t0_num16(t.xLabel) + ' (OSD:' + get_osd_int(t.yLabel) + ')';
-            return 'PGID(' + str_pg_primary_replica + '): ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', Size: ' + Byte2MB(t.yLabel) + 'MiB, OSD: ' + pg_current_osd;
+            return 'PGID(' + str_pg_primary_replica + '): ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', Size: ' + t.yLabel + "B(" + toMB(t.yLabel) + "MB)" + ', OSD: ' + pg_current_osd;
           }
         }
       },
@@ -181,7 +140,6 @@ var getData = function() {
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
     url: 'jq-pg-size.php',
     data: {
-      "req_pool_id": "<?php echo $req_pool_id; ?>",
       "req_pg_type": "<?php echo $req_pg_type; ?>"
     },
     success: function(data) {
@@ -196,7 +154,7 @@ var getData = function() {
       //Chart.data.datasets = [];
       var parsed_data = JSON.parse(data);
 //      //var max_pg_number = 0;
-//      console.log(parsed_data);
+      console.log(parsed_data);
 //      parsed_data.forEach(datasets => {
 //        //console.log(datasets);
 //        var dataset = datasets.data;
@@ -250,8 +208,8 @@ function get_osd_int(num) {
   return Math.floor(num);
 }
 
-function Byte2MB(num) {
-  return (num/1024/1024).toFixed(4);
+function toMB(num) {
+  return (num/1024/1024).toFixed(2);
 }
 
 function num10_to_num16(num10) {
