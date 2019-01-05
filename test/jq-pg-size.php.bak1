@@ -12,13 +12,16 @@ $arrTotalPoolList = getPoolList();
 $jsonData = simple_curl("$ceph_api/pg/dump_json?dumpcontents=pgs");
 $arrPGStats = json_decode($jsonData, true)['output']['pg_stats'];
 
-//$max_num_bytes = 0;
-//foreach ($arrPGStats as $item_pg) {
-//	$num_bytes = $item_pg['stat_sum']['num_bytes'];
-//	if ($num_bytes > $max_num_bytes) {
-//		$max_num_bytes = $num_bytes;
-//	}
-//}
+$max_num_bytes = 0;
+foreach ($arrPGStats as $item_pg) {
+	$num_bytes = $item_pg['stat_sum']['num_bytes'];
+	if ($num_bytes > $max_num_bytes) {
+		$max_num_bytes = $num_bytes;
+	}
+}
+
+//print_r(get_bubble_radius(20, $max_num_bytes, 10, 4194304));
+//exit;
 
 $arrChartDatasets = array();
 
@@ -29,27 +32,13 @@ $border_color_primary = "rgba(169, 40, 97, 0.5)";
 foreach ($arrTotalPoolList as $pool) {
 	$poolnum = $pool['poolnum'];
 	$poolname = $pool['poolname'];
-	if ($req_pool_id == $poolnum || $req_pool_id == "all") {
-		$arrChartDatasets[$poolnum] = array("label" => $poolname."(".$poolnum.")", "hoverBorderWidth" => 3, "borderColor" => $border_color_primary, "borderWidth" => 1, "backgroundColor" => randomRBGA4ChartJS($transparency), "data" => array());
-	}
+	$arrChartDatasets[$poolnum] = array("label" => $poolname."(".$poolnum.")", "hoverBorderWidth" => 3, "borderColor" => $border_color_primary, "borderWidth" => 1, "backgroundColor" => randomRBGA4ChartJS($transparency), "data" => array());
 }
 
 //foreach ($arrChartDatasets as $k => $v) {
 //	$label = $v['label'];
 //	${"arrKey_".$label} = $k;
 //}
-
-$max_num_bytes = 0;
-foreach ($arrPGStats as $item_pg) {
-	$pg_id = $item_pg['pgid'];
-	$pg_pool_id = explode('.', $pg_id)[0];
-	if ($req_pool_id == $pg_pool_id || $req_pool_id == "all") {
-		$num_bytes = $item_pg['stat_sum']['num_bytes'];
-		if ($num_bytes > $max_num_bytes) {
-			$max_num_bytes = $num_bytes;
-		}
-	}
-}
 
 foreach ($arrPGStats as $item_pg) {
 	//$pg_ = $item_pg[''];

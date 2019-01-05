@@ -12,12 +12,6 @@ if (!$req_pg_type) {
 	$req_pg_type = "acting";
 }
 
-if ($req_pool_id == "acting") {
-	$chart_title = "ALL";
-} else { 
-	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
-}
-
 $arrTotalPoolList = getPoolList();
 
 $jsonData = simple_curl("$ceph_api/pg/dump_json?dumpcontents=pgs");

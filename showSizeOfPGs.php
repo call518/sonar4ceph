@@ -12,7 +12,43 @@
 <?php
 include '_config.php';
 include '_functions.php';
+
+$chart_title = "";
+
+$req_pool_id = $_POST['req_pool_id'];
+if ($req_pool_id == "all" || !$req_pool_id) {
+	$req_pool_id = "all";
+	$chart_title = "ALL(ALL)";
+} else {
+	$chart_title = pool_id2name($req_pool_id)."(".$req_pool_id.")";
+}
+
+$arrTotalPoolList = getPoolList();
+
 ?>
+<form id="form1" name="form1" method="post" action="showSizeOfPGs.php">
+<?php
+//date_default_timezone_set($default_time_zone);
+//echo "<b>".date("Y-m-d H:i:s")."</b>";
+//echo "&nbsp;&nbsp;&nbsp;";
+echo "Pool: <select id=\"req_pool_id\" name=\"req_pool_id\">";
+echo "<option value=\"all\">ALL</option>";
+foreach ($arrTotalPoolList as $arrPoolInfo) {
+	if ($arrPoolInfo['poolnum'] == $req_pool_id) {
+?>
+		<option value="<?php echo $arrPoolInfo['poolnum'] ?>" selected><?php echo $arrPoolInfo['poolname'] ?></option>
+<?php
+	} else {
+		//print_r($arrPoolInfo);
+?>
+		<option value="<?php echo $arrPoolInfo['poolnum'] ?>"><?php echo $arrPoolInfo['poolname'] ?></option>
+<?php
+	}
+}
+?>
+</select>
+<input type="submit" name="Submit" value="Submit"/>
+</form>
 
 <canvas id="canvas"></canvas>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -41,7 +77,7 @@ var Chart = new Chart(ctx_live, {
       title: {
         display: true,
         padding: 30,
-        text: 'PGs Size (Primary PG)',
+        text: '<?php echo $chart_title; ?> - PGs Size (Primary PG)',
         fontSize: 20,
       },
       legend: {
@@ -113,11 +149,11 @@ var getData = function() {
     type: 'POST',
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
     url: 'jq-pg-size.php',
-    //data: {
-    //  "req_pg_type": "<?php echo $req_pg_type; ?>"
-    //},
+    data: {
+      "req_pool_id": "<?php echo $req_pool_id; ?>",
+    },
     success: function(data) {
-      Chart.options.title.text = '[' + getNow() + ']  ' + 'PGs Size (Primary PG)';
+      Chart.options.title.text = '[' + getNow() + ']  ' + '<?php echo $chart_title; ?> - PGs Size (Primary PG)';
       //Chart.options.scales.xAxes[0].ticks.max = 1000;
       //console.log(data);
       //alert(data);
