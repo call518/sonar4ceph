@@ -9,6 +9,8 @@ Intro
 * MAINTAINER: Jung-In.Jung (call518@gmail.com)
 * 2018-12-13 ~ (On-going...)
 
+(Note) If you are interested in this project, please contact me at any time.
+
 ## Goals
 
 * Visualization of logical structure of CEPH cluster based on CRUSH map.
