@@ -27,6 +27,7 @@ Intro
 ![ScreenShot](README/poolspgsosds.png?raw=true)
 ![ScreenShot](README/showPGCountByEachOSD.png?raw=true)
 ![ScreenShot](README/showPGCountByEachPool.png?raw=true)
+![ScreenShot](README/showSizeOfPGs.png?raw=true)
 
 Installation
 ================================
