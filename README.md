@@ -21,7 +21,7 @@ Intro
 
 ## ScreenShots (PoC)
 
-![ScreenShot](README/show-physical.png?raw=true)
+![ScreenShot](README/show-physical.png?raw=true|width=100)
 ![ScreenShot](README/cluster-bw.png?raw=true)
 ![ScreenShot](README/showDistributionPGs.png?raw=true)
 ![ScreenShot](README/poolspgsosds.png?raw=true)
