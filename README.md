@@ -21,13 +21,13 @@ Intro
 
 ## ScreenShots (PoC)
 
-![ScreenShot](README/show-physical.png?raw=true){:height="50%" width="50%"}
-![ScreenShot](README/cluster-bw.png?raw=true){:height="50%" width="50%"}
-![ScreenShot](README/showDistributionPGs.png?raw=true){:height="50%" width="50%"}
-![ScreenShot](README/poolspgsosds.png?raw=true){:height="50%" width="50%"}
-![ScreenShot](README/showPGCountByEachOSD.png?raw=true){:height="50%" width="50%"}
-![ScreenShot](README/showPGCountByEachPool.png?raw=true){:height="50%" width="50%"}
-![ScreenShot](README/showSizeOfPGs.png?raw=true){:height="50%" width="50%"}
+![ScreenShot](README/show-physical.png?raw=true)
+![ScreenShot](README/cluster-bw.png?raw=true)
+![ScreenShot](README/showDistributionPGs.png?raw=true)
+![ScreenShot](README/poolspgsosds.png?raw=true)
+![ScreenShot](README/showPGCountByEachOSD.png?raw=true)
+![ScreenShot](README/showPGCountByEachPool.png?raw=true)
+![ScreenShot](README/showSizeOfPGs.png?raw=true)
 
 Installation
 ================================
