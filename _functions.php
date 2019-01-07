@@ -68,7 +68,7 @@ function buildNode($nodeID) {
 function getChildren($arr)
 {
 	global $arrPG_DUMP;
-	global $pre_rootNodeId;
+	global $rootNodeId;
 	//$color_root = "#7B68EE";
 	//$color_datacenter = '#3CB371';
 	//$color_rack = '#7B68EE';
@@ -102,7 +102,7 @@ function getChildren($arr)
 		global $rootIDs;
 		echo "    <select id=\"root_node\" name=\"root_node\">";
 		foreach ($rootIDs as $k => $v) {
-			if ($pre_rootNodeId == $v) {
+			if ($rootNodeId == $v) {
 				echo "      <option value=\"$v\" selected>$k</option>";
 			} else {
 				echo "      <option value=\"$v\">$k</option>";

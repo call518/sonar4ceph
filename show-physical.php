@@ -56,8 +56,8 @@ if ($pre_rootNodeId && $pre_rootNodeId != "undefined") {
 }
 $rootIDs = getRootNodeIDs();
 $rootNodeName = array_search($rootNodeId, $rootIDs);
-//print_r($rootNodeId);
-//print_r($rootNodeName);
+print_r($rootNodeId);
+print_r($rootNodeName);
 ?>
 
 <?php
