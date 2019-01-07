@@ -137,7 +137,7 @@ Customizing Config
 
 #### Apache "mod_proxy"
 
-/etc/httpd/conf.d/inkscope-lite.conf
+/etc/httpd/conf.d/sonar4ceph.conf
 
 * "http://127.0.0.1:5000/api/v0.1/"
   * (Note) Change address to "Ceph-Rest-API" listener address.
