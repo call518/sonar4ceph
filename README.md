@@ -15,7 +15,6 @@ Intro
 
 * Visualization of logical structure of CEPH cluster based on CRUSH map.
 * Pool / OSD / PG distribution status visualization.
-* 주요 컴포넌트들의 Health 상태 및 중요 지표 파악.
 * Understanding the health status and key indicators of the main components.
 * Minimization of monitoring load.
 
@@ -57,16 +56,16 @@ Codename:	Core
 
 #### CEPH-REST-API (TCP:5000)
 
-* In the first test, a simple PHP "shell_exec ()" was used to query using the "ceph {options} -f json" method, but as the send data increased and became more frequent , Slow and heavy system load.
-  * Inevitably, information that can not be acquired by some ceph-rest-api is collected using "shell_exec ()".
-* To minimize the load, execute "ceph-rest-api" with ceph administration (ceph.admin) authority (TCP: 5000) and request / receive necessary information.
+* In the first test, a simple PHP "shell_exec()" was used to query using the "ceph {options} -f json" method, but as the send data increased and became more frequent, Slow and heavy system load.
+  * Inevitably, information that can not be acquired by some ceph-rest-api is collected using "shell_exec()".
+* To minimize the load, execute "ceph-rest-api" with ceph administration(ceph.admin) authority(TCP: 5000) and request/receive necessary information.
   * The authority is also changed to an account with no admin or read-only privileges.
-* shell_exec () is excluded, and ceph-rest-api is the only alternative.
+* "shell_exec()" is excluded, and ceph-rest-api is the only alternative.
 
 
 ## Tutorial
 
-* It is expected that CentOS7 (x86_64) will be based on the platform, and there will be no big difference in the other platforms.
+* It is expected that CentOS7(x86_64) will be based on the platform, and there will be no big difference in the other platforms.
 
 #### Apache(HTTPd)
 
@@ -93,11 +92,11 @@ Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 
 #### CEPH-REST-API
 
-* Select the location where you want to run it appropriately because a query using HTTP_ mod_proxy will be executed.
-* It is necessary to confirm that the location of the CEPH-REST-API service matches the value of the "$ ceph_api" variable in "_config.php".
+* Select the location where you want to run it appropriately because a query using HTTPd mod_proxy will be executed.
+* It is necessary to confirm that the location of the CEPH-REST-API service matches the value of the "$ceph_api" variable in "_config.php".
 * (Note)
   * Use "screen" to execute in Daemon form.
-  * The http-user(nobody/wwwdata) has access to the /etc/ceph/ceph.client.admin.keyring file.
+  * The http-user(nobody or wwwdata or any) has access to the "/etc/ceph/ceph.client.admin.keyring" file.
 
 ```bash
 chmod 644 /etc/ceph/ceph.client.admin.keyring
@@ -140,7 +139,9 @@ Customizing Config
 
 /etc/httpd/conf.d/inkscope-lite.conf
 
-* "http://127.0.0.1:5000/api/v0.1/" 주소를 ceph-rest-api의 LISTEN 주소로 수정.
+* "http://127.0.0.1:5000/api/v0.1/"
+  * (Note) Change address to "Ceph-Rest-API" listener address.
+
 
 ```bash
 <VirtualHost *:80>
@@ -170,6 +171,6 @@ Customizing Config
 APPENDIX
 ================================
 
-There is a nice OpenSource called "* inkscope-lite *." Among the features I had planned, I included inkscope-lite and used it in the form of a module.
+Special Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (["A-Dechorgnat"](https://github.com/A-Dechorgnat/inkscope-lite/commits?author=A-Dechorgnat))
 
-Thanks~ ["inkscope-lite"](https://github.com/A-Dechorgnat/inkscope-lite) (["A-Dechorgnat"](https://github.com/A-Dechorgnat/inkscope-lite/commits?author=A-Dechorgnat))
+There is a nice OpenSource called "*inkscope-lite*." Among the features I had planned, I included inkscope-lite and used it in the form of a module.
