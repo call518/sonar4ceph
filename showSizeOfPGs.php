@@ -129,6 +129,7 @@ var Chart = new Chart(ctx_live, {
             //var pg_num = d.datasets[t.datasetIndex].data[t.index].x
             var pg_pool_id = d.datasets[t.datasetIndex].data[t.index].pool_id
             var pg_primary_osd = d.datasets[t.datasetIndex].data[t.index].primary_osd
+            var pg_num_objects = d.datasets[t.datasetIndex].data[t.index].num_objects
             //var pg_current_osd = d.datasets[t.datasetIndex].data[t.index].current_osd
             //var pg_is_primary = "(N/A)";
             //if (pg_current_osd == pg_primary_osd) {
@@ -136,7 +137,7 @@ var Chart = new Chart(ctx_live, {
             //} else {
             //  str_pg_primary_replica = "R";
             //}
-            return 'PGID: ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', Size: ' + toMB(t.yLabel) + "MB(" + t.yLabel + "B)" + ', Primary-OSD: ' + pg_primary_osd;
+            return 'PGID: ' + pg_pool_id + '.' + num10_to_num16(t.xLabel) + '(' + t.xLabel + ')' + ', Size: ' + toMB(t.yLabel) + "MB(" + t.yLabel + "B)" + ', Primary-OSD: ' + pg_primary_osd + ', Objects: ' + pg_num_objects;
           }
         }
       },

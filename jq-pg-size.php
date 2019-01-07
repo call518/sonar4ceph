@@ -64,11 +64,12 @@ foreach ($arrPGStats as $item_pg) {
 	$pg_up_array = $item_pg['up'];
 	$pg_up_primary = $item_pg['up_primary'];
 	$num_bytes = $item_pg['stat_sum']['num_bytes'];
+	$num_objects = $item_pg['stat_sum']['num_objects'];
 
 	if ($req_pool_id == $pg_pool_id || $req_pool_id == "all") {
 		if ($num_bytes > 0) {
 			$pg_radius = get_bubble_radius(100, $max_num_bytes, 10, $num_bytes);
-			$arrTMP = array("x" => $pg_hash_num10, "y" => $num_bytes, "r" => $pg_radius, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary);
+			$arrTMP = array("x" => $pg_hash_num10, "y" => $num_bytes, "r" => $pg_radius, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary, "num_objects" => $num_objects);
 			array_push($arrChartDatasets[$pg_pool_id]['data'], $arrTMP);
 		}
 	}
