@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Cluster B/W (Byte)</title>
+  <title>OSD Latency - Apply (ms)</title>
 </head>
 
 <body>
@@ -45,42 +45,16 @@ var Chart = new Chart(ctx_live, {
   type: 'line',
   data: {
     labels: [],
-    datasets:
-    [
-     {
-      data: [],
-      borderWidth: 1,
-      backgroundColor:'#5DADE2',
-      borderColor:'#5DADE2',
-      pointRadius: 1,
-      label: 'read_bytes_sec',
-      fill: false,
-      showLine: true,
-      //lineTension: 0.3,
-      borderWidth: 2,
-     },
-     {
-      data: [],
-      borderWidth: 1,
-      backgroundColor:'#F5B041',
-      borderColor:'#F5B041',
-      pointRadius: 1,
-      label: 'write_bytes_sec',
-      fill: false,
-      showLine: true,
-      //lineTension: 0.3,
-      borderWidth: 2,
-     }
-    ]
   },
   options: {
     responsive: true,
     title: {
       display: true,
-      text: "Cluster B/W (Byte)",
+      text: "OSD Latency - Apply (ms)",
     },
     legend: {
-      display: true
+      display: true,
+      position: 'right',
     },
     scales: {
       xAxes: [{
@@ -93,16 +67,16 @@ var Chart = new Chart(ctx_live, {
       yAxes: [{
         ticks: {
           beginAtZero: true,
-          callback: function(label, index, labels) {
-            return (label/1024/1024).toFixed(2)+'MiB';
-          },
+          //callback: function(label, index, labels) {
+          //  return (label/1024/1024).toFixed(2)+'MiB';
+          //},
         },
         scaleLabel: {
           display: true,
-          labelString: 'Bandwidth (1MiB = 1024KiB)'
+          labelString: 'OSD Latency - Apply (ms)'
         },
       }]
-    }
+    },
   }
 });
 
@@ -111,13 +85,13 @@ var getData = function() {
   $.ajax({
     type: 'GET',
     //url: 'jq-pool-client-io.php?pool_name=<?php echo $pool_name; ?>&pool_id=<?php echo $pool_id; ?>',
-    url: 'jq-cluster-io.php',
+    url: 'jq-osd-latency.php',
     //data: {
     //  "pool_name": "<?php echo $pool_name; ?>",
     //  "pool_id": "<?php echo $pool_id; ?>"
     //},
     success: function(data) {
-      console.log(data);
+      //console.log(data);
       //alert(data);
       // process your data to pull out what you plan to use to update the chart
       // e.g. new label and a new data point
@@ -131,17 +105,37 @@ var getData = function() {
         });
       }
       var parsed_data = JSON.parse(data);
-      console.log(count);
-      console.log(parsed_data.read_bytes_sec);
-      console.log(parsed_data.write_bytes_sec);
-      //Chart.data.labels.push(Date.now());
+      //console.log(count);
+      //console.log(parsed_data);
+	  if (Chart.data.datasets.length == 0) {
+        parsed_data.forEach((osd_dataset) => {
+          color = '#'+Math.floor(Math.random()*16777215).toString(16);
+          osd_id = osd_dataset.id;
+          Chart.data.datasets[osd_id] = [];
+          Chart.data.datasets[osd_id].data = [];
+          Chart.data.datasets[osd_id].label = "OSD-" + osd_id;
+          Chart.data.datasets[osd_id].borderWidth = 1;
+          Chart.data.datasets[osd_id].backgroundColor = color;
+          Chart.data.datasets[osd_id].borderColor = color;
+          Chart.data.datasets[osd_id].pointRadius = 2;
+          Chart.data.datasets[osd_id].fill = false;
+          Chart.data.datasets[osd_id].showLine = true;
+          //Chart.data.datasets[osd_id].lineTension = 0.3;
+          Chart.data.datasets[osd_id].showLine = true;
+	    });
+      }
       Chart.data.labels.push(getNow());
-      //Chart.data.datasets[0].data.push(getRandomIntInclusive(1, 25));
-      //Chart.data.datasets[1].data.push(getRandomIntInclusive(1, 25));
-      //Chart.data.datasets[0].data.push(<?php echo $read_bytes_sec; ?>);
-      //Chart.data.datasets[1].data.push(<?php echo $write_bytes_sec; ?>);
-      Chart.data.datasets[0].data.push(parsed_data.read_bytes_sec);
-      Chart.data.datasets[1].data.push(parsed_data.write_bytes_sec);
+      parsed_data.forEach((osd_dataset) => {
+        osd_id = osd_dataset.id;
+        apply_latency_ms = osd_dataset.apply_latency_ms;
+        //commit_latency_ms = osd_dataset.commit_latency_ms;
+		//console.log("osd_id: " + osd_id);
+		//console.log("apply_latency_ms: " + apply_latency_ms);
+		//console.log("commit_latency_ms: " + commit_latency_ms);
+      	Chart.data.datasets[osd_id].data.label = "osd-" + osd_id;
+      	Chart.data.datasets[osd_id].data.push(apply_latency_ms);
+      	//Chart.data.datasets[osd_id].data.push(commit_latency_ms);
+      });
       
       // re-render the chart
       Chart.update();
@@ -150,8 +144,7 @@ var getData = function() {
 };
 
 // get new data every 3 seconds
-//setInterval(getData, <?php echo $refresh_interval_Cluster_IO; ?>);
-setInterval(getData, <?php echo $refresh_interval_Cluster_IO; ?>);
+setInterval(getData, <?php echo $refresh_interval_OSD_Latency; ?>);
 </script>
 
 </body>

@@ -4,8 +4,6 @@ include "_functions.php";
 
 $pool_name = $_GET['pool_name'];
 $pool_id = $_GET['pool_id'];
-//$pool_name = "vms";
-//$pool_id = 5;
 //$jsonData = shell_exec("ceph osd pool stats $pool_name --format=json");
 $jsonData = simple_curl("$ceph_api/osd/pool/stats?name=$pool_name");
 //print_r($jsonData);
