@@ -111,7 +111,7 @@ git clone https://github.com/call518/sonar4ceph.git
 mv sonar4ceph /var/www/html/
 ```
 
-#### Web 접근
+#### Web Access
 
 ```bash
 <Browser Address Bar>
