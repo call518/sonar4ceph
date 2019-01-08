@@ -53,7 +53,7 @@ var Chart = new Chart(ctx_live, {
       text: "OSD Latency - Commit (ms)",
     },
     legend: {
-      display: true,
+      display: false,
       //position: 'right',
     },
     scales: {
