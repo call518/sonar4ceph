@@ -47,9 +47,9 @@ var Chart = new Chart(ctx_live, {
     labels: [],
   },
   options: {
-    responsive: false,
+    responsive: true,
     title: {
-      display: true,
+      display: false,
       text: "OSD Latency - Commit (ms)",
     },
     legend: {
