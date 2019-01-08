@@ -54,7 +54,7 @@ var Chart = new Chart(ctx_live, {
     },
     legend: {
       display: true,
-      position: 'right',
+      //position: 'right',
     },
     scales: {
       xAxes: [{
