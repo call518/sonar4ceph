@@ -95,7 +95,7 @@ var Chart = new Chart(ctx_live, {
             autoSkip: false,
             min: 0,
             //max: get_max_OSD_num(),
-            stepSize: 10*1024*1024,
+            //stepSize: 10*1024*1024,
             //callback: function(value) {
             //  return "OSD-" + value;
             //}
@@ -164,22 +164,26 @@ var getData = function() {
       // add new label and data point to chart's underlying data structures
       //Chart.data.datasets = [];
       var parsed_data = JSON.parse(data);
-//      //var max_pg_number = 0;
+      var min_y_axis;
       //console.log(parsed_data);
-//      parsed_data.forEach(datasets => {
-//        //console.log(datasets);
-//        var dataset = datasets.data;
-//        //console.log(dataset);
-//        dataset.forEach(data => {
-//          //console.log(data);
-//          //console.log(data.x);
-//          if (data.x > max_pg_number) {
-//            max_pg_number = data.x
-//          }
-//        });
-//      });
+      parsed_data.forEach(datasets => {
+        //console.log(datasets);
+        var dataset = datasets.data;
+        //console.log(dataset);
+        dataset.forEach(data => {
+          //console.log(data);
+          //console.log(data.x);
+          if (data.y == null) {
+            min_y_axis = data.y
+          } else {
+            if (data.y < min_y_axis) {
+              min_y_axis = data.y
+            }
+          }
+        });
+      });
       //console.log(max_pg_number);
-      //Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 50;
+      Chart.options.scales.yAxes[0].ticks.min = min_y_axis;
       //console.log(Chart.data.datasets);
       if (Chart.data.datasets.length == 0) {
         Chart.data.datasets = parsed_data;
