@@ -98,7 +98,7 @@ var getData = function() {
       
       // add new label and data point to chart's underlying data structures
       var count = Chart.data.labels.length; 
-      if (count > 300) {
+      if (count > <?php echo $graph_x_count; ?>) {
         Chart.data.labels.splice(0, 1);
         Chart.data.datasets.forEach((dataset) => {
           dataset.data.splice(0, 1);
