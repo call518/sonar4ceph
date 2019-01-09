@@ -8,7 +8,7 @@ $prePoolCountFile = "/tmp/sonar4ceph-pre-pool-count";
 
 $PoolColorFile = "/tmp/sonar4ceph-pre-pool-colors";
 
-$graph_x_count = 100;
+$graph_x_count = 50;
 
 $refresh_interval_Cluster_IO = 3000;
 $refresh_interval_Pools_IO = 3000;
