@@ -53,8 +53,8 @@ var Chart = new Chart(ctx_live, {
       text: "OSD Latency - Apply (ms)",
     },
     legend: {
-      display: false,
-      //position: 'right',
+      display: true,
+      position: 'right',
     },
     scales: {
       xAxes: [{
