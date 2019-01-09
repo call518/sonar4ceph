@@ -109,7 +109,7 @@ var getData = function() {
       //console.log(parsed_data);
 	  if (Chart.data.datasets.length == 0) {
         parsed_data.forEach((osd_dataset) => {
-          color = '#'+Math.floor(Math.random()*16777215).toString(16);
+          color = randomColor();
           osd_id = osd_dataset.id;
           Chart.data.datasets[osd_id] = [];
           Chart.data.datasets[osd_id].data = [];
@@ -145,6 +145,11 @@ var getData = function() {
 
 // get new data every 3 seconds
 setInterval(getData, <?php echo $refresh_interval_OSD_Latency; ?>);
+
+function randomColor() {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
+}
 </script>
 
 </body>
