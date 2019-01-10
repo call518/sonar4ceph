@@ -116,14 +116,20 @@ Chart.plugins.register({
 
                   // draw a cross
                   // or you can draw anything using general canvas methods
-                  ctx.beginPath();
-                  ctx.moveTo(x - r / 4, y);
-                  ctx.lineTo(x + r / 4, y);
-                  ctx.moveTo(x, y + r / 4);
-                  ctx.lineTo(x, y - r / 4);
-                  ctx.strokeStyle = '#001FFF';
-                  ctx.lineWidth = 1;
-                  ctx.stroke();
+
+                  //ctx.beginPath();
+                  //ctx.moveTo(x - r / 4, y);
+                  //ctx.lineTo(x + r / 4, y);
+                  //ctx.moveTo(x, y + r / 4);
+                  //ctx.lineTo(x, y - r / 4);
+                  //ctx.strokeStyle = '#001FFF';
+                  //ctx.lineWidth = 1;
+                  //ctx.stroke();
+                  ctx.textAlign = "center";
+                  ctx.textBaseline = 'middle';
+                  ctx.fillStyle = "#0000FF";
+                  ctx.font = 'normal 10px Helvetica';
+                  ctx.fillText("P", x - 1, y + 2);
               };
               ctx.restore();
           });
