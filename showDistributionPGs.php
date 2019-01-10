@@ -129,7 +129,7 @@ Chart.plugins.register({
                   ctx.textBaseline = 'middle';
                   ctx.fillStyle = "#0000FF";
                   ctx.font = 'normal 10px Helvetica';
-                  ctx.fillText("P", x - 1, y);
+                  ctx.fillText("P", x - 1, y + 1);
               };
               ctx.restore();
           });
