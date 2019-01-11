@@ -155,7 +155,7 @@ echo "  <td>";
 echo "    <center><input type=\"button\" value=\"Show Physical\" style=\"width:90%\" onclick=\"window.open('show-physical.php', '_blank')\">";
 echo "  </td>";
 echo "  <td>";
-echo "    <input type=\"button\" value=\"PG Distribution\" style=\"width:90%\" onclick=\"window.open('showDistributionPGs.php', '_blank')\">";
+echo "    <input type=\"button\" value=\"PG States\" style=\"width:90%\" onclick=\"window.open('showPGsStates.php', '_blank')\">";
 echo "  </td>";
 echo "  <td>";
 echo "    <input type=\"button\" value=\"PG Size\" style=\"width:90%\" onclick=\"window.open('showSizeOfPGs.php', '_blank')\">";

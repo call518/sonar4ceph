@@ -21,6 +21,8 @@ $arrChartDatasets = array();
 
 $transparency = 0.6;
 
+$border_color_primary = "rgba(169, 40, 97, 0.5)";
+
 $arrTmp = array();
 foreach ($arrPGStats as $item_pg) {
 	array_push($arrTmp, $item_pg['state']);
@@ -28,7 +30,7 @@ foreach ($arrPGStats as $item_pg) {
 $arrNowUniqStates = array_unique($arrTmp);
 
 foreach ($arrNowUniqStates as $item) {
-	$arrChartDatasets[$item] = array("label" => $item, "hoverBorderWidth" => 3, "borderColor" => "rgba(169, 40, 97, 0.5)", "borderWidth" => 1, "data" => array());
+	$arrChartDatasets[$item] = array("label" => $item, "hoverBorderWidth" => 3, "borderColor" => $border_color_primary, "borderWidth" => 1, "backgroundColor" => randomRBGA4ChartJS($transparency), "data" => array());
 }
 //print_r($arrChartDatasets);
 //exit;

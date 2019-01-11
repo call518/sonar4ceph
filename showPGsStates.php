@@ -2,7 +2,7 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Distribution Chart of PGs</title>
+  <title>States Chart of PGs</title>
 
 <script type="text/JavaScript">
 //function timedRefresh(timeoutPeriod) {
@@ -12,7 +12,7 @@
 //    var select = document.getElementById('req_pool_id');
 //
 //    select.addEventListener('change', function(){
-//        window.location = 'showDistributionPGs.php?req_pool_id=' + this.value;
+//        window.location = 'showPGsStates.php?req_pool_id=' + this.value;
 //    }, false);
 //}, false);
 </script>
@@ -50,7 +50,7 @@ if ($req_pg_type == "acting") {
 $arrTotalPoolList = getPoolList();
 
 ?>
-<form id="form1" name="form1" method="post" action="showDistributionPGs.php">
+<form id="form1" name="form1" method="post" action="showPGsStates.php">
 <?php
 //date_default_timezone_set($default_time_zone);
 //echo "<b>".date("Y-m-d H:i:s")."</b>";
@@ -143,8 +143,8 @@ var Chart = new Chart(ctx_live, {
     }],
     type: 'bubble',
     data: {
-      labels: "HASH of PGs",
-      //datasets: <?php echo json_encode($arrChartDatasets); ?>
+//      labels: "HASH of PGs",
+//      //datasets: <?php echo json_encode($arrChartDatasets); ?>
       datasets: [],
     },
     options: {
@@ -152,7 +152,7 @@ var Chart = new Chart(ctx_live, {
       title: {
         display: true,
         padding: 30,
-        text: '<?php echo $chart_title; ?> - PGs Distribution & State',
+        text: '<?php echo $chart_title; ?> - PGs States',
         fontSize: 20,
       },
       legend: {
@@ -214,6 +214,8 @@ var Chart = new Chart(ctx_live, {
     }
 });
 
+var arr_backgroundColor = new Array();
+
 // logic to get new data
 var getData = function() {
   $.ajax({
@@ -225,50 +227,38 @@ var getData = function() {
       "req_pg_type": "<?php echo $req_pg_type; ?>"
     },
     success: function(data) {
-      Chart.options.title.text = '[' + getNow() + ']  ' + '<?php echo $chart_title; ?> - PGs Distribution & State';
-      //Chart.options.scales.xAxes[0].ticks.max = 1000;
-      //console.log(data);
-      //alert(data);
-      // process your data to pull out what you plan to use to update the chart
-      // e.g. new label and a new data point
-      
-      // add new label and data point to chart's underlying data structures
-      //Chart.data.datasets = [];
+      Chart.options.title.text = '[' + getNow() + ']  ' + '<?php echo $chart_title; ?> - PGs States';
+
       var parsed_data = JSON.parse(data);
       var max_pg_number = 0;
-      //console.log(parsed_data);
       parsed_data.forEach(datasets => {
-        //console.log(datasets);
         var dataset = datasets.data;
-        //console.log(dataset);
         dataset.forEach(data => {
-          //console.log(data);
-          //console.log(data.x);
           if (data.x > max_pg_number) {
             max_pg_number = data.x
           }
         });
       });
-      //console.log(max_pg_number);
       Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 50;
-      //console.log(Chart.data.datasets);
-      //console.log(parsed_data);
-      if (Chart.data.datasets.length == 0) {
-        Chart.data.datasets = parsed_data;
-      } else {
-        parsed_data.forEach((dataset, i) => {
-          //console.log(Chart.data.datasets[i].data);
-          Chart.data.datasets[i].data = [];
-          //console.log(i, dataset);
-          Chart.data.datasets[i].data = dataset.data;
-        }); 
+
+      var arrLabels = new Array();
+      for (var key in parsed_data) {
+        //console.log(parsed_data[key].label);
+        arrLabels.push(parsed_data[key].label);
       }
-      //for(var k in parsed_data) {
-      //  //console.log(k, parsed_data[k]);
-      //  Chart.data.datasets.push(parsed_data[k]);
-      //}
-      
-      //console.log(Chart.data.datasets);
+      Chart.data.lables = arrLabels;
+
+      parsed_data.forEach((dataset, i) => {
+        if (dataset.label in arr_backgroundColor) {
+          parsed_data[i].backgroundColor = arr_backgroundColor[dataset.label];
+        } else {
+          now_backgroundColor = random_rgba(0.5);
+          arr_backgroundColor[dataset.label] = now_backgroundColor;
+          parsed_data[i].backgroundColor = now_backgroundColor;
+        }
+      });
+
+      Chart.data.datasets = parsed_data;
 
       // re-render the chart
       Chart.update();
@@ -282,10 +272,6 @@ $(document).ready(getData);
 // get new data every 3 seconds
 setInterval(getData, <?php echo $refresh_interval_PG_Stats; ?>);
 
-function get_pool_id(num10) {
-  return Number(String(num10).split('.')[0]);
-}
-
 function get_osd_int(num) {
   return Math.floor(num)
 }
@@ -298,6 +284,13 @@ function num10_to_num16(num10) {
 
 function get_max_OSD_num() {
 	return <?php echo max(uniq_OSD_list()); ?>
+}
+
+function random_rgba(transparency) {
+    var r = Math.floor(Math.random() * (255 - 0 + 1)) + 0;
+    var g = Math.floor(Math.random() * (255 - 0 + 1)) + 0;
+    var b = Math.floor(Math.random() * (255 - 0 + 1)) + 0;
+    return 'rgba(' + r + ',' + g + ',' + b + ',' + transparency + ')';
 }
 
 function getNow() {
