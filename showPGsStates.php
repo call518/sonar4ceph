@@ -252,7 +252,7 @@ var getData = function() {
         if (dataset.label in arr_backgroundColor) {
           parsed_data[i].backgroundColor = arr_backgroundColor[dataset.label];
         } else {
-          now_backgroundColor = random_rgba(0.5);
+          now_backgroundColor = random_rgba(0.3);
           arr_backgroundColor[dataset.label] = now_backgroundColor;
           parsed_data[i].backgroundColor = now_backgroundColor;
         }
