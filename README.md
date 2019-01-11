@@ -18,6 +18,39 @@ Intro
 * Understanding the health status and key indicators of the main components.
 * Minimization of monitoring load.
 
+## Features
+
+#### Sonar4Ceph
+
+* Show Physical by CRUSH-MAP
+* PG States
+* PG Size
+* PG Count
+  * per Pool
+  * per OSD
+* Dump Infomations
+  * Pool
+  * OSD
+  * PG
+* Client Bandwidth & IOPS
+  * Cluster
+  * per Pool
+* OSD Latency
+  * Apply
+  * Commit
+
+#### Inkscope-lite
+
+* OSD MAP
+* OSD Status
+* OSD Performance
+* Relation Pool/OSD/PG
+* Pool State
+* Stuck PG
+* Object Lookup
+* Erasure Profiles
+* CURSH MAP
+
 ## ScreenShots (PoC)
 
 ![ScreenShot](README/show-physical.png?raw=true)
