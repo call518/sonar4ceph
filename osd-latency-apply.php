@@ -108,32 +108,32 @@ var getData = function() {
       //console.log(count);
       //console.log(parsed_data);
 	  if (Chart.data.datasets.length == 0) {
-        parsed_data.forEach((osd_dataset) => {
+        parsed_data.forEach((osd_dataset, index) => {
           color = randomColor();
           osd_id = osd_dataset.id;
-          Chart.data.datasets[osd_id] = [];
-          Chart.data.datasets[osd_id].data = [];
-          Chart.data.datasets[osd_id].label = "OSD-" + osd_id;
-          Chart.data.datasets[osd_id].borderWidth = 1;
-          Chart.data.datasets[osd_id].backgroundColor = color;
-          Chart.data.datasets[osd_id].borderColor = color;
-          Chart.data.datasets[osd_id].pointRadius = 2;
-          Chart.data.datasets[osd_id].fill = false;
-          Chart.data.datasets[osd_id].showLine = true;
-          //Chart.data.datasets[osd_id].lineTension = 0.3;
+          Chart.data.datasets[index] = [];
+          Chart.data.datasets[index].data = [];
+          Chart.data.datasets[index].label = "OSD-" + osd_id;
+          Chart.data.datasets[index].borderWidth = 1;
+          Chart.data.datasets[index].backgroundColor = color;
+          Chart.data.datasets[index].borderColor = color;
+          Chart.data.datasets[index].pointRadius = 2;
+          Chart.data.datasets[index].fill = false;
+          Chart.data.datasets[index].showLine = true;
+          //Chart.data.datasets[index].lineTension = 0.3;
 	    });
       }
       Chart.data.labels.push(getNow());
-      parsed_data.forEach((osd_dataset) => {
+      parsed_data.forEach((osd_dataset, index) => {
         osd_id = osd_dataset.id;
         apply_latency_ms = osd_dataset.apply_latency_ms;
         //commit_latency_ms = osd_dataset.commit_latency_ms;
 		//console.log("osd_id: " + osd_id);
 		//console.log("apply_latency_ms: " + apply_latency_ms);
 		//console.log("commit_latency_ms: " + commit_latency_ms);
-      	Chart.data.datasets[osd_id].data.label = "osd-" + osd_id;
-      	Chart.data.datasets[osd_id].data.push(apply_latency_ms);
-      	//Chart.data.datasets[osd_id].data.push(commit_latency_ms);
+      	Chart.data.datasets[index].data.label = "osd-" + osd_id;
+      	Chart.data.datasets[index].data.push(apply_latency_ms);
+      	//Chart.data.datasets[index].data.push(commit_latency_ms);
       });
       
       // re-render the chart
