@@ -2,7 +2,7 @@
 include '_config.php';
 include "_functions.php";
 
-$jsonData = shell_exec("ceph --status --format json");
+//$jsonData = shell_exec("ceph --status --format json");
 $jsonData = simple_curl("$ceph_api/osd/perf.json");
 //print_r($jsonData);
 //exit;
