@@ -121,7 +121,6 @@ var getData = function() {
           Chart.data.datasets[osd_id].fill = false;
           Chart.data.datasets[osd_id].showLine = true;
           //Chart.data.datasets[osd_id].lineTension = 0.3;
-          Chart.data.datasets[osd_id].showLine = true;
 	    });
       }
       Chart.data.labels.push(getNow());
