@@ -53,7 +53,7 @@ foreach ($arrPGStats as $item_pg) {
 		}
 		foreach ($osds as $osd) {
 			//$arrTMP = array('x' => $pg_pool_id.".".$pg_hash_num10, 'y' => $osd, 'r' => '10');
-			$arrTMP = array("x" => $pg_hash_num10, "y" => $osd, "r" => 15, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary, "ps_state" => $pg_state);
+			$arrTMP = array("x" => $pg_hash_num10, "y" => $osd, "r" => 10, "pool_id" => $pg_pool_id, "primary_osd" => $pg_acting_primary, "ps_state" => $pg_state);
 			array_push($arrChartDatasets[$pg_state]['data'], $arrTMP);
 		}
 	}
