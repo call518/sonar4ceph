@@ -50,6 +50,10 @@ if ($req_pg_type == "acting") {
 $arrTotalPoolList = getPoolList();
 
 ?>
+<center>
+<table width="100%">
+<tr>
+<td>
 <form id="form1" name="form1" method="post" action="showPGsStates.php">
 <?php
 //date_default_timezone_set($default_time_zone);
@@ -80,6 +84,14 @@ PG Type:
 &nbsp;&nbsp;&nbsp;
 <input type="submit" name="Submit" value="Submit"/>
 </form>
+</td>
+<td width="100">
+<input type="button" value="Running" id="btn_pause" />
+</td>
+</tr>
+</table>
+</center>
+
 
 <canvas id="canvas"></canvas>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
@@ -269,8 +281,24 @@ var getData = function() {
 
 $(document).ready(getData);
 
+var interval = <?php echo $refresh_interval_PG_Stats; ?>;
+
 // get new data every 3 seconds
-setInterval(getData, <?php echo $refresh_interval_PG_Stats; ?>);
+var refresh = setInterval(getData, interval);
+
+$('#btn_pause').on('click', function() {
+  // clear the existing interval
+  // just start a new one
+  btn_text = document.getElementById("btn_pause").value;
+  if (btn_text == "Running") {
+    clearInterval(refresh);
+    new_btn_text = "Paused";
+  } else if (btn_text == "Paused") {
+    refresh = setInterval(getData, interval);
+    new_btn_text = "Running";
+  }
+  document.getElementById("btn_pause").value = new_btn_text;
+})
 
 function get_osd_int(num) {
   return Math.floor(num)
