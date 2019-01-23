@@ -185,7 +185,7 @@ var Chart = new Chart(ctx_live, {
           ticks: {
             autoSkip: false,
             min: 0,
-            //stepSize: 50,
+            stepSize: 50,
             callback: function(value) {
               return value + " (" + value.toString(16) + ")";
             }
@@ -239,7 +239,7 @@ var getData = function() {
           }
         });
       });
-      Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 50;
+      //Chart.options.scales.xAxes[0].ticks.max = max_pg_number + 10;
 
       var arrLabels = new Array();
       for (var key in parsed_data) {
