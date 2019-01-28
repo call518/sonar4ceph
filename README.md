@@ -55,6 +55,7 @@ Intro
 
 ![ScreenShot](README/show-physical.png?raw=true)
 ![ScreenShot](README/cluster-bw.png?raw=true)
+![ScreenShot](README/osd-latency-commit.png?raw=true)
 ![ScreenShot](README/showDistributionPGs.png?raw=true)
 ![ScreenShot](README/poolspgsosds.png?raw=true)
 ![ScreenShot](README/showPGCountByEachOSD.png?raw=true)
