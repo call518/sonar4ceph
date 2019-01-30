@@ -453,5 +453,19 @@ function get_bubble_radius($max_radius, $max_num_bytes, $total_steps, $num_bytes
 	#echo "step_bytes: $step_bytes, step: $step, step_radius: $step_radius\n";
 	return $step * $step_radius;
 }
+
+function toBytes($str) {
+	$val = trim($str);
+	$last = strtolower($str[strlen($str)-1]);
+	if (!is_numeric($last)) {
+		$val = substr($val,0,strlen($val)-1);
+		switch($last) {
+		    case 'g': $val *= 1024;
+		    case 'm': $val *= 1024;
+		    case 'k': $val *= 1024;
+		}
+	}
+	return $val;
+}
 //=============================================================================================
 ?>

@@ -179,7 +179,7 @@ echo "  <td>";
 echo "   <input type=\"button\" style=\"width:90%\" value=\"Cluster B/W (Byte)\" onclick=\"window.open('cluster-bw.php', 'Cluster B/W (Byte)', 'width=1024, height=800')\">";
 echo "  </td>";
 echo "  <td>";
-echo "   <input type=\"button\" style=\"width:90%\" value=\"Cluster IOPS (Count)\" onclick=\"window.open('cluster-iops.php', 'Cluster IOPS (Count)', 'width=1024, height=800')\">";
+echo "   <input type=\"button\" style=\"width:90%\" value=\"Cluster IOPS (Operations)\" onclick=\"window.open('cluster-iops.php', 'Cluster IOPS (Operations)', 'width=1024, height=800')\">";
 echo "  </td>";
 echo " </tr>";
 echo "</table>";
@@ -207,7 +207,7 @@ foreach ($arrPoolData as $object)
 
 	echo "   <input type=\"button\" style=\"width:90%\" value=\"Client B/W (Byte) : $pool_name($pool_id)\" onclick=\"window.open('client-bw-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client B/W (Byte) : $pool_name($pool_id)', 'width=1024, height=800')\">";
 	echo "<br>";
-	echo "   <input type=\"button\" style=\"width:90%\" value=\"Client IOPS (Count) : $pool_name($pool_id)\" onclick=\"window.open('client-iops-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client IOPS (Count) : $pool_name($pool_id)', 'width=1024, height=800')\">";
+	echo "   <input type=\"button\" style=\"width:90%\" value=\"Client IOPS (Operations) : $pool_name($pool_id)\" onclick=\"window.open('client-iops-pool.php?pool_name=$pool_name&pool_id=$pool_id', 'Client IOPS (Operations) : $pool_name($pool_id)', 'width=1024, height=800')\">";
 }
 echo "  </td>";
 echo " </tr>";
@@ -221,6 +221,22 @@ echo "   <input type=\"button\" style=\"width:90%\" value=\"OSD Latency - Commit
 echo "  </td>";
 echo "  <td>";
 echo "   <input type=\"button\" style=\"width:90%\" value=\"OSD Latency - Apply (ms)\" onclick=\"window.open('osd-latency-apply.php', 'OSD Latency - Apply (ms)', 'width=1024, height=800')\">";
+echo "  </td>";
+echo " </tr>";
+echo " <tr>";
+echo "  <td>";
+echo "   <input type=\"button\" style=\"width:90%\" value=\"OSD B/W - Read (Byte)\" onclick=\"window.open('osd-bw-read.php', 'OSD B/W - Read (Byte)', 'width=1024, height=800')\">";
+echo "  </td>";
+echo "  <td>";
+echo "   <input type=\"button\" style=\"width:90%\" value=\"OSD B/W - Write (Byte)\" onclick=\"window.open('osd-bw-write.php', 'OSD B/W - Write (Byte)', 'width=1024, height=800')\">";
+echo "  </td>";
+echo " </tr>";
+echo " <tr>";
+echo "  <td>";
+echo "   <input type=\"button\" style=\"width:90%\" value=\"OSD IOPS - Read (Operations)\" onclick=\"window.open('osd-iops-read.php', 'OSD IOPS - Read (Operations)', 'width=1024, height=800')\">";
+echo "  </td>";
+echo "  <td>";
+echo "   <input type=\"button\" style=\"width:90%\" value=\"OSD IOPS - Write (Operations)\" onclick=\"window.open('osd-iops-write.php', 'OSD IOPS - Write (Operations)', 'width=1024, height=800')\">";
 echo "  </td>";
 echo " </tr>";
 echo "</table>";

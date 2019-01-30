@@ -18,4 +18,5 @@ $refresh_interval_PG_Size = 10000;
 $refresh_interval_PG_Count_by_Each_OSD = 600000;
 $refresh_interval_PG_Count_by_Each_Pool = 600000;
 $refresh_interval_OSD_Latency = 3000;
+$refresh_interval_OSD_Perf = 3000;
 ?>

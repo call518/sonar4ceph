@@ -38,6 +38,9 @@ Intro
 * OSD Latency
   * Apply
   * Commit
+* OSD Performance
+  * B/W (Read/Write)
+  * IOPS (Read/Write)
 
 #### Inkscope-lite
 
