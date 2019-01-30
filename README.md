@@ -148,7 +148,7 @@ git clone https://github.com/call518/sonar4ceph.git
 mv sonar4ceph /var/www/html/
 ```
 
-#### _config.php
+#### Config Env.Vars
 
 * A list of the main configuration files.
   * "_config.php" file.
@@ -156,12 +156,13 @@ mv sonar4ceph /var/www/html/
 * Accurately check / change the access point of CEPH-REST-API.
 * Since Rest-API is the most necessary measure, it is necessary to check the connection.
 
-#### Apache "mod_proxy"
+#### Config Apache 
 
 /etc/httpd/conf.d/sonar4ceph.conf
 
 * "http://127.0.0.1:5000/api/v0.1/"
-  * (Note) Change address to "Ceph-Rest-API" listener address.
+  * (Note) Change address to your "Ceph-Rest-API" listener address.
+* for "Web" and "Proxy"
 
 
 ```bash
