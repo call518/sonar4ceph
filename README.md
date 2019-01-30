@@ -148,27 +148,11 @@ git clone https://github.com/call518/sonar4ceph.git
 mv sonar4ceph /var/www/html/
 ```
 
-#### Web Access
-
-```bash
-<Browser Address Bar>
-
-http://{your-http-server-ip-or-name}/sonar4ceph
-```
-
-
-Completed~~~~~~~~~~~~~~~~~ :)
-
-
-Customizing Config
-================================
+#### _config.php
 
 * A list of the main configuration files.
   * "_config.php" file.
   * Configure apache "mod_proxy" to support access to CEPH-REST-API in inkscope-lite.
-
-#### _config.php
-
 * Accurately check / change the access point of CEPH-REST-API.
 * Since Rest-API is the most necessary measure, it is necessary to check the connection.
 
@@ -203,6 +187,16 @@ Customizing Config
 
     CustomLog "logs/access.log" combined
 </VirtualHost>
+```
+
+#### Web Access
+
+```bash
+# systemctl restart httpd
+
+<Browser Address Bar>
+
+http://{your-http-server-ip-or-name}/sonar4ceph
 ```
 
 APPENDIX
