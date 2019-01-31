@@ -22,7 +22,7 @@ $arrPGStats = json_decode($jsonData, true)['output']['pg_stats'];
 
 $arrChartDatasets = array();
 
-$transparency = 0.3;
+$transparency = 0.1;
 
 $border_color_primary = "rgba(169, 40, 97, 0.5)";
 
