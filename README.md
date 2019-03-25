@@ -129,6 +129,8 @@ Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 
 #### CEPH-REST-API
 
+* (Note) if mimic, use 'restful' of MGR. ('CEPH-REST-API' command-line tool has been dropped in Mimic)
+ * Ref. http://docs.ceph.com/docs/master/releases/mimic/
 * Select the location where you want to run it appropriately because a query using HTTPd mod_proxy will be executed.
 * It is necessary to confirm that the location of the CEPH-REST-API service matches the value of the "$ceph_api" variable in "_config.php".
 * (Note)
