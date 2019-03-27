@@ -6,6 +6,9 @@ $pool_name = $_GET['pool_name'];
 $pool_id = $_GET['pool_id'];
 //$jsonData = shell_exec("ceph osd pool stats $pool_name --format=json");
 $jsonData = simple_curl("$ceph_api/osd/pool/stats?name=$pool_name");
+if (json_decode($jsonData, true)['status'] != "OK") {
+	$jsonData = simple_curl("$ceph_api/osd/pool/stats?pool_name=$pool_name");
+}
 //print_r($jsonData);
 $arrData = json_decode($jsonData, true)['output'];
 //print_r($arrData);
