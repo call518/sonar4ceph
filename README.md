@@ -131,6 +131,12 @@ Zend Engine v2.6.0, Copyright (c) 1998-2016 Zend Technologies
 
 * (Note) if mimic, use 'restful' of MGR. ('CEPH-REST-API' command-line tool has been dropped in Mimic)
  * Ref. http://docs.ceph.com/docs/master/releases/mimic/
+ * Try this, to use ceph-rest-api since mimic.
+```bash
+# cp -a tools-ceph-rest-api/ceph-rest-api /usr/bin/ceph-rest-api
+# cp -a tools-ceph-rest-api/ceph-rest-api.py {PYTHON_DIR}/site-packages/ceph_rest_api.py
+```
+
 * Select the location where you want to run it appropriately because a query using HTTPd mod_proxy will be executed.
 * It is necessary to confirm that the location of the CEPH-REST-API service matches the value of the "$ceph_api" variable in "_config.php".
 * (Note)
