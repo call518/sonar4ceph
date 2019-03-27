@@ -4,7 +4,8 @@ include "_functions.php";
 
 $arrResult = array();
 
-$Data = shell_exec("ceph tell mgr osd status 2>&1 > /dev/null | sed -e 's/|/ /g' -e '/---/d' -e '/id.*host.*used.*avail.*wr.*ops.*wr.*data.*rd.*ops.*rd.*data.*state/d' | sed -r \"s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g\"");
+#$Data = shell_exec("ceph tell mgr osd status 2>&1 > /dev/null | sed -e 's/|/ /g' -e '/---/d' -e '/id.*host.*used.*avail.*wr.*ops.*wr.*data.*rd.*ops.*rd.*data.*state/d' | sed -r \"s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g\"");
+$Data = shell_exec("ceph tell mgr osd status 2>&1 | sed -e 's/|/ /g' -e '/---/d' -e '/id.*host.*used.*avail.*wr.*ops.*wr.*data.*rd.*ops.*rd.*data.*state/d' | sed -r \"s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g\"");
 $arrData = explode("\n", trim($Data));
 
 foreach ($arrData as $line) {
